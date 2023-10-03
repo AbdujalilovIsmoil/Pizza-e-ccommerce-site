@@ -86,15 +86,17 @@ const index = () => {
         <div className="container">
           <div className="header-list">
             <div className="header-list__container">
-              <div className="header-list__intro">
-                <img
-                  alt="Pizza"
-                  title="Pizza"
-                  src={HeaderListIntro}
-                  className="header-list__intro-icon"
-                />
-                <h4 className="header-list__intro-heading">Куда пицца</h4>
-              </div>
+              <Link to="/">
+                <div className="header-list__intro">
+                  <img
+                    alt="Pizza"
+                    title="Pizza"
+                    src={HeaderListIntro}
+                    className="header-list__intro-icon"
+                  />
+                  <h4 className="header-list__intro-heading">Куда пицца</h4>
+                </div>
+              </Link>
               <ul className="header-list-menu">
                 <li className="header-list-menu__item">
                   <h4 className="header-list-menu__item-heading">Акции</h4>
