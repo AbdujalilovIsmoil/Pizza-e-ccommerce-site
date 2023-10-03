@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "components/fields";
 import { BsChevronDown } from "assets/react-icons";
 import { HeaderListIntro } from "assets/images/svg/header";
@@ -64,9 +65,11 @@ const index = () => {
                         </h4>
                       </li>
                       <li className="header-open__item">
-                        <h4 className="header-open__item-heading header-open__item-heading--regular">
-                          Настройки
-                        </h4>
+                        <Link to="/pages/settings">
+                          <h4 className="header-open__item-heading header-open__item-heading--regular">
+                            Настройки
+                          </h4>
+                        </Link>
                       </li>
                       <li className="header-open__item header-open__item--border">
                         <Button className="header-open__item-btn" type="button">

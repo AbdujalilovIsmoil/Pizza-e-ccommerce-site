@@ -1,0 +1,12 @@
+.settings {
+  &-header {
+    &__block {
+      &-btn {
+        @include Button();
+        &--active{
+            color: red;
+        }
+      }
+    }
+  }
+}

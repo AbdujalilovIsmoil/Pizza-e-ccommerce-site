@@ -6,7 +6,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const App = () => {
   const Login = lazy(() => import("pages/Login"));
+  const History = lazy(() => import("pages/History"));
+  const Settigs = lazy(() => import("pages/Settings"));
   const Registration = lazy(() => import("pages/Registration"));
+
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -15,6 +18,14 @@ const App = () => {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/pages/settings",
+          element: <Settigs />,
+        },
+        {
+          path: "/pages/history",
+          element: <History />,
         },
       ],
     },
