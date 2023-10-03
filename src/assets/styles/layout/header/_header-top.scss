@@ -1,6 +1,4 @@
 .header-top {
-  padding: 15px 0;
-  border-bottom: 1px solid $header-top__border-color;
   @include flexLayout(flex, space-between, center, 0, row nowrap);
   &__list {
     @include flexLayout(flex, flex-start, center, 40px, row nowrap);

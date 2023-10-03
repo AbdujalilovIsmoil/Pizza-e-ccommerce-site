@@ -3,4 +3,8 @@
 
 .header {
   background-color: $header__bg-color;
+  &__border-bottom {
+    padding: 15px 0;
+    border-bottom: 1px solid $header-top__border-color;
+  }
 }
