@@ -6,6 +6,13 @@
   &__item {
     &--hover {
       cursor: pointer;
+      &:hover .header-top__item-down {
+        transform: rotate(180deg);
+        color: $header-cart__bg-color;
+      }
+      &:hover .header-top__item-heading {
+        color: $header-cart__bg-color;
+      }
     }
     @include flexLayout(flex, center, center, 10px, row nowrap);
     &-location {
@@ -13,6 +20,7 @@
       height: 20px;
     }
     &-heading {
+      transition: color 150ms linear;
       @include headingFonts(
         $heading-top__heading-color,
         14px,
@@ -24,6 +32,7 @@
     &-down {
       width: 12px;
       height: 12px;
+      transition: color 150ms linear, transform 150ms linear;
     }
     &-account {
       width: 20px;

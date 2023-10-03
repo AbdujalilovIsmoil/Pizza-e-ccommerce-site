@@ -3,6 +3,9 @@
 
 .header {
   background-color: $header__bg-color;
+  &-list {
+    @include flexLayout(flex, space-between, center, 0, row nowrap);
+  }
   &__border-bottom {
     padding: 15px 0;
     border-bottom: 1px solid $header-top__border-color;

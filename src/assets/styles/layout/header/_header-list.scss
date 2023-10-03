@@ -1,0 +1,81 @@
+.header-list {
+  padding: 20px 0;
+  &__container {
+    @include flexLayout(flex, flex-start, center, 0, row nowrap);
+  }
+  &-menu {
+    margin-top: 5px;
+    margin-left: 60px;
+    @include flexLayout(flex, flex-start, center, 30px, nowrap row);
+  }
+  &__intro {
+    cursor: pointer;
+    @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+    &-icon {
+      height: 32px;
+      width: 32px;
+    }
+    &-heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        18px,
+        400,
+        default,
+        default
+      );
+    }
+  }
+  &-menu {
+    &__item {
+      @include flexLayout(flex, flex-start, center, 10px, row nowrap);
+      &:hover &-heading {
+        color: $header-cart__bg-color;
+      }
+      &:hover &-down {
+        transform: rotate(180deg);
+        color: $header-cart__bg-color;
+      }
+      &-block {
+        cursor: pointer;
+        @include flexLayout(flex, flex-start, center, 10px, row nowrap);
+      }
+      &-heading {
+        cursor: pointer;
+        transition: color 150ms linear;
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+      }
+      &-down {
+        width: 15px;
+        height: 15px;
+        transition: color 150ms linear, transform 150ms linear;
+      }
+    }
+  }
+  &__btn {
+    @include flexLayout(flex, center, center, 10px, row nowrap);
+    @include Button(
+      $header-cart__bg-color,
+      none,
+      4px,
+      8px 16px,
+      opacity 150ms linear
+    );
+    &:hover {
+      opacity: 0.8;
+    }
+    &-cart {
+      width: 20px;
+      height: 24px;
+      padding: 1.5px 0px;
+    }
+    &-heading {
+      @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+    }
+  }
+}

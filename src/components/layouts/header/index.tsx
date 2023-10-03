@@ -1,9 +1,12 @@
+import { BsChevronDown } from "assets/react-icons";
 import { HeaderListIntro } from "assets/images/svg/header";
+import { HeaderListCart } from "assets/images/svg/header/header-list";
 import {
   HeaderTopDown,
   HeaderTopAccount,
   HeaderTopLocation,
 } from "assets/images/svg";
+import { Button } from "components/fields";
 
 const index = () => {
   return (
@@ -21,11 +24,7 @@ const index = () => {
                       className="header-top__item-location"
                     />
                     <h4 className="header-top__item-heading">Москва</h4>
-                    <img
-                      src={HeaderTopDown}
-                      alt="header-top__down"
-                      className="header-top__item-down"
-                    />
+                    <BsChevronDown className="header-top__item-down" />
                   </li>
                   <li className="header-top__item">
                     <h4 className="header-top__item-heading">
@@ -62,47 +61,58 @@ const index = () => {
             </div>
           </div>
         </div>
-        <div className="header-list">
-          <div className="header-list__intro">
-            <img
-              alt="Pizza"
-              title="Pizza"
-              src={HeaderListIntro}
-              className="header-list__intro-icon"
-            />
-            <h4 className="header-list__intro-heading">Куда пицца</h4>
-          </div>
-          <ul className="header-list-menu">
-            <li className="header-list-menu__item">
-              <h4 className="header-list-menu__item-heading">Акции</h4>
-            </li>
-            <li className="header-list-menu__item">
-              <h4 className="header-list-menu__item-heading">Суши</h4>
-            </li>
-            <li className="header-list-menu__item">
-              <h4 className="header-list-menu__item-heading">Напитки</h4>
-            </li>
-            <li className="header-list-menu__item">
-              <h4 className="header-list-menu__item-heading">Закуски</h4>
-            </li>
-            <li className="header-list-menu__item">
-              <h4 className="header-list-menu__item-heading">Комбо</h4>
-            </li>
-            <li className="header-list-menu__item">
-              <h4 className="header-list-menu__item-heading">Десерты</h4>
-            </li>
-            <li className="header-list-menu__item">
-              <h4 className="header-list-menu__item-heading">Соусы</h4>
-            </li>
-            <li className="header-list-menu__item">
-              <h4 className="header-list-menu__item-heading">Другое</h4>
+        <div className="container">
+          <div className="header-list">
+            <div className="header-list__container">
+              <div className="header-list__intro">
+                <img
+                  alt="Pizza"
+                  title="Pizza"
+                  src={HeaderListIntro}
+                  className="header-list__intro-icon"
+                />
+                <h4 className="header-list__intro-heading">Куда пицца</h4>
+              </div>
+              <ul className="header-list-menu">
+                <li className="header-list-menu__item">
+                  <h4 className="header-list-menu__item-heading">Акции</h4>
+                </li>
+                <li className="header-list-menu__item">
+                  <h4 className="header-list-menu__item-heading">Суши</h4>
+                </li>
+                <li className="header-list-menu__item">
+                  <h4 className="header-list-menu__item-heading">Напитки</h4>
+                </li>
+                <li className="header-list-menu__item">
+                  <h4 className="header-list-menu__item-heading">Закуски</h4>
+                </li>
+                <li className="header-list-menu__item">
+                  <h4 className="header-list-menu__item-heading">Комбо</h4>
+                </li>
+                <li className="header-list-menu__item">
+                  <h4 className="header-list-menu__item-heading">Десерты</h4>
+                </li>
+                <li className="header-list-menu__item">
+                  <h4 className="header-list-menu__item-heading">Соусы</h4>
+                </li>
+                <li className="header-list-menu__item">
+                  <div className="header-list-menu__item-block">
+                    <h4 className="header-list-menu__item-heading">Другое</h4>
+                    <BsChevronDown className="header-list-menu__item-down" />
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <Button className="header-list__btn" type="button">
               <img
-                src={HeaderTopDown}
-                alt="header-list-menu__item-down"
-                className="header-list-menu__item-down"
+                alt="header-cart"
+                src={HeaderListCart}
+                className="header-list__btn-cart"
               />
-            </li>
-          </ul>
+              <h4 className="header-list__btn-heading">0 ₽</h4>
+            </Button>
+          </div>
         </div>
       </header>
     </>
