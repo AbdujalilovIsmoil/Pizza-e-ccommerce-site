@@ -139,7 +139,6 @@ const index = () => {
                 </li>
               </ul>
             </div>
-
             <Button className="header-list__btn" type="button">
               <img
                 alt="header-cart"
