@@ -1,3 +1,4 @@
+import { Input } from "components/fields";
 import { settingsEditIcon } from "assets/images/svg";
 import { Link, useLocation } from "react-router-dom";
 
@@ -77,6 +78,42 @@ const index = () => {
                         <h5 className="user-body__item-value">13.02.1996</h5>
                       </li>
                     </ul>
+                  </div>
+                </div>
+              </li>
+              <li className="settings-body__list-item">
+                <div className="user">
+                  <div className="user-header">
+                    <div className="user-header__box">
+                      <h4 className="user-header__box-heading">Пароль</h4>
+                    </div>
+                    <div className="user-header__box">
+                      <img
+                        src={settingsEditIcon}
+                        alt="setting-edit-icon"
+                        className="user-header__box-icon"
+                      />
+                      <h4 className="user-header__box-edit">Изменить</h4>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li className="settings-body__list-item">
+                <div className="user">
+                  <div className="user-header user-header--last">
+                    <div className="user-header__box">
+                      <h4 className="user-header__box-heading">Подписки</h4>
+                    </div>
+                    <div className="user-header__box">
+                      <Input
+                        id="check"
+                        type="checkbox"
+                        className="user-header__box-checkbox"
+                      />
+                      <label className="user-header__box-label" htmlFor="check">
+                        Получать предложения и акции
+                      </label>
+                    </div>
                   </div>
                 </div>
               </li>

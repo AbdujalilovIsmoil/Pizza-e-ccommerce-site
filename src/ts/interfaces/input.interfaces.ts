@@ -1,3 +1,5 @@
 export interface inputInterface {
-  children?: React.ReactNode;
+  id?: string;
+  className?: string;
+  type?: "text" | "number" | "checkbox" | undefined;
 }

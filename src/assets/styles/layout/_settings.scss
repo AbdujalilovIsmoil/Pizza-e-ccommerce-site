@@ -57,11 +57,61 @@
         .user {
           &-header {
             @include flexLayout(flex, space-between, center, 0, row nowrap);
+            &--last {
+              @include flexLayout(flex, space-between, flex-start, 16px, column nowrap);
+            }
             &__box {
-              @include flexLayout(flex, flex-start, center, 0, row nowrap);
               &:nth-child(2) {
                 cursor: pointer;
                 @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+              }
+              &-checkbox {
+                margin: 0;
+                display: grid;
+                font: inherit;
+                width: 1.15em;
+                height: 1.15em;
+                appearance: none;
+                position: relative;
+                color: currentColor;
+                place-content: center;
+                border-radius: 0.15em;
+                transform: translateY(-0.075em);
+                background-color: $header__bg-color;
+                transition: background-color 120ms linear;
+                border: 0.15em solid $header-cart__bg-color;
+                &:checked {
+                  background-color: $header-cart__bg-color;
+                  &::before {
+                    transform: scale(1);
+                  }
+                }
+                &::before {
+                  content: "";
+                  width: 0.65em;
+                  height: 0.65em;
+                  transform: scale(0);
+                  transform-origin: bottom left;
+                  transition: transform all linear;
+                  box-shadow: inset 1em 1em $header__bg-color;
+                  clip-path: polygon(
+                    14% 44%,
+                    0 65%,
+                    50% 100%,
+                    100% 16%,
+                    80% 0%,
+                    43% 62%
+                  );
+                }
+              }
+              &-label {
+                @include headingFonts(
+                  $heading-top__heading-color,
+                  16px,
+                  400,
+                  22px,
+                  default
+                );
               }
               &-heading {
                 @include headingFonts(
@@ -88,6 +138,10 @@
             }
           }
           &-body {
+            margin-top: 16px;
+            &__list {
+              @include flexLayout(flex, flex-start, center, 32px, row nowrap);
+            }
             &__item {
               &-key {
                 @include headingFonts(
