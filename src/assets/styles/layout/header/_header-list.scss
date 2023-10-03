@@ -1,5 +1,5 @@
 .header-list {
-  padding: 6px 0;
+  padding: 10px 0;
   &__container {
     @include flexLayout(flex, flex-start, center, 0, row nowrap);
   }
@@ -11,11 +11,15 @@
   &__intro {
     cursor: pointer;
     @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+    &:hover &-heading {
+      color: $header-cart__bg-color;
+    }
     &-icon {
       height: 32px;
       width: 32px;
     }
     &-heading {
+      transition: color 150ms linear;
       @include headingFonts(
         $heading-top__heading-color,
         18px,
@@ -30,7 +34,7 @@
       cursor: pointer;
       position: relative;
       @include flexLayout(flex, flex-start, center, 10px, row nowrap);
-      &:last-child{
+      &:last-child {
         padding: 10px 0;
       }
       &:hover &-heading {
