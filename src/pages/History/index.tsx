@@ -5,19 +5,19 @@ const index = () => {
 
   return (
     <>
-      <section className="settings">
+      <section className="history">
         <div className="container">
-          <div className="settings-header">
-            <div className="settings-header__block">
-              <h4 className="settings-header__block-heading">Мой аккаунт</h4>
+          <div className="history-header">
+            <div className="history-header__block">
+              <h4 className="history-header__block-heading">Мой аккаунт</h4>
             </div>
-            <div className="settings-header__block">
+            <div className="history-header__block">
               <Link
                 type="button"
                 to="/pages/history"
-                className={`settings-header__block-btn ${
+                className={`history-header__block-btn ${
                   pathname === "/pages/history" &&
-                  "settings-header__block-btn--active"
+                  "history-header__block-btn--active"
                 }`}
               >
                 История заказов
@@ -25,9 +25,9 @@ const index = () => {
               <Link
                 type="button"
                 to="/pages/settings"
-                className={`settings-header__block-btn ${
+                className={`history-header__block-btn ${
                   pathname === "/pages/settings" &&
-                  "settings-header__block-btn--active"
+                  "history-header__block-btn--active"
                 }`}
               >
                 Настройки

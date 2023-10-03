@@ -1,10 +1,115 @@
 .settings {
+  max-width: 100%;
+  margin: 40px auto 24px auto;
   &-header {
+    @include flexLayout(flex, space-between, center);
     &__block {
+      &-heading {
+        @include headingFonts(
+          $heading-top__heading-color,
+          40px,
+          600,
+          48px,
+          default
+        );
+      }
       &-btn {
-        @include Button();
-        &--active{
-            color: red;
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+        @include Button(
+          $header__bg-color,
+          $header-top__border-color,
+          6px 0 0 6px,
+          14px 24px,
+          all 150ms linear
+        );
+        &--active {
+          color: $header__bg-color;
+          @include Button(
+            $header-cart__bg-color,
+            $header-cart__bg-color,
+            6px,
+            all 150ms linear
+          );
+        }
+        &:nth-child(1) {
+          border-radius: 6px 0 0 6px;
+        }
+        &:nth-child(2) {
+          border-radius: 6px 6px 6px 6px;
+        }
+      }
+    }
+  }
+  &-body {
+    &__list {
+      &-item {
+        margin: 20px 0;
+        padding: 24px 32px;
+        border-radius: 12px;
+        background-color: $header__bg-color;
+        border: 1px solid $header-top__border-color;
+        .user {
+          &-header {
+            @include flexLayout(flex, space-between, center, 0, row nowrap);
+            &__box {
+              @include flexLayout(flex, flex-start, center, 0, row nowrap);
+              &:nth-child(2) {
+                cursor: pointer;
+                @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+              }
+              &-heading {
+                @include headingFonts(
+                  $heading-top__heading-color,
+                  24px,
+                  600,
+                  32px,
+                  default
+                );
+              }
+              &-icon {
+                width: 20px;
+                height: 20px;
+              }
+              &-edit {
+                @include headingFonts(
+                  $header-cart__bg-color,
+                  16px,
+                  400,
+                  22px,
+                  default
+                );
+              }
+            }
+          }
+          &-body {
+            &__item {
+              &-key {
+                @include headingFonts(
+                  $heading-cart__heading-color,
+                  14px,
+                  400,
+                  18px,
+                  default
+                );
+              }
+              &-value {
+                margin-top: 4px;
+                @include headingFonts(
+                  $heading-top__heading-color,
+                  16px,
+                  400,
+                  22px,
+                  default
+                );
+              }
+            }
+          }
         }
       }
     }

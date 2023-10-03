@@ -1,4 +1,4 @@
+import { settingsEditIcon } from "./settings";
 import { HeaderTopAccount, HeaderTopDown, HeaderTopLocation } from "./header";
-import { } from "./header";
 
-export { HeaderTopAccount, HeaderTopDown, HeaderTopLocation };
+export { HeaderTopAccount, settingsEditIcon, HeaderTopDown, HeaderTopLocation };
