@@ -1,5 +1,5 @@
 .settings {
-  max-width: 100%;
+  max-width: 70%;
   margin: 40px auto 24px auto;
   &-header {
     @include flexLayout(flex, space-between, center);
@@ -58,7 +58,13 @@
           &-header {
             @include flexLayout(flex, space-between, center, 0, row nowrap);
             &--last {
-              @include flexLayout(flex, space-between, flex-start, 16px, column nowrap);
+              @include flexLayout(
+                flex,
+                space-between,
+                flex-start,
+                16px,
+                column nowrap
+              );
             }
             &__box {
               &:nth-child(2) {
@@ -143,7 +149,11 @@
               @include flexLayout(flex, flex-start, center, 32px, row nowrap);
             }
             &__item {
+              max-width: 175px;
               &-key {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
                 @include headingFonts(
                   $heading-cart__heading-color,
                   14px,
@@ -154,6 +164,9 @@
               }
               &-value {
                 margin-top: 4px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
                 @include headingFonts(
                   $heading-top__heading-color,
                   16px,

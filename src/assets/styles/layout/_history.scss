@@ -1,5 +1,5 @@
 .history {
-  max-width: 100%;
+  max-width: 70%;
   margin: 40px auto 24px auto;
   &-header {
     @include flexLayout(flex, space-between, center);
