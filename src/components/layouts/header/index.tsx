@@ -51,6 +51,29 @@ const index = () => {
                     <h4 className="header-top__item-heading">
                       Войти в аккаунт
                     </h4>
+
+                    <ul className="header-open">
+                      <li className="header-open__item">
+                        <h4 className="header-open__item-heading">
+                          100 бонусов
+                        </h4>
+                      </li>
+                      <li className="header-open__item">
+                        <h4 className="header-open__item-heading header-open__item-heading--regular">
+                          История заказов
+                        </h4>
+                      </li>
+                      <li className="header-open__item">
+                        <h4 className="header-open__item-heading header-open__item-heading--regular">
+                          Настройки
+                        </h4>
+                      </li>
+                      <li className="header-open__item header-open__item--border">
+                        <Button className="header-open__item-btn" type="button">
+                          Выход из аккаунта
+                        </Button>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </div>
