@@ -1,12 +1,8 @@
+import { Button } from "components/fields";
 import { BsChevronDown } from "assets/react-icons";
 import { HeaderListIntro } from "assets/images/svg/header";
 import { HeaderListCart } from "assets/images/svg/header/header-list";
-import {
-  HeaderTopDown,
-  HeaderTopAccount,
-  HeaderTopLocation,
-} from "assets/images/svg";
-import { Button } from "components/fields";
+import { HeaderTopAccount, HeaderTopLocation } from "assets/images/svg";
 
 const index = () => {
   return (
@@ -100,6 +96,46 @@ const index = () => {
                     <h4 className="header-list-menu__item-heading">Другое</h4>
                     <BsChevronDown className="header-list-menu__item-down" />
                   </div>
+                  <ul className="header-drop-down">
+                    <li className="header-drop-down__block">
+                      <h4 className="header-drop-down__block-title">Акции</h4>
+                    </li>
+                    <li className="header-drop-down__block">
+                      <h4 className="header-drop-down__block-title">
+                        О компании{" "}
+                      </h4>
+                    </li>
+                    <li className="header-drop-down__block">
+                      <h4 className="header-drop-down__block-title">
+                        Пользовательское соглашение
+                      </h4>
+                    </li>
+                    <li className="header-drop-down__block">
+                      <h4 className="header-drop-down__block-title">
+                        Условия гарантии
+                      </h4>
+                    </li>
+                    <li className="header-drop-down__block">
+                      <h4 className="header-drop-down__block-title">
+                        Ресторан
+                      </h4>
+                    </li>
+                    <li className="header-drop-down__block">
+                      <h4 className="header-drop-down__block-title">
+                        Контакты
+                      </h4>
+                    </li>
+                    <li className="header-drop-down__block">
+                      <h4 className="header-drop-down__block-title">
+                        Поддержка
+                      </h4>
+                    </li>
+                    <li className="header-drop-down__block">
+                      <h4 className="header-drop-down__block-title">
+                        Отследить заказ
+                      </h4>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>
