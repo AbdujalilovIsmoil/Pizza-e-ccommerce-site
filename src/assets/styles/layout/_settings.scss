@@ -148,10 +148,31 @@
             &__list {
               @include flexLayout(flex, flex-start, center, 32px, row nowrap);
             }
+            &__send {
+              margin-top: 16px;
+              @include Button(
+                $header-cart__bg-color,
+                none,
+                6px,
+                14px 26px,
+                opacity 150ms linear
+              );
+              @include headingFonts(
+                $header__bg-color,
+                16px,
+                400,
+                22px,
+                default
+              );
+              &:hover {
+                opacity: 0.8;
+              }
+            }
             &__item {
               &-key {
                 overflow: hidden;
                 white-space: nowrap;
+                margin-bottom: 10px;
                 text-overflow: ellipsis;
                 @include headingFonts(
                   $heading-cart__heading-color,
@@ -162,9 +183,13 @@
                 );
               }
               &-input {
+                outline: none;
                 padding: 13px 16px;
+                border-radius: 6px;
                 width: 245px !important;
                 height: 48px !important;
+                background-color: $header__bg-color;
+                border: 1px solid $header-top__border-color;
               }
               &-value {
                 margin-top: 4px;

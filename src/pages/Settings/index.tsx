@@ -1,18 +1,36 @@
 import { useState } from "react";
-import { Input } from "components/fields";
 import "react-calendar/dist/Calendar.css";
 import DataPicker from "react-date-picker";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import "react-date-picker/dist/DatePicker.css";
+import { Button, Input } from "components/fields";
 import { settingsEditIcon } from "assets/images/svg";
 import { Link, useLocation } from "react-router-dom";
 
 const index = () => {
   type ValuePiece = Date | null;
   const { pathname } = useLocation();
+  const [email, setEmail] = useState<string>("");
   type Value = ValuePiece | [ValuePiece, ValuePiece];
   const [date, setDate] = useState<Value>(new Date());
+  const [userName, setUserName] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [isUserOpen, setIsUserOpen] = useState<boolean>(false);
+
+  type SettingValues = {
+    date: Value;
+    email: string;
+    userName: string;
+    phoneNumber: string;
+  };
+
+  const editSettingValues = () => {
+    setIsUserOpen(false);
+    const settingValues: SettingValues = { date, email, userName, phoneNumber };
+
+    console.log(settingValues); // send setting values
+  };
 
   return (
     <>
@@ -47,97 +65,120 @@ const index = () => {
           </div>
           <div className="settings-body">
             <ul className="settings-body__list">
-              <li className="settings-body__list-item">
-                <div className="user">
-                  <div className="user-header">
-                    <div className="user-header__box">
-                      <h4 className="user-header__box-heading">
-                        Личные данные
-                      </h4>
+              {!isUserOpen && (
+                <li className="settings-body__list-item">
+                  <div className="user">
+                    <div className="user-header">
+                      <div className="user-header__box">
+                        <h4 className="user-header__box-heading">
+                          Личные данные
+                        </h4>
+                      </div>
+                      <div
+                        className="user-header__box"
+                        onClick={() => setIsUserOpen(true)}
+                      >
+                        <img
+                          src={settingsEditIcon}
+                          alt="setting-edit-icon"
+                          className="user-header__box-icon"
+                        />
+                        <h4 className="user-header__box-edit">Изменить</h4>
+                      </div>
                     </div>
-                    <div className="user-header__box">
-                      <img
-                        src={settingsEditIcon}
-                        alt="setting-edit-icon"
-                        className="user-header__box-icon"
-                      />
-                      <h4 className="user-header__box-edit">Изменить</h4>
-                    </div>
-                  </div>
-                  <div className="user-body">
-                    <ul className="user-body__list">
-                      <li className="user-body__item">
-                        <h5 className="user-body__item-key">Имя*</h5>
-                        <h5 className="user-body__item-value">Вадим</h5>
-                      </li>
-                      <li className="user-body__item">
-                        <h5 className="user-body__item-key">Номер телефона*</h5>
-                        <h5 className="user-body__item-value">
-                          +7 (926) 223-10-11
-                        </h5>
-                      </li>
-                      <li className="user-body__item">
-                        <h5 className="user-body__item-key">Почта</h5>
-                        <h5 className="user-body__item-value">
-                          mail@gmail.com
-                        </h5>
-                      </li>
-                      <li className="user-body__item">
-                        <h5 className="user-body__item-key">Дата рождения</h5>
-                        <h5 className="user-body__item-value">13.02.1996</h5>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <li className="settings-body__list-item">
-                <div className="user">
-                  <div className="user-header">
-                    <div className="user-header__box">
-                      <h4 className="user-header__box-heading">
-                        Изменение личных данных
-                      </h4>
+                    <div className="user-body">
+                      <ul className="user-body__list">
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">Имя*</h5>
+                          <h5 className="user-body__item-value">Вадим</h5>
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">
+                            Номер телефона*
+                          </h5>
+                          <h5 className="user-body__item-value">
+                            +7 (926) 223-10-11
+                          </h5>
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">Почта</h5>
+                          <h5 className="user-body__item-value">
+                            mail@gmail.com
+                          </h5>
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">Дата рождения</h5>
+                          <h5 className="user-body__item-value">13.02.1996</h5>
+                        </li>
+                      </ul>
                     </div>
                   </div>
-                  <div className="user-body">
-                    <ul className="user-body__list">
-                      <li className="user-body__item">
-                        <h5 className="user-body__item-key">Имя*</h5>
-                        <Input
-                          type="text"
-                          placeholder="Имя*"
-                          className="user-body__item-input"
-                        />
-                      </li>
-                      <li className="user-body__item">
-                        <h5 className="user-body__item-key">Номер телефона*</h5>
-                        <PhoneInput
-                          country={"uz"}
-                          onChange={() => ""}
-                          placeholder="Номер телефона*"
-                          inputClass="user-body__item-input"
-                        />
-                      </li>
-                      <li className="user-body__item">
-                        <h5 className="user-body__item-key">Почта</h5>
-                        <Input
-                          type="text"
-                          placeholder="Почта"
-                          className="user-body__item-input"
-                        />
-                      </li>
-                      <li className="user-body__item">
-                        <h5 className="user-body__item-key">Дата рождения</h5>
-                        <DataPicker
-                          value={date}
-                          onChange={setDate}
-                          className="user-body__item-input"
-                        />
-                      </li>
-                    </ul>
+                </li>
+              )}
+              {isUserOpen && (
+                <li className="settings-body__list-item">
+                  <div className="user">
+                    <div className="user-header">
+                      <div className="user-header__box">
+                        <h4 className="user-header__box-heading">
+                          Изменение личных данных
+                        </h4>
+                      </div>
+                    </div>
+                    <div className="user-body">
+                      <ul className="user-body__list">
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">Имя*</h5>
+                          <Input
+                            type="text"
+                            value={userName}
+                            placeholder="Имя*"
+                            className="user-body__item-input"
+                            onChange={(e) => setUserName(e.target.value)}
+                          />
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">
+                            Номер телефона*
+                          </h5>
+                          <PhoneInput
+                            country={"uz"}
+                            value={phoneNumber}
+                            placeholder="Номер телефона*"
+                            inputClass="user-body__item-input"
+                            onChange={(phone) => setPhoneNumber(phone)}
+                          />
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">Почта</h5>
+                          <Input
+                            type="email"
+                            placeholder="Почта"
+                            value={email}
+                            className="user-body__item-input"
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">Дата рождения</h5>
+                          <DataPicker
+                            value={date}
+                            clearIcon={null}
+                            onChange={setDate}
+                          />
+                        </li>
+                      </ul>
+                      <Button
+                        type="button"
+                        className="user-body__send"
+                        onClick={() => editSettingValues()}
+                      >
+                        Сохранить изменения
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              )}
               <li className="settings-body__list-item">
                 <div className="user">
                   <div className="user-header">
