@@ -60,9 +60,11 @@ const index = () => {
                         </h4>
                       </li>
                       <li className="header-open__item">
-                        <h4 className="header-open__item-heading header-open__item-heading--regular">
-                          История заказов
-                        </h4>
+                        <Link to="/pages/history">
+                          <h4 className="header-open__item-heading header-open__item-heading--regular">
+                            История заказов
+                          </h4>
+                        </Link>
                       </li>
                       <li className="header-open__item">
                         <Link to="/pages/settings">
