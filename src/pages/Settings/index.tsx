@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "react-calendar/dist/Calendar.css";
 import DataPicker from "react-date-picker";
 import "react-phone-input-2/lib/style.css";
@@ -7,6 +7,7 @@ import "react-date-picker/dist/DatePicker.css";
 import { Button, Input } from "components/fields";
 import { settingsEditIcon } from "assets/images/svg";
 import { Link, useLocation } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "assets/react-icons";
 
 const index = () => {
   type ValuePiece = Date | null;
@@ -15,10 +16,16 @@ const index = () => {
   type Value = ValuePiece | [ValuePiece, ValuePiece];
   const [date, setDate] = useState<Value>(new Date());
   const [userName, setUserName] = useState<string>("");
+  const newConfirmRef = useRef<HTMLInputElement>(null);
+  const oldPasswordRef = useRef<HTMLInputElement>(null);
+  const newPasswordRef = useRef<HTMLInputElement>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [oldPassword, setOldPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [isUserOpen, setIsUserOpen] = useState<boolean>(false);
+  const [isConfirmOpen, setIsConfirm] = useState<boolean>(true);
+  const [isOldEyeOpen, setIsOldEyeOpen] = useState<boolean>(true);
+  const [isNewEyeOpen, setisNewEyeOpen] = useState<boolean>(true);
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
@@ -34,6 +41,45 @@ const index = () => {
     const settingValues: SettingValues = { date, email, userName, phoneNumber };
 
     console.log(settingValues); // send setting values
+  };
+
+  const isOpenOldEyeRef = (number: number) => {
+    if (
+      number === 1 &&
+      oldPasswordRef.current?.getAttribute("type") === "password"
+    ) {
+      setIsOldEyeOpen(false);
+      oldPasswordRef.current.setAttribute("type", "text");
+    } else {
+      setIsOldEyeOpen(true);
+      oldPasswordRef.current?.setAttribute("type", "password");
+    }
+  };
+
+  const isOpenNewEyeRef = (number: number) => {
+    if (
+      number === 1 &&
+      newPasswordRef.current?.getAttribute("type") === "password"
+    ) {
+      setisNewEyeOpen(false);
+      newPasswordRef.current.setAttribute("type", "text");
+    } else {
+      setisNewEyeOpen(true);
+      newPasswordRef.current?.setAttribute("type", "password");
+    }
+  };
+
+  const isOpenConfirmEyeRef = (number: number) => {
+    if (
+      number === 1 &&
+      newConfirmRef.current?.getAttribute("type") === "password"
+    ) {
+      setIsConfirm(false);
+      newConfirmRef.current.setAttribute("type", "text");
+    } else {
+      setIsConfirm(true);
+      newConfirmRef.current?.setAttribute("type", "password");
+    }
   };
 
   return (
@@ -248,9 +294,23 @@ const index = () => {
                             type="password"
                             value={oldPassword}
                             placeholder="********"
+                            passwordRef={oldPasswordRef}
                             className="user-body__item-input"
                             onChange={(e) => setOldPassword(e.target.value)}
                           />
+                          <div className="user-body__item-eyes">
+                            {isOldEyeOpen ? (
+                              <AiOutlineEye
+                                className="user-body__item-eye"
+                                onClick={() => isOpenOldEyeRef(1)}
+                              />
+                            ) : (
+                              <AiOutlineEyeInvisible
+                                onClick={() => isOpenOldEyeRef(2)}
+                                className="user-body__item-eye"
+                              />
+                            )}
+                          </div>
                         </li>
                         <li className="user-body__item">
                           <h5 className="user-body__item-key">Новый пароль*</h5>
@@ -259,9 +319,23 @@ const index = () => {
                             type="password"
                             value={newPassword}
                             placeholder="********"
+                            passwordRef={newPasswordRef}
                             className="user-body__item-input"
                             onChange={(e) => setNewPassword(e.target.value)}
                           />
+                          <div className="user-body__item-eyes">
+                            {isNewEyeOpen ? (
+                              <AiOutlineEye
+                                className="user-body__item-eye"
+                                onClick={() => isOpenNewEyeRef(1)}
+                              />
+                            ) : (
+                              <AiOutlineEyeInvisible
+                                onClick={() => isOpenNewEyeRef(2)}
+                                className="user-body__item-eye"
+                              />
+                            )}
+                          </div>
                         </li>
                         <li className="user-body__item">
                           <h5 className="user-body__item-key">
@@ -270,11 +344,25 @@ const index = () => {
                           <Input
                             maxLength={18}
                             type="password"
-                            value={confirmPassword}
                             placeholder="********"
+                            value={confirmPassword}
+                            passwordRef={newConfirmRef}
                             className="user-body__item-input"
                             onChange={(e) => setConfirmPassword(e.target.value)}
                           />
+                          <div className="user-body__item-eyes">
+                            {isConfirmOpen ? (
+                              <AiOutlineEye
+                                className="user-body__item-eye"
+                                onClick={() => isOpenConfirmEyeRef(1)}
+                              />
+                            ) : (
+                              <AiOutlineEyeInvisible
+                                className="user-body__item-eye"
+                                onClick={() => isOpenConfirmEyeRef(2)}
+                              />
+                            )}
+                          </div>
                         </li>
                       </ul>
                       <Button

@@ -169,6 +169,15 @@
               }
             }
             &__item {
+              position: relative;
+              &-eyes{
+                top: 40px;
+                right: 20px;
+                position: absolute;
+              }
+              &-eye{
+                font-size: 22px;
+              }
               &-key {
                 overflow: hidden;
                 white-space: nowrap;

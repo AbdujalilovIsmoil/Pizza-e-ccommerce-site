@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, RefObject } from "react";
 
 export interface inputInterface {
   id?: string;
@@ -6,6 +6,7 @@ export interface inputInterface {
   maxLength?: number;
   className?: string;
   placeholder?: string;
+  passwordRef?: RefObject<HTMLInputElement>;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   type?:
     | "text"

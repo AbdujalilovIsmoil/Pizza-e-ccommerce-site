@@ -1,3 +1,4 @@
 import { BsChevronDown } from "./bs";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "./ai";
 
-export { BsChevronDown };
+export { BsChevronDown, AiOutlineEye, AiOutlineEyeInvisible };

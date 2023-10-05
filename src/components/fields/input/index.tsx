@@ -3,7 +3,7 @@ import { inputInterface } from "ts/interfaces";
 const index = (props: inputInterface) => {
   return (
     <>
-      <input {...props} />
+      <input ref={props.passwordRef} {...props} />
     </>
   );
 };
