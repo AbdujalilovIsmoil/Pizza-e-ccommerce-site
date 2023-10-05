@@ -135,6 +135,7 @@ const index = () => {
                           <h5 className="user-body__item-key">Имя*</h5>
                           <Input
                             type="text"
+                            maxLength={18}
                             value={userName}
                             placeholder="Имя*"
                             className="user-body__item-input"
@@ -157,8 +158,9 @@ const index = () => {
                           <h5 className="user-body__item-key">Почта</h5>
                           <Input
                             type="email"
-                            placeholder="Почта"
                             value={email}
+                            maxLength={20}
+                            placeholder="Почта"
                             className="user-body__item-input"
                             onChange={(e) => setEmail(e.target.value)}
                           />
@@ -202,6 +204,26 @@ const index = () => {
                         <h4 className="user-header__box-edit">Изменить</h4>
                       </div>
                     </div>
+                    <div className="user-body">
+                      <ul className="user-body__list">
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">
+                            Старый пароль*
+                          </h5>
+                          <h5 className="user-body__item-value">12345678</h5>
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">Новый пароль*</h5>
+                          <h5 className="user-body__item-value">8765421</h5>
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">
+                            Подтвердите пароль*
+                          </h5>
+                          <h5 className="user-body__item-value">87654321</h5>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </li>
               )}
@@ -222,6 +244,7 @@ const index = () => {
                             Старый пароль*
                           </h5>
                           <Input
+                            maxLength={18}
                             type="password"
                             value={oldPassword}
                             placeholder="********"
@@ -232,6 +255,7 @@ const index = () => {
                         <li className="user-body__item">
                           <h5 className="user-body__item-key">Новый пароль*</h5>
                           <Input
+                            maxLength={18}
                             type="password"
                             value={newPassword}
                             placeholder="********"
@@ -244,6 +268,7 @@ const index = () => {
                             Подтвердите пароль*
                           </h5>
                           <Input
+                            maxLength={18}
                             type="password"
                             value={confirmPassword}
                             placeholder="********"
