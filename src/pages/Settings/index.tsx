@@ -16,7 +16,11 @@ const index = () => {
   const [date, setDate] = useState<Value>(new Date());
   const [userName, setUserName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [oldPassword, setOldPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
   const [isUserOpen, setIsUserOpen] = useState<boolean>(false);
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [isPasswordOpen, setIsPasswordOpen] = useState<boolean>(false);
 
   type SettingValues = {
     date: Value;
@@ -179,23 +183,86 @@ const index = () => {
                   </div>
                 </li>
               )}
-              <li className="settings-body__list-item">
-                <div className="user">
-                  <div className="user-header">
-                    <div className="user-header__box">
-                      <h4 className="user-header__box-heading">Пароль</h4>
-                    </div>
-                    <div className="user-header__box">
-                      <img
-                        src={settingsEditIcon}
-                        alt="setting-edit-icon"
-                        className="user-header__box-icon"
-                      />
-                      <h4 className="user-header__box-edit">Изменить</h4>
+              {!isPasswordOpen && (
+                <li className="settings-body__list-item">
+                  <div className="user">
+                    <div className="user-header">
+                      <div className="user-header__box">
+                        <h4 className="user-header__box-heading">Пароль</h4>
+                      </div>
+                      <div
+                        className="user-header__box"
+                        onClick={() => setIsPasswordOpen(true)}
+                      >
+                        <img
+                          src={settingsEditIcon}
+                          alt="setting-edit-icon"
+                          className="user-header__box-icon"
+                        />
+                        <h4 className="user-header__box-edit">Изменить</h4>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              )}
+              {isPasswordOpen && (
+                <li className="settings-body__list-item">
+                  <div className="user">
+                    <div className="user-header">
+                      <div className="user-header__box">
+                        <h4 className="user-header__box-heading">
+                          Изменение личных данных
+                        </h4>
+                      </div>
+                    </div>
+                    <div className="user-body">
+                      <ul className="user-body__list">
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">
+                            Старый пароль*
+                          </h5>
+                          <Input
+                            type="password"
+                            value={oldPassword}
+                            placeholder="********"
+                            className="user-body__item-input"
+                            onChange={(e) => setOldPassword(e.target.value)}
+                          />
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">Новый пароль*</h5>
+                          <Input
+                            type="password"
+                            value={newPassword}
+                            placeholder="********"
+                            className="user-body__item-input"
+                            onChange={(e) => setNewPassword(e.target.value)}
+                          />
+                        </li>
+                        <li className="user-body__item">
+                          <h5 className="user-body__item-key">
+                            Подтвердите пароль*
+                          </h5>
+                          <Input
+                            type="password"
+                            value={confirmPassword}
+                            placeholder="********"
+                            className="user-body__item-input"
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                          />
+                        </li>
+                      </ul>
+                      <Button
+                        type="button"
+                        className="user-body__send"
+                        onClick={() => setIsPasswordOpen(false)}
+                      >
+                        Сохранить изменения
+                      </Button>
+                    </div>
+                  </div>
+                </li>
+              )}
               <li className="settings-body__list-item">
                 <div className="user">
                   <div className="user-header user-header--last">

@@ -6,5 +6,12 @@ export interface inputInterface {
   className?: string;
   placeholder?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  type?: "text" | "number" | "checkbox" | "number" | "email" | undefined;
+  type?:
+    | "text"
+    | "number"
+    | "checkbox"
+    | "number"
+    | "email"
+    | "password"
+    | undefined;
 }
