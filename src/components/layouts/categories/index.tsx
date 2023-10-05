@@ -18,6 +18,7 @@ const index = () => {
         <section className="categories">
           <Swiper
             loop={true}
+            grabCursor={true}
             spaceBetween={30}
             slidesPerView={8}
             modules={[Autoplay]}

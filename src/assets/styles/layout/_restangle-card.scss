@@ -1,7 +1,4 @@
 .restangle-card {
-  &__list {
-    @include gridLayout(grid, 4, space-between, center, 30px);
-  }
   &__item {
     padding: 20px;
     max-width: 300px;
