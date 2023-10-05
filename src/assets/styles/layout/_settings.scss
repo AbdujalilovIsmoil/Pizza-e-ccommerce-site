@@ -149,7 +149,6 @@
               @include flexLayout(flex, flex-start, center, 32px, row nowrap);
             }
             &__item {
-              max-width: 175px;
               &-key {
                 overflow: hidden;
                 white-space: nowrap;
@@ -161,6 +160,11 @@
                   18px,
                   default
                 );
+              }
+              &-input {
+                padding: 13px 16px;
+                width: 245px !important;
+                height: 48px !important;
               }
               &-value {
                 margin-top: 4px;

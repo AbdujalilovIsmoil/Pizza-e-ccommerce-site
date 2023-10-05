@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { Input } from "components/fields";
+import "react-calendar/dist/Calendar.css";
+import DataPicker from "react-date-picker";
+import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-input-2";
+import "react-date-picker/dist/DatePicker.css";
 import { settingsEditIcon } from "assets/images/svg";
 import { Link, useLocation } from "react-router-dom";
 
 const index = () => {
+  type ValuePiece = Date | null;
   const { pathname } = useLocation();
+  type Value = ValuePiece | [ValuePiece, ValuePiece];
+  const [date, setDate] = useState<Value>(new Date());
 
   return (
     <>
@@ -76,6 +85,54 @@ const index = () => {
                       <li className="user-body__item">
                         <h5 className="user-body__item-key">Дата рождения</h5>
                         <h5 className="user-body__item-value">13.02.1996</h5>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li className="settings-body__list-item">
+                <div className="user">
+                  <div className="user-header">
+                    <div className="user-header__box">
+                      <h4 className="user-header__box-heading">
+                        Изменение личных данных
+                      </h4>
+                    </div>
+                  </div>
+                  <div className="user-body">
+                    <ul className="user-body__list">
+                      <li className="user-body__item">
+                        <h5 className="user-body__item-key">Имя*</h5>
+                        <Input
+                          type="text"
+                          placeholder="Имя*"
+                          className="user-body__item-input"
+                        />
+                      </li>
+                      <li className="user-body__item">
+                        <h5 className="user-body__item-key">Номер телефона*</h5>
+                        <PhoneInput
+                          country={"uz"}
+                          onChange={() => ""}
+                          placeholder="Номер телефона*"
+                          inputClass="user-body__item-input"
+                        />
+                      </li>
+                      <li className="user-body__item">
+                        <h5 className="user-body__item-key">Почта</h5>
+                        <Input
+                          type="text"
+                          placeholder="Почта"
+                          className="user-body__item-input"
+                        />
+                      </li>
+                      <li className="user-body__item">
+                        <h5 className="user-body__item-key">Дата рождения</h5>
+                        <DataPicker
+                          value={date}
+                          onChange={setDate}
+                          className="user-body__item-input"
+                        />
                       </li>
                     </ul>
                   </div>

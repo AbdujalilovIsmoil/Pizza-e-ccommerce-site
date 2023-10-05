@@ -1,5 +1,6 @@
 export interface inputInterface {
   id?: string;
   className?: string;
-  type?: "text" | "number" | "checkbox" | undefined;
+  placeholder?: string;
+  type?: "text" | "number" | "checkbox" | "number" | "email" | undefined;
 }
