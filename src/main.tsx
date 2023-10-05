@@ -1,3 +1,4 @@
+import "swiper/css";
 import App from "./App.tsx";
 import { store } from "store";
 import "assets/styles/index.scss";

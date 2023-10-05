@@ -1,7 +1,9 @@
+import { Categories } from "components/layouts";
+
 const index = () => {
   return (
     <>
-      <h1>Home</h1>
+      <Categories />
     </>
   );
 };
