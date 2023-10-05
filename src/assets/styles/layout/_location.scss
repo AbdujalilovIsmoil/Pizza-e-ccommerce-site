@@ -1,0 +1,58 @@
+.location {
+  margin: 30px 0;
+  &__list {
+    border-radius: 8px;
+    padding: 16px 32px;
+    background: $header__bg-color;
+    border: 1px solid $header-top__border-color;
+    @include flexLayout(flex, space-between, center, 30px, row nowrap);
+  }
+  &__item {
+    &-heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        18px,
+        400,
+        24px,
+        default
+      );
+    }
+    &-btn {
+      @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+      @include Button(
+        $header-cart__bg-color,
+        none,
+        6px,
+        12px 32px,
+        opacity 150ms linear
+      );
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+  &-form {
+    width: 720px;
+    height: 48px;
+    position: relative;
+    border-radius: 6px;
+    background-color: $header__bg-color;
+    border: 1px solid $header-top__border-color;
+    &__icon {
+      top: 12px;
+      left: 12px;
+      position: absolute;
+    }
+    &__input {
+      padding: 12px 40px;
+      @include Input(
+        $heading-cart__heading-color,
+        $heading-cart__heading-color,
+        $header__bg-color,
+        none,
+        6px,
+        0
+      );
+    }
+  }
+}

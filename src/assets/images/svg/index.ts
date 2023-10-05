@@ -1,3 +1,4 @@
+import { locationIcon1 } from "./location";
 import { settingsEditIcon } from "./settings";
 import { restangleCard1 } from "./restangle-card";
 import { HeaderTopAccount, HeaderTopDown, HeaderTopLocation } from "./header";
@@ -21,6 +22,7 @@ export {
   Categories6,
   Categories7,
   Categories8,
+  locationIcon1,
   HeaderTopDown,
   restangleCard1,
   settingsEditIcon,
