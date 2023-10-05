@@ -167,14 +167,21 @@ const index = () => {
                 </li>
               </ul>
             </div>
-            <Button className="header-list__btn" type="button">
-              <img
-                alt="header-cart"
-                src={HeaderListCart}
-                className="header-list__btn-cart"
-              />
-              <h4 className="header-list__btn-heading">0 ₽</h4>
-            </Button>
+            <div className="header-list__modal">
+              <Button className="header-list__btn" type="button">
+                <img
+                  alt="header-cart"
+                  src={HeaderListCart}
+                  className="header-list__btn-cart"
+                />
+                <h4 className="header-list__btn-heading">0 ₽</h4>
+              </Button>
+              <div className="small-modal small-modal--open">
+                <h4 className="small-modal__heading">
+                  Товар добавлен в корзину
+                </h4>
+              </div>
+            </div>
           </div>
         </div>
       </header>

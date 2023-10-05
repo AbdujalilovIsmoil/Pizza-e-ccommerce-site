@@ -1,5 +1,34 @@
 .header-list {
   padding: 10px 0;
+  &__modal {
+    position: relative;
+    .small-modal {
+      top: 60px;
+      z-index: 1;
+      right: -50%;
+      padding: 12px 32px;
+      position: absolute;
+      border-radius: 58px;
+      transform: scale(0);
+      transition: transform 150ms linear;
+      background-color: $header__bg-color;
+      box-shadow: 0px 2px 4px 0px $drop-down__bg-color;
+      &--open {
+        transform: scale(1);
+        transition: transform 150ms linear;
+      }
+      &__heading {
+        white-space: nowrap;
+        @include headingFonts(
+          $heading-top__heading-color,
+          14px,
+          400,
+          18px,
+          default
+        );
+      }
+    }
+  }
   &__container {
     @include flexLayout(flex, flex-start, center, 0, row nowrap);
   }
@@ -71,6 +100,7 @@
     }
   }
   &__btn {
+    z-index: -1000;
     @include flexLayout(flex, center, center, 10px, row nowrap);
     @include Button(
       $header-cart__bg-color,

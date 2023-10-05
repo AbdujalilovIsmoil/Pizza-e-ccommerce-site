@@ -1,10 +1,11 @@
 .header-top {
+  z-index: 2;
+  position: relative;
   @include flexLayout(flex, space-between, center, 0, row nowrap);
   &__list {
     @include flexLayout(flex, flex-start, center, 40px, row nowrap);
   }
   &__item {
-    position: relative;
     @include flexLayout(flex, center, center, 10px, row nowrap);
     &--hover {
       cursor: pointer;

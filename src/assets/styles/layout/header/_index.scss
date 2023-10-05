@@ -3,12 +3,11 @@
 
 .header {
   top: 0;
-  z-index: 10;
+  z-index: 1000;
   position: sticky;
   background-color: $header__bg-color;
   &-open {
     top: 90px;
-    z-index: 1;
     opacity: 0;
     right: -40px;
     width: 285px;
@@ -49,6 +48,7 @@
           opacity: 0.8;
         }
       }
+      cursor: pointer;
       &:first-child {
         padding-bottom: 16px;
         color: $header-cart__bg-color;
@@ -62,7 +62,6 @@
       &:nth-child(2) {
         padding: 16px 20px 0 20px;
       }
-      cursor: pointer;
 
       &-heading {
         &--regular {
@@ -93,7 +92,6 @@
   &-drop-down {
     top: 80px;
     opacity: 0;
-    z-index: 1;
     left: -100%;
     width: 285px;
     padding: 20px;
@@ -106,6 +104,7 @@
     border: 1px solid $header-top__border-color;
     box-shadow: 0px 2px 8px 0px $drop-down__bg-color;
     @include flexLayout(flex, flex-start, flex-start, 16px, column nowrap);
+    
     &::after {
       left: 42%;
       top: -15px;
@@ -118,6 +117,7 @@
       filter: drop-shadow(0px 2px 8px $drop-down__bg-color);
     }
     &__block {
+
       &:hover &-title {
         color: $header-cart__bg-color;
       }
