@@ -1,0 +1,29 @@
+.restangle-card {
+  &__list {
+    @include gridLayout(grid, 4, space-between, center, 30px);
+  }
+  &__item {
+    padding: 20px;
+    max-width: 300px;
+    min-height: 343px;
+    border-radius: 15px;
+    background-color: $categories__heading-color;
+    @include flexLayout(flex, space-between, space-between, 0, column nowrap);
+    &-img {
+      height: 115px;
+      margin-top: 70px;
+      object-fit: contain;
+    }
+    &-line {
+      width: 100%;
+    }
+    &-heading {
+      @include headingFonts($header__bg-color, 20px, 600, 28px, default);
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}

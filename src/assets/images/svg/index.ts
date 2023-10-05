@@ -1,4 +1,5 @@
 import { settingsEditIcon } from "./settings";
+import { restangleCard1 } from "./restangle-card";
 import { HeaderTopAccount, HeaderTopDown, HeaderTopLocation } from "./header";
 import {
   Categories1,
@@ -21,6 +22,7 @@ export {
   Categories7,
   Categories8,
   HeaderTopDown,
+  restangleCard1,
   settingsEditIcon,
   HeaderTopAccount,
   HeaderTopLocation,
