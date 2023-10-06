@@ -1,14 +1,27 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "components/fields";
+import { CardModal } from "components/layouts";
 import { BsChevronDown } from "assets/react-icons";
 import { HeaderListIntro } from "assets/images/svg/header";
 import { HeaderListCart } from "assets/images/svg/header/header-list";
 import { HeaderTopAccount, HeaderTopLocation } from "assets/images/svg";
 
 const index = () => {
+  const [isCartModalOpen, setIsCartModalOpen] = useState<boolean>(false);
+
+  if (isCartModalOpen) {
+    document.body.classList.add("hidden");
+  } else {
+    document.body.classList.remove("hidden");
+  }
   return (
     <>
       <header className="header">
+        <CardModal
+          isCartModalOpen={isCartModalOpen}
+          setIsCartModalOpen={setIsCartModalOpen}
+        />
         <div className="header__border-bottom">
           <div className="container">
             <div className="header-top">
@@ -170,7 +183,11 @@ const index = () => {
               </ul>
             </div>
             <div className="header-list__modal">
-              <Button className="header-list__btn" type="button">
+              <Button
+                className="header-list__btn"
+                type="button"
+                onClick={() => setIsCartModalOpen(true)}
+              >
                 <img
                   alt="header-cart"
                   src={HeaderListCart}

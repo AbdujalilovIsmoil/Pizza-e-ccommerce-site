@@ -1,5 +1,6 @@
 import { locationIcon1 } from "./location";
 import { settingsEditIcon } from "./settings";
+import { Counter1, Counter2 } from "./counter";
 import { GroupCardFilter } from "./group-card";
 import { restangleCard1 } from "./restangle-card";
 import { HeaderTopAccount, HeaderTopDown, HeaderTopLocation } from "./header";
@@ -15,6 +16,8 @@ import {
 } from "./categories";
 
 export {
+  Counter1,
+  Counter2,
   Categories1,
   Categories2,
   Categories3,
