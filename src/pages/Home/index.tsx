@@ -1,4 +1,9 @@
-import { Categories, Location, RestangleCard } from "components/layouts";
+import {
+  Location,
+  GroupCard,
+  Categories,
+  RestangleCard,
+} from "components/layouts";
 
 const index = () => {
   return (
@@ -6,6 +11,7 @@ const index = () => {
       <Categories />
       <RestangleCard />
       <Location />
+      <GroupCard />
     </>
   );
 };

@@ -1,0 +1,39 @@
+.group-card {
+  &__header {
+    margin-bottom: 6px;
+    @include flexLayout(flex, space-between, center, 0, row nowrap);
+  }
+  &__box {
+    &-heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        40px,
+        600,
+        48px,
+        default
+      );
+    }
+  }
+  &__filter {
+    @include flexLayout(flex, center, center, 8px, row nowrap);
+    @include Button(
+      $header__bg-color,
+      $header-top__border-color,
+      6px,
+      10px 16px,
+      opacity 150ms linear
+    );
+    &-heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        16px,
+        400,
+        22px,
+        default
+      );
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

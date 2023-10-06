@@ -1,5 +1,6 @@
 import { locationIcon1 } from "./location";
 import { settingsEditIcon } from "./settings";
+import { GroupCardFilter } from "./group-card";
 import { restangleCard1 } from "./restangle-card";
 import { HeaderTopAccount, HeaderTopDown, HeaderTopLocation } from "./header";
 import {
@@ -25,6 +26,7 @@ export {
   locationIcon1,
   HeaderTopDown,
   restangleCard1,
+  GroupCardFilter,
   settingsEditIcon,
   HeaderTopAccount,
   HeaderTopLocation,
