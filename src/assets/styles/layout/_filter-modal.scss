@@ -91,6 +91,8 @@
     }
   }
   &__footer {
+    bottom: 0;
+    position: sticky;
     padding: 12px 20px;
     border-top: 1px solid $header-top__border-color;
     @include flexLayout(flex, space-between, center, 20px, row nowrap);

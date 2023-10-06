@@ -76,9 +76,9 @@
     @include flexLayout(flex, space-between, center, 0, row nowrap);
   }
   &__background {
-    left: 68.9%;
+    left: 68.1%;
     overflow: auto;
-    max-width: 420px;
+    max-width: 430px;
     min-height: 700px;
     position: relative;
     background-color: $header__bg-color;
@@ -100,13 +100,10 @@
     }
   }
   &__footer {
-    bottom: 0;
-    position: absolute;
     padding: 22px 20px;
     border-top: 1px solid $header-top__border-color;
     @include flexLayout(flex, space-between, center, 0px, row nowrap);
     &-btn {
-      margin-left: 70px;
       @include headingFonts($header__bg-color, 16px, 400, 22px, default);
       @include Button(
         $header-cart__bg-color,
