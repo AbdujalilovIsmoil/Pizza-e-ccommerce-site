@@ -1,0 +1,121 @@
+.filter-modal {
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  overflow: auto;
+  position: fixed;
+  backdrop-filter: blur(16px);
+  transition: left 150ms linear;
+  background-color: rgba(25, 25, 25, 0.4);
+  &--open {
+    left: 0;
+    transition: left 150ms linear;
+  }
+  &__border {
+    padding: 32px 20px 15px 20px;
+  }
+  &__background {
+    left: 65.15%;
+    overflow: auto;
+    max-width: 470px;
+    min-height: 700px;
+    position: relative;
+    background-color: $header__bg-color;
+  }
+  &__header {
+    @include flexLayout(flex, space-between, center, 0, row nowrap);
+  }
+  &__box {
+    &-heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        32px,
+        600,
+        40px,
+        default
+      );
+    }
+    &-icon {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+  }
+  &__item {
+    margin-top: 20px;
+    &-heading {
+      @include headingFonts(
+        $heading-cart__heading-color,
+        16px,
+        400,
+        22px,
+        default
+      );
+    }
+  }
+
+  &__check-list {
+    margin: 24px 0;
+    @include flexLayout(flex, flex-start, flex-start, 0, row wrap);
+    row-gap: 30px;
+    column-gap: 8px;
+  }
+  &__check {
+    input {
+      display: none;
+    }
+    input[type="radio"]:checked + label {
+      color: $header__bg-color;
+      background-color: $header-cart__bg-color;
+    }
+    &-btn {
+      @include headingFonts(
+        $heading-top__heading-color,
+        14px,
+        400,
+        18px,
+        default
+      );
+    }
+    label {
+      cursor: pointer;
+      @include Button(
+        $header__bg-color,
+        1px solid $header-top__border-color,
+        6px,
+        12px 16px,
+        all 150ms linear
+      );
+    }
+  }
+  &__footer {
+    padding: 12px 20px;
+    border-top: 1px solid $header-top__border-color;
+    @include flexLayout(flex, space-between, center, 20px, row nowrap);
+    &-btn {
+      width: 100%;
+      @include headingFonts($header-cart__bg-color, 16px, 400, 22px, default);
+      @include Button(
+        $header__bg-color,
+        1px solid $header-cart__bg-color,
+        6px,
+        14px 60px,
+        all 150ms linear
+      );
+      &:nth-child(2) {
+        color: $header__bg-color;
+        background-color: $header-cart__bg-color;
+      }
+      &:nth-child(1):hover {
+        color: $header__bg-color;
+        background-color: $header-cart__bg-color;
+      }
+      &:nth-child(2):hover {
+        color: $header-cart__bg-color;
+        background-color: $header__bg-color;
+      }
+    }
+  }
+}

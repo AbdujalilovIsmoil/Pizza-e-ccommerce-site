@@ -4,6 +4,7 @@ import Loader from "./loader";
 import Location from "./location";
 import GroupCard from "./group-card";
 import Categories from "./categories";
+import FilterModal from "./filter-modal";
 import RestangleCard from "./restangle-card";
 
 export {
@@ -13,5 +14,6 @@ export {
   Location,
   GroupCard,
   Categories,
+  FilterModal,
   RestangleCard,
 };

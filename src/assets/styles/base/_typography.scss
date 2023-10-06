@@ -1,6 +1,10 @@
 body {
+  overflow: visible;
   font-family: "Inter", sans-serif;
   background-color: $body__bg-color;
+  &.hidden {
+    overflow: hidden;
+  }
 }
 
 a {

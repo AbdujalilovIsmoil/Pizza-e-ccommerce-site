@@ -1,10 +1,24 @@
-import { GroupCardFilter } from "assets/images/svg";
+import { useState } from "react";
 import { Button } from "components/fields";
+import { FilterModal } from "components/layouts";
+import { GroupCardFilter } from "assets/images/svg";
 
 const index = () => {
+  const [isOpenFilterModal, setIsOpenFilterModal] = useState<boolean>(false);
+
+  if (isOpenFilterModal) {
+    document.body.classList.add("hidden");
+  } else {
+    document.body.classList.remove("hidden");
+  }
+
   return (
     <>
       <section className="group-card">
+        <FilterModal
+          isOpenFilterModal={isOpenFilterModal}
+          setIsOpenFilterModal={setIsOpenFilterModal}
+        />
         <div className="container">
           <ul className="group-card__list">
             <li className="group-card__item">
@@ -13,7 +27,11 @@ const index = () => {
                   <h2 className="group-card__box-heading">Пицца</h2>
                 </div>
                 <div className="group-card__box">
-                  <Button className="group-card__filter" type="button">
+                  <Button
+                    className="group-card__filter"
+                    type="button"
+                    onClick={() => setIsOpenFilterModal(true)}
+                  >
                     <img
                       src={GroupCardFilter}
                       alt="group-card-filter"
