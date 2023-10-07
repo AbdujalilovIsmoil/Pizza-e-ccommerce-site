@@ -1,6 +1,6 @@
 .group-card {
   &__header {
-    margin-bottom: 6px;
+    margin-top: 48px;
     @include flexLayout(flex, space-between, center, 0, row nowrap);
   }
   &__box {
@@ -34,6 +34,106 @@
     }
     &:hover {
       opacity: 0.8;
+    }
+  }
+
+  &__item {
+    .cards {
+      margin-top: 30px;
+      @include gridLayout(grid, 4, space-between, center, 30px);
+      gap: 30px;
+      &__category {
+        left: 0;
+        top: 20px;
+        position: absolute;
+      }
+      &-footer {
+        @include flexLayout(flex, space-between, center, 0, row nowrap);
+        &__box {
+          &-btn {
+            border-radius: 6px;
+            background-color: $header-cart__bg-color;
+            @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+            @include Button(
+              $header-cart__bg-color,
+              none,
+              6px,
+              14px 32px,
+              opacity 150ms linear
+            );
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+          &-heading {
+            @include headingFonts(
+              $header-cart__bg-color,
+              18px,
+              600,
+              24px,
+              default
+            );
+          }
+        }
+      }
+      &__content {
+        width: 275px;
+        margin-top: 16px;
+        padding: 0 20px 20px 20px;
+        &-title {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          @include headingFonts(
+            $heading-top__heading-color,
+            18px,
+            600,
+            24px,
+            default
+          );
+        }
+        &-text {
+          overflow: hidden;
+          display: -webkit-box;
+          margin: 12px 0 14px 0;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          @include headingFonts(
+            $heading-top__heading-color,
+            16px,
+            400,
+            22px,
+            default
+          );
+        }
+      }
+      &__image {
+        width: 100%;
+        height: 300px;
+        margin: 0 auto;
+        position: relative;
+        @include flexLayout(flex, center, center, 0, row nowrap);
+        &-img {
+          height: 100%;
+        }
+      }
+      &__item {
+        max-width: 100%;
+        min-height: 400px;
+        border-radius: 12px;
+        background-color: $header__bg-color;
+        border: 1px solid $header-top__border-color;
+      }
+      &__category {
+        height: 32px;
+        max-width: 65px;
+        padding: 8px 16px;
+        border-radius: 0 10px 10px 0;
+        background-color: $categories__heading-color;
+        &-heading {
+          @include headingFonts($header__bg-color, 14px, 400, 18px, uppercase);
+        }
+      }
     }
   }
 }
