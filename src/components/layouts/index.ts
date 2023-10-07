@@ -1,3 +1,4 @@
+import Auth from "./auth";
 import Header from "./header";
 import Footer from "./footer";
 import Loader from "./loader";
@@ -9,6 +10,7 @@ import FilterModal from "./filter-modal";
 import RestangleCard from "./restangle-card";
 
 export {
+  Auth,
   Header,
   Footer,
   Loader,

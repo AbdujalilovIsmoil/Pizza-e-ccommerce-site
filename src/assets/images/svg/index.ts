@@ -1,3 +1,4 @@
+import { AuthIcon1 } from "./auth";
 import { locationIcon1 } from "./location";
 import { settingsEditIcon } from "./settings";
 import { Counter1, Counter2 } from "./counter";
@@ -18,6 +19,7 @@ import {
 export {
   Counter1,
   Counter2,
+  AuthIcon1,
   Categories1,
   Categories2,
   Categories3,

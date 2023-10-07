@@ -1,0 +1,96 @@
+.auth-modal {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  overflow: auto;
+  position: fixed;
+  transform: scale(0);
+  backdrop-filter: blur(16px);
+  transition: transform 200ms linear;
+  background-color: rgba(25, 25, 25, 0.4);
+  @include flexLayout(flex, center, center, 0, row nowrap);
+  &--open {
+    transform: scale(1);
+    transition: transform 200ms linear;
+  }
+  &__content {
+    margin: 0 auto;
+    max-width: 320px;
+    text-align: center;
+  }
+  &__background {
+    padding: 60px;
+    margin: 0 auto;
+    overflow: auto;
+    max-width: 850px;
+    min-height: 445px;
+    position: relative;
+    border-radius: 24px;
+    background-color: $header__bg-color;
+    &-close {
+      top: 50px;
+      right: 50px;
+      cursor: pointer;
+      position: absolute;
+    }
+    &-heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        32px,
+        600,
+        40px,
+        default
+      );
+    }
+    &-desc {
+      margin: 16px 0 20px 0;
+      @include headingFonts(
+        $heading-top__heading-color,
+        16px,
+        400,
+        22px,
+        default
+      );
+    }
+    &-btn {
+      width: 100%;
+      @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+      @include Button(
+        $header-cart__bg-color,
+        none,
+        6px,
+        14px 0,
+        opacity 150ms linear
+      );
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    &-text {
+      opacity: 0.4;
+      margin-top: 12px;
+      @include headingFonts(
+        $heading-top__heading-color,
+        14px,
+        400,
+        18px,
+        default
+      );
+    }
+  }
+  &__form {
+    &-input {
+      margin: 8px 0;
+      padding: 14px 16px;
+      @include Input(
+        $heading-cart__heading-color,
+        $heading-cart__heading-color,
+        $header__bg-color,
+        1px solid $header-top__border-color,
+        6px,
+        0
+      );
+    }
+  }
+}

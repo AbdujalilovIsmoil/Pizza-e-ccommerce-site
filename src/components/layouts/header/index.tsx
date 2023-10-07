@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "components/fields";
-import { CardModal } from "components/layouts";
 import { BsChevronDown } from "assets/react-icons";
+import { CardModal, Auth } from "components/layouts";
 import { HeaderListIntro } from "assets/images/svg/header";
 import { HeaderListCart } from "assets/images/svg/header/header-list";
 import { HeaderTopAccount, HeaderTopLocation } from "assets/images/svg";
 
 const index = () => {
   const [isCartModalOpen, setIsCartModalOpen] = useState<boolean>(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
 
   if (isCartModalOpen) {
     document.body.classList.add("hidden");
@@ -21,6 +22,10 @@ const index = () => {
         <CardModal
           isCartModalOpen={isCartModalOpen}
           setIsCartModalOpen={setIsCartModalOpen}
+        />
+        <Auth
+          isAuthModalOpen={isAuthModalOpen}
+          setIsAuthModalOpen={setIsAuthModalOpen}
         />
         <div className="header__border-bottom">
           <div className="container">
@@ -85,6 +90,14 @@ const index = () => {
                             Настройки
                           </h4>
                         </Link>
+                      </li>
+                      <li
+                        onClick={() => setIsAuthModalOpen(true)}
+                        className="header-open__item header-open__item--border"
+                      >
+                        <Button type="button" className="header-open__item-btn">
+                          Вход в аккаунт
+                        </Button>
                       </li>
                       <li className="header-open__item header-open__item--border">
                         <Button className="header-open__item-btn" type="button">
