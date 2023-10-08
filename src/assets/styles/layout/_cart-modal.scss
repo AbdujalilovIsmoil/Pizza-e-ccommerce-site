@@ -110,8 +110,11 @@
         1px solid $header-cart__bg-color,
         6px,
         12px 24px,
-        all 150ms linear
+        opacity 150ms linear
       );
+      &:hover {
+        opacity: 0.8;
+      }
     }
     &-heading {
       @include headingFonts($header-cart__bg-color, 20px, 600, 28px, default);
