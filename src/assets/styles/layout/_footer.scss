@@ -1,0 +1,89 @@
+.footer {
+  padding: 40px 0;
+  margin-top: 60px;
+  background-color: $header__bg-color;
+  &__list {
+    @include flexLayout(flex, space-between, flex-start, 0, row nowrap);
+  }
+  &__intro {
+    @include flexLayout(flex, flex-start, center, 15px, row nowrap);
+  }
+  &__item {
+    &:hover &-title {
+      color: $header-cart__bg-color;
+    }
+    &-intro {
+      width: 40px;
+      height: 40px;
+    }
+    &-title {
+      transition: color 150ms linear;
+      @include headingFonts(
+        $heading-top__heading-color,
+        18px,
+        400,
+        default,
+        default
+      );
+    }
+    &-heading {
+      margin-bottom: 22px;
+      @include headingFonts(
+        $heading-top__heading-color,
+        20px,
+        600,
+        default,
+        default
+      );
+    }
+  }
+  &-categories {
+    &__item {
+      margin-bottom: 22px;
+      &-heading {
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+      }
+    }
+  }
+  &-medias {
+    &__container {
+      @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+    }
+    &__item {
+      margin-bottom: 22px;
+      &-icon {
+        width: 20px;
+        height: 20px;
+      }
+      &-heading {
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+      }
+    }
+  }
+  &__copy {
+    padding: 40px 0 0 0;
+    text-align: center;
+    border-top: 1px solid $header-top__border-color;
+    &-heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        16px,
+        400,
+        22px,
+        default
+      );
+    }
+  }
+}
