@@ -5,7 +5,7 @@
   z-index: 1000;
   overflow: auto;
   position: fixed;
-  //   transform: scale(0);
+    transform: scale(0);
   backdrop-filter: blur(16px);
   transition: transform 200ms linear;
   background-color: rgba(25, 25, 25, 0.4);
@@ -19,8 +19,8 @@
     position: relative;
     @include flexLayout(flex, center, center, 0, row nowrap);
     &-times {
-      right: 0;
-      top: 100px;
+      top: 50px;
+      right: -100px;
       cursor: pointer;
       position: absolute;
     }
@@ -87,10 +87,12 @@
         @include gridLayout(grid, 4, space-between, flex-start, 20px);
         &__back {
           display: block;
+          cursor: pointer;
           &-success {
             top: 8px;
             right: 8px;
             position: absolute;
+            visibility: hidden;
           }
           &-meal {
             width: 40px;
@@ -100,12 +102,23 @@
         &__box {
           width: 95px;
           text-align: center;
-          &-input:checked + label {
-            .item-categories__active {
-              border: 1px solid $header-cart__bg-color;
+          &-input {
+            display: none;
+            &:checked + label {
+              .item-categories__active {
+                border: 1px solid $header-cart__bg-color;
+              }
+              .item-categories__back-success {
+                visibility: visible;
+              }
+              .item-categories__box-title {
+                color: $header-cart__bg-color;
+              }
+              .item-categories__box-price {
+                color: $header-cart__bg-color;
+              }
             }
           }
-
           &-title {
             overflow: hidden;
             white-space: nowrap;
@@ -119,16 +132,153 @@
               default
             );
           }
+          &-price {
+            margin-top: 5px;
+            @include headingFonts(
+              $heading-top__heading-color,
+              14px,
+              400,
+              18px,
+              default
+            );
+          }
         }
         &__active {
           width: 95px;
           height: 95px;
-          cursor: pointer;
           position: relative;
           border-radius: 12px;
           background-color: $header__bg-color;
           border: 1px solid $header-top__border-color;
           @include flexLayout(flex, center, center, 0, row nowrap);
+        }
+      }
+      &-sizes {
+        margin-top: 24px;
+        @include flexLayout(flex, flex-start, center, 0, row nowrap);
+        &__box {
+          width: 100%;
+          display: block;
+          &-radio {
+            display: none;
+            &:checked + label {
+              color: $header__bg-color;
+              @include Button(
+                $header-cart__bg-color,
+                1px solid $header-cart__bg-color,
+                6px,
+                14px 0,
+                all 150ms linear
+              );
+            }
+          }
+          &-btn {
+            width: 100%;
+            display: block;
+            cursor: pointer;
+            text-align: center;
+            @include Button(
+              $header__bg-color,
+              1px solid $header-top__border-color,
+              6px,
+              14px 0,
+              all 150ms linear
+            );
+            @include headingFonts(
+              $heading-top__heading-color,
+              16px,
+              400,
+              22px,
+              default
+            );
+          }
+        }
+      }
+      &-buttons {
+        margin-top: 16px;
+        border-radius: 6px;
+        border: 1px solid $header-top__border-color;
+        @include flexLayout(flex, space-between, center, 0, row nowrap);
+        &__box {
+          width: 100%;
+          text-align: center;
+          &-input {
+            display: none;
+            &:checked + label {
+              color: $header__bg-color;
+              @include Button(
+                $header-cart__bg-color,
+                none,
+                6px,
+                14px 0,
+                all 150ms linear
+              );
+            }
+          }
+          &-btn {
+            width: 100%;
+            display: block;
+            padding: 10px 0;
+            cursor: pointer;
+            @include Button(
+              $header__bg-color,
+              none,
+              6px,
+              14px 0,
+              all 150ms linear
+            );
+            @include headingFonts(
+              $heading-top__heading-color,
+              16px,
+              400,
+              22px,
+              default
+            );
+          }
+        }
+      }
+    }
+  }
+  &__vegetables {
+    margin-top: 24px;
+    &-heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        16px,
+        600,
+        20px,
+        default
+      );
+    }
+  }
+  &-bottom {
+    margin-top: 40px;
+    @include flexLayout(flex, space-between, center, 0, row nowrap);
+    &__box {
+      @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+      &-heading {
+        @include headingFonts($header-cart__bg-color, 20px, 600, 28px, default);
+      }
+      &-small {
+        @include headingFonts(
+          $heading-cart__heading-color,
+          14px,
+          400,
+          18px,
+          default
+        );
+      }
+      &-btn {
+        @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+        @include Button(
+          $header-cart__bg-color,
+          none,
+          6px,
+          14px 40px,
+          opacity 150ms linear
+        );
+        &:hover {
+          opacity: 0.8;
         }
       }
     }

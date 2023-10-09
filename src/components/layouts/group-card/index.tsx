@@ -6,6 +6,7 @@ import { Card1, Card2, Card3, Card4 } from "assets/images/png";
 
 const index = () => {
   const [isOpenFilterModal, setIsOpenFilterModal] = useState<boolean>(false);
+  const [isOpenProductModal, setIsOpenProductModal] = useState<boolean>(false);
 
   if (isOpenFilterModal) {
     document.body.classList.add("hidden");
@@ -16,7 +17,10 @@ const index = () => {
   return (
     <>
       <section className="group-card">
-        <ProductModal />
+        <ProductModal
+          isOpenProductModal={isOpenProductModal}
+          setIsOpenProductModal={setIsOpenProductModal}
+        />
         <FilterModal
           isOpenFilterModal={isOpenFilterModal}
           setIsOpenFilterModal={setIsOpenFilterModal}
@@ -64,7 +68,11 @@ const index = () => {
                     </h4>
                     <div className="cards-footer">
                       <div className="cards-footer__box">
-                        <Button className="cards-footer__box-btn" type="button">
+                        <Button
+                          type="button"
+                          className="cards-footer__box-btn"
+                          onClick={() => setIsOpenProductModal(true)}
+                        >
                           Выбрать
                         </Button>
                       </div>

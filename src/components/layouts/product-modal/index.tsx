@@ -13,15 +13,28 @@ import {
   ProductModalIcon9,
 } from "assets/images/svg";
 
-const index = () => {
+type OpenProductType = {
+  isOpenProductModal: boolean;
+  setIsOpenProductModal: (e: boolean) => void;
+};
+
+const index = ({
+  isOpenProductModal,
+  setIsOpenProductModal,
+}: OpenProductType) => {
   return (
     <>
-      <section className="product-modal">
+      <section
+        className={`product-modal ${
+          isOpenProductModal && "product-modal--open"
+        }`}
+      >
         <div className="container">
           <div className="product-modal__container">
             <img
               src={ProductModalIcon1}
-              alt="product-modal-icon1"
+              alt="product-modal-close"
+              onClick={() => setIsOpenProductModal(false)}
               className="product-modal__container-times"
             />
             <div className="product-modal__background">
@@ -177,31 +190,76 @@ const index = () => {
                   </ul>
                   <ul className="item-sizes">
                     <li className="item-sizes__box">
-                      <Button type="button" className="item-sizes__box-btn">
+                      <Input
+                        type="radio"
+                        id="sizes-button1"
+                        name="sizes-button"
+                        className="item-sizes__box-radio"
+                      />
+                      <label
+                        htmlFor="sizes-button1"
+                        className="item-sizes__box-btn item-sizes__box-btn--first"
+                      >
                         Традиционное
-                      </Button>
+                      </label>
                     </li>
                     <li className="item-sizes__box">
-                      <Button type="button" className="item-sizes__box-btn">
+                      <Input
+                        type="radio"
+                        id="sizes-button2"
+                        name="sizes-button"
+                        className="item-sizes__box-radio"
+                      />
+                      <label
+                        htmlFor="sizes-button2"
+                        className="item-sizes__box-btn item-sizes__box-btn--second"
+                      >
                         Тонкое
-                      </Button>
+                      </label>
                     </li>
                   </ul>
                   <ul className="item-buttons">
                     <li className="item-buttons__box">
-                      <Button type="button" className="item-buttons__box-btn">
+                      <Input
+                        type="radio"
+                        id="button1"
+                        name="button-radio"
+                        className="item-buttons__box-input"
+                      />
+                      <label
+                        htmlFor="button1"
+                        className="item-buttons__box-btn"
+                      >
                         20 см
-                      </Button>
+                      </label>
                     </li>
                     <li className="item-buttons__box">
-                      <Button type="button" className="item-buttons__box-btn">
+                      <Input
+                        type="radio"
+                        id="button2"
+                        name="button-radio"
+                        className="item-buttons__box-input"
+                      />
+                      <label
+                        htmlFor="button2"
+                        className="item-buttons__box-btn"
+                      >
                         28 см
-                      </Button>
+                      </label>
                     </li>
                     <li className="item-buttons__box">
-                      <Button type="button" className="item-buttons__box-btn">
+                      <Input
+                        type="radio"
+                        id="button3"
+                        name="button-radio"
+                        className="item-buttons__box-input"
+                      />
+                      <label
+                        htmlFor="button3"
+                        className="item-buttons__box-btn"
+                      >
                         33 см
-                      </Button>
+                      </label>
                     </li>
                   </ul>
                   <div className="product-modal__vegetables">
@@ -213,7 +271,7 @@ const index = () => {
                         <Input
                           type="radio"
                           id="category5"
-                          name="category"
+                          name="category-box"
                           className="item-categories__box-input"
                         />
                         <label
@@ -242,7 +300,7 @@ const index = () => {
                         <Input
                           type="radio"
                           id="category6"
-                          name="category"
+                          name="category-box"
                           className="item-categories__box-input"
                         />
                         <label
@@ -271,7 +329,7 @@ const index = () => {
                         <Input
                           type="radio"
                           id="category7"
-                          name="category"
+                          name="category-box"
                           className="item-categories__box-input"
                         />
                         <label
@@ -300,7 +358,7 @@ const index = () => {
                         <Input
                           type="radio"
                           id="category8"
-                          name="category"
+                          name="category-box"
                           className="item-categories__box-input"
                         />
                         <label
