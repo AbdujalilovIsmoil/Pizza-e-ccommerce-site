@@ -5,12 +5,13 @@
   z-index: 1000;
   overflow: auto;
   position: fixed;
-    transform: scale(0);
+  transform: scale(0);
   backdrop-filter: blur(16px);
   transition: transform 200ms linear;
   background-color: rgba(25, 25, 25, 0.4);
   &--open {
     transform: scale(1);
+    transition: transform 200ms linear;
   }
   &__container {
     margin: 0 auto;
