@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "components/fields";
-import { FilterModal } from "components/layouts";
+import { FilterModal, ProductModal } from "components/layouts";
 import { GroupCardFilter } from "assets/images/svg";
 import { Card1, Card2, Card3, Card4 } from "assets/images/png";
 
@@ -16,6 +16,7 @@ const index = () => {
   return (
     <>
       <section className="group-card">
+        <ProductModal />
         <FilterModal
           isOpenFilterModal={isOpenFilterModal}
           setIsOpenFilterModal={setIsOpenFilterModal}

@@ -7,6 +7,18 @@ import { restangleCard1 } from "./restangle-card";
 import { FooterIcon1, FooterIcon2, FooterIcon3, FooterIcon4 } from "./footer";
 import { HeaderTopAccount, HeaderTopDown, HeaderTopLocation } from "./header";
 import {
+  ProductModalIcon1,
+  ProductModalIcon2,
+  ProductModalIcon3,
+  ProductModalIcon4,
+  ProductModalIcon5,
+  ProductModalIcon6,
+  ProductModalIcon7,
+  ProductModalIcon8,
+  ProductModalIcon9,
+  ProductModalIcon10,
+} from "./product-modal";
+import {
   Categories1,
   Categories2,
   Categories3,
@@ -40,4 +52,14 @@ export {
   settingsEditIcon,
   HeaderTopAccount,
   HeaderTopLocation,
+  ProductModalIcon1,
+  ProductModalIcon2,
+  ProductModalIcon3,
+  ProductModalIcon4,
+  ProductModalIcon5,
+  ProductModalIcon6,
+  ProductModalIcon7,
+  ProductModalIcon8,
+  ProductModalIcon9,
+  ProductModalIcon10,
 };

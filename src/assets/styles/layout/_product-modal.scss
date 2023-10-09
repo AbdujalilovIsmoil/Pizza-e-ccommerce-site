@@ -1,0 +1,136 @@
+.product-modal {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  overflow: auto;
+  position: fixed;
+  //   transform: scale(0);
+  backdrop-filter: blur(16px);
+  transition: transform 200ms linear;
+  background-color: rgba(25, 25, 25, 0.4);
+  &--open {
+    transform: scale(1);
+  }
+  &__container {
+    margin: 0 auto;
+    max-width: 1000px;
+    min-height: 100vh;
+    position: relative;
+    @include flexLayout(flex, center, center, 0, row nowrap);
+    &-times {
+      right: 0;
+      top: 100px;
+      cursor: pointer;
+      position: absolute;
+    }
+  }
+  &__background {
+    padding: 30px;
+    margin: 0 auto;
+    overflow: auto;
+    min-height: 445px;
+    width: 1070px;
+    position: relative;
+    border-radius: 24px;
+    background-color: $header__bg-color;
+  }
+  &__category {
+    left: 0;
+    padding: 8px 18px;
+    position: absolute;
+    display: inline-block;
+    border-radius: 0 10px 10px 0;
+    background-color: $categories__heading-color;
+    &-heading {
+      @include headingFonts($header__bg-color, 14px, 400, 18px, uppercase);
+    }
+  }
+  &__list {
+    @include flexLayout(flex, space-between, center, 60px, row nowrap);
+  }
+  &__item {
+    &:nth-child(2) {
+      width: 450px;
+    }
+    &-img {
+      width: 450px;
+      height: 450px;
+      object-fit: cover;
+    }
+    .item {
+      &-header {
+        @include flexLayout(flex, space-between, center, 0, row nowrap);
+        &__box {
+          @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+          &-icon {
+            width: 24px;
+            height: 24px;
+          }
+          &-heading {
+            @include headingFonts(
+              $heading-top__heading-color,
+              20px,
+              600,
+              28px,
+              default
+            );
+          }
+          &-warning {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+      &-categories {
+        margin-top: 16px;
+        @include gridLayout(grid, 4, space-between, flex-start, 20px);
+        &__back {
+          display: block;
+          &-success {
+            top: 8px;
+            right: 8px;
+            position: absolute;
+          }
+          &-meal {
+            width: 40px;
+            height: 40px;
+          }
+        }
+        &__box {
+          width: 95px;
+          text-align: center;
+          &-input:checked + label {
+            .item-categories__active {
+              border: 1px solid $header-cart__bg-color;
+            }
+          }
+
+          &-title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            margin-top: 8px;
+            @include headingFonts(
+              $heading-top__heading-color,
+              14px,
+              400,
+              18px,
+              default
+            );
+          }
+        }
+        &__active {
+          width: 95px;
+          height: 95px;
+          cursor: pointer;
+          position: relative;
+          border-radius: 12px;
+          background-color: $header__bg-color;
+          border: 1px solid $header-top__border-color;
+          @include flexLayout(flex, center, center, 0, row nowrap);
+        }
+      }
+    }
+  }
+}
