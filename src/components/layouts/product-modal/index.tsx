@@ -2,7 +2,6 @@ import { Card1 } from "assets/images/png";
 import { Button, Input } from "components/fields";
 import {
   ProductModalIcon1,
-  ProductModalIcon10,
   ProductModalIcon2,
   ProductModalIcon3,
   ProductModalIcon4,
@@ -11,6 +10,7 @@ import {
   ProductModalIcon7,
   ProductModalIcon8,
   ProductModalIcon9,
+  ProductModalIcon10,
 } from "assets/images/svg";
 
 type OpenProductType = {

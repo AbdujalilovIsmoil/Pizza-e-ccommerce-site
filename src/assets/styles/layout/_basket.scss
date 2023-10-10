@@ -1,0 +1,404 @@
+.basket {
+  &__heading {
+    margin: 40px 0 8px 0;
+    @include headingFonts(
+      $heading-top__heading-color,
+      40px,
+      600,
+      48px,
+      default
+    );
+  }
+  &-cart {
+    &__item {
+      margin: 16px 0;
+      @include flexLayout(flex, space-between, center, 0, row nowrap);
+      padding: 16px;
+      border-radius: 12px;
+      background-color: $header__bg-color;
+      border: 1px solid $header-top__border-color;
+    }
+    &__box {
+      @include flexLayout(flex, flex-start, center, 16px, row nowrap);
+      &:nth-child(2) {
+        @include flexLayout(flex, flex-start, center, 40px, row nowrap);
+      }
+    }
+    &__small {
+      max-width: 500px;
+      &-img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+      }
+      &-heading {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @include headingFonts(
+          $heading-top__heading-color,
+          20px,
+          600,
+          28px,
+          default
+        );
+      }
+      &-regular {
+        margin-top: 8px;
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+      }
+    }
+    &__counter {
+      &-price {
+        @include headingFonts($header-cart__bg-color, 20px, 600, 28px, default);
+      }
+      .counter {
+        padding: 8px;
+        border-radius: 6px;
+        background-color: $counter__bg-color;
+        @include flexLayout(flex, space-between, center, 16px, row nowrap);
+        &__heading {
+          @include headingFonts(
+            $header-cart__bg-color,
+            16px,
+            600,
+            20px,
+            default
+          );
+        }
+
+        &__icon {
+          width: 8px;
+          height: 8px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  &-price {
+    width: 100%;
+    padding: 10px 0;
+    @include flexLayout(flex, flex-end, center, 0, row nowrap);
+    &__heading {
+      @include headingFonts($header-cart__bg-color, 20px, 600, 28px, default);
+    }
+  }
+  &-carousel {
+    &__list {
+      position: relative;
+    }
+    &__navigation {
+      top: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      @include flexLayout(flex, space-between, center, 0, row nowrap);
+      &-btn {
+        @include flexLayout(flex, center, center, 0, row nowrap);
+        @include Button(
+          $header-cart__bg-color,
+          none,
+          50%,
+          15px,
+          opacity 150ms linear
+        );
+        &--right {
+          right: -50px;
+          position: absolute;
+        }
+        &--left {
+          left: -50px;
+          position: absolute;
+        }
+      }
+      &-icon {
+        width: 15px;
+        height: 15px;
+      }
+    }
+    &__heading {
+      margin: 14px 0 24px 0;
+      @include headingFonts(
+        $heading-top__heading-color,
+        24px,
+        600,
+        32px,
+        default
+      );
+    }
+    &__item {
+      max-width: 100%;
+      min-height: 350px;
+      text-align: center;
+      border-radius: 12px;
+      background-color: $header__bg-color;
+      border: 1px solid $header-top__border-color;
+      @include flexLayout(flex, space-between, space-between, 0, column nowrap);
+    }
+    &__content {
+      padding: 16px;
+      &-img {
+        width: 190px;
+        height: 190px;
+      }
+      &-heading {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: 16px 0 8px 0;
+        @include headingFonts(
+          $heading-top__heading-color,
+          18px,
+          600,
+          24px,
+          default
+        );
+      }
+      &-regular {
+        @include headingFonts(
+          $heading-top__heading-color,
+          14px,
+          400,
+          18px,
+          default
+        );
+      }
+      &-btn {
+        width: 100%;
+        margin-top: 12px;
+        @include headingFonts($header__bg-color, 16px, 600, 20px, default);
+        @include Button(
+          $header-cart__bg-color,
+          none,
+          6px,
+          10px 20px,
+          opacity 150ms linear
+        );
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  &-form {
+    &-user {
+      &__title {
+        margin: 30px 0 16px 0;
+        @include headingFonts(
+          $heading-top__heading-color,
+          24px,
+          600,
+          32px,
+          default
+        );
+      }
+      .user {
+        width: 100% !important;
+        @include flexLayout(flex, space-between, center, 20px, row nowrap);
+        &-label {
+          width: 100% !important;
+          &-heading {
+            margin-bottom: 8px;
+            @include headingFonts(
+              $heading-cart__heading-color,
+              14px,
+              400,
+              18px,
+              default
+            );
+          }
+        }
+        &__input {
+          padding: 0 16px;
+          width: 100% !important;
+          height: 48px !important;
+          @include Input(
+            $heading-top__heading-color,
+            $heading-cart__heading-color,
+            $header__bg-color,
+            1px solid $header-top__border-color,
+            6px,
+            0
+          );
+        }
+      }
+    }
+    &-header {
+      margin: 50px 0 24px 0;
+      @include flexLayout(flex, space-between, center, 0, row nowrap);
+      &__box {
+        &-heading {
+          @include headingFonts(
+            $heading-top__heading-color,
+            24px,
+            600,
+            32px,
+            default
+          );
+        }
+      }
+      &__container {
+        height: 100%;
+        min-width: 350px;
+        border-radius: 6px;
+        background-color: $header__bg-color;
+        border: 1px solid $header-top__border-color;
+        @include flexLayout(flex, flex-start, center, 0, row nowrap);
+      }
+      &__send {
+        width: 100%;
+        &-input {
+          display: none;
+          &:checked + label {
+            color: $header__bg-color;
+            background-color: #ff7010;
+          }
+        }
+      }
+      &__label {
+        width: 100%;
+        height: 100%;
+        display: block;
+        cursor: pointer;
+        text-align: center;
+        @include Button(
+          $header__bg-color,
+          none,
+          6px,
+          14px 0 !important,
+          all 150ms linear
+        );
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+      }
+    }
+    &-delivery {
+      &__container {
+        margin-top: 16px;
+        @include flexLayout(flex, space-between, center, 20px, row nowrap);
+      }
+      &__label {
+        width: 100%;
+        &-heading {
+          margin-bottom: 8px;
+          @include headingFonts(
+            $heading-cart__heading-color,
+            14px,
+            400,
+            18px,
+            default
+          );
+        }
+        &-input {
+          padding: 14px 16px;
+          @include Input(
+            $heading-cart__heading-color,
+            $heading-cart__heading-color,
+            $header__bg-color,
+            1px solid $header-top__border-color,
+            6px,
+            0
+          );
+        }
+      }
+    }
+    &-order {
+      &__item {
+        padding: 20px 0;
+        position: relative;
+        border-bottom: 1px solid $header-top__border-color;
+        &-text {
+          resize: none;
+          padding: 14px 16px;
+          height: 200px !important;
+          @include Input(
+            $heading-top__heading-color,
+            $heading-cart__heading-color,
+            $header__bg-color,
+            1px solid $header-top__border-color,
+            6px,
+            0
+          );
+          @include headingFonts(none, 16px, 400, 22px, default);
+        }
+        &-regular {
+          margin: 16px 0 12px 0;
+          @include headingFonts(
+            $heading-cart__heading-color,
+            16px,
+            400,
+            22px,
+            default
+          );
+        }
+        &-title {
+          margin: 0 0 16px 0;
+          @include headingFonts(
+            $heading-top__heading-color,
+            24px,
+            600,
+            32px,
+            default
+          );
+        }
+      }
+      &__label {
+        @include flexLayout(flex, flex-start, center, 8px, row nowrap);
+        &-input {
+          &:checked {
+            accent-color: $header-cart__bg-color2;
+          }
+        }
+        &-heading {
+          @include headingFonts(
+            $heading-top__heading-color,
+            16px,
+            400,
+            22px,
+            default
+          );
+        }
+      }
+      &__wrapper {
+        @include flexLayout(flex, flex-start, center, 24px, row nowrap);
+      }
+      &__footer {
+        margin-top: 20px;
+        @include flexLayout(flex, space-between, center, 0, row nowrap);
+        &-heading {
+          @include headingFonts(
+            $header-cart__bg-color,
+            20px,
+            600,
+            28px,
+            default
+          );
+        }
+        &-btn {
+          @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+          @include Button(
+            $header-cart__bg-color,
+            none,
+            6px,
+            14px 24px,
+            opacity 150ms linear
+          );
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+}

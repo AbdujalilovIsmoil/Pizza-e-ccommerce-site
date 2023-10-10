@@ -1,11 +1,22 @@
 import { AuthIcon1 } from "./auth";
 import { locationIcon1 } from "./location";
+import { Basket1, Basket2 } from "./basket";
 import { settingsEditIcon } from "./settings";
 import { Counter1, Counter2 } from "./counter";
 import { GroupCardFilter } from "./group-card";
 import { restangleCard1 } from "./restangle-card";
 import { FooterIcon1, FooterIcon2, FooterIcon3, FooterIcon4 } from "./footer";
 import { HeaderTopAccount, HeaderTopDown, HeaderTopLocation } from "./header";
+import {
+  Categories1,
+  Categories2,
+  Categories3,
+  Categories4,
+  Categories5,
+  Categories6,
+  Categories7,
+  Categories8,
+} from "./categories";
 import {
   ProductModalIcon1,
   ProductModalIcon2,
@@ -18,18 +29,10 @@ import {
   ProductModalIcon9,
   ProductModalIcon10,
 } from "./product-modal";
-import {
-  Categories1,
-  Categories2,
-  Categories3,
-  Categories4,
-  Categories5,
-  Categories6,
-  Categories7,
-  Categories8,
-} from "./categories";
 
 export {
+  Basket1,
+  Basket2,
   Counter1,
   Counter2,
   AuthIcon1,

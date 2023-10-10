@@ -1,5 +1,6 @@
 import { Cart1 } from "assets/images/png";
 import { Button } from "components/fields";
+import { useNavigate } from "react-router-dom";
 import { Counter1, Counter2 } from "assets/images/svg";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
 
@@ -10,10 +11,17 @@ const index = ({
   isCartModalOpen: boolean;
   setIsCartModalOpen: (e: boolean) => void;
 }) => {
+  const navigate = useNavigate();
+
   const closeCartModal = (e: any) => {
     if (e.target?.getAttribute("class") === "cart-modal cart-modal--open") {
       setIsCartModalOpen(false);
     }
+  };
+
+  const openBasketPage = () => {
+    navigate("/pages/basket");
+    setIsCartModalOpen(false);
   };
 
   return (
@@ -142,7 +150,11 @@ const index = ({
           </div>
           <div className="cart-modal__footer">
             <h4 className="cart-modal__footer-heading">Итого: 2 379 ₽</h4>
-            <Button type="button" className="cart-modal__footer-btn">
+            <Button
+              type="button"
+              className="cart-modal__footer-btn"
+              onClick={() => openBasketPage()}
+            >
               Оформить заказ
             </Button>
           </div>

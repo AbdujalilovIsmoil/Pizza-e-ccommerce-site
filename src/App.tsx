@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const App = () => {
   const Login = lazy(() => import("pages/Login"));
+  const Basket = lazy(() => import("pages/Basket"));
   const History = lazy(() => import("pages/History"));
   const Settigs = lazy(() => import("pages/Settings"));
   const Registration = lazy(() => import("pages/Registration"));
@@ -26,6 +27,10 @@ const App = () => {
         {
           path: "/pages/history",
           element: <History />,
+        },
+        {
+          path: "/pages/basket",
+          element: <Basket />,
         },
       ],
     },
