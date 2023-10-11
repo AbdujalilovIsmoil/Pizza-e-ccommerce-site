@@ -47,4 +47,185 @@
       }
     }
   }
+  &__input {
+    display: none;
+    &:checked + label {
+      .history-top__item-icon {
+        transform: rotate(0deg);
+      }
+      .history-top__list {
+        border-radius: 12px 12px 0 0;
+        transition: border-radius 150ms linear;
+      }
+    }
+    &:checked + label + .history-background {
+      max-height: 100%;
+      transition: all 150ms linear;
+    }
+  }
+  &-top {
+    margin: 20px 0 0 0;
+    display: block;
+    &__item {
+      &:nth-child(1) {
+        position: relative;
+        padding: 0 0 0 20px;
+        &::before {
+          top: 0;
+          left: 0;
+          width: 4px;
+          content: "";
+          height: 100%;
+          position: absolute;
+          border-radius: 24px;
+          background-color: $categories__heading-color;
+        }
+      }
+      &-icon {
+        width: 16px;
+        height: 16px;
+        transform: rotate(180deg);
+      }
+      &-heading {
+        @include headingFonts(
+          $heading-cart__heading-color,
+          14px,
+          400,
+          18px,
+          default
+        );
+      }
+    }
+    &__list {
+      padding: 16px;
+      cursor: pointer;
+      border-radius: 12px 12px 0 0;
+      background-color: $header__bg-color;
+      transition: border-radius 150ms linear;
+      border-bottom: 1px solid $header-top__border-color;
+      @include flexLayout(flex, space-between, center, 0, row nowrap);
+    }
+    &__numbers {
+      margin-top: 6px;
+      @include flexLayout(flex, flex-start, center, 8px, row nowrap);
+      &-heading {
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+      }
+      &-date {
+        @include headingFonts(
+          $heading-cart__heading-color,
+          14px,
+          400,
+          20px,
+          default
+        );
+      }
+    }
+  }
+  &-background {
+    width: 100%;
+    padding: 0 20px;
+    max-height: 84px;
+    overflow: hidden;
+    border-top: none !important;
+    border-radius: 0 0 12px 12px;
+    transition: all 150ms linear;
+    background-color: $header__bg-color;
+    &__item {
+      padding: 20px 0;
+      border-bottom: 1px solid $header-top__border-color;
+    }
+    &__container {
+      width: 100%;
+      padding: 0 0 20px 0;
+      border-bottom: 1px solid $header-top__border-color;
+      @include flexLayout(flex, space-between, center, 0, row nowrap);
+    }
+    &__box {
+      &-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        border: 2px solid $header-top__border-color;
+      }
+      &-text {
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+      }
+    }
+    &__element {
+      margin: 12px 0;
+      @include flexLayout(flex, space-between, center, 0, row nowrap);
+      &-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        border: 2px solid $header-top__border-color;
+      }
+      &-heading {
+        @include headingFonts(
+          $heading-top__heading-color,
+          16px,
+          600,
+          20px,
+          default
+        );
+      }
+      &-regular {
+        @include headingFonts(
+          $heading-top__heading-color,
+          14px,
+          400,
+          18px,
+          default
+        );
+      }
+      &-btn {
+        cursor: text;
+        @include Button($counter__bg-color, none, 6px, 10px 20px, none);
+        @include headingFonts($header-cart__bg-color, 16px, 600, 20px, default);
+      }
+      &-price {
+        @include headingFonts($header-cart__bg-color, 16px, 600, 20px, default);
+      }
+    }
+  }
+  &-pagination {
+    &__container {
+      margin-top: 48px;
+      @include flexLayout(flex, center, center, 16px, row nowrap);
+    }
+    &__btn {
+      display: inline;
+      cursor: pointer;
+      @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+      @include Button($header-cart__bg-color, none, 6px, 15px 20px, none);
+    }
+    &__page {
+      cursor: pointer;
+      @include Button($header__bg-color, none, 6px, 15px 20px, none);
+      @include headingFonts(
+        $heading-top__heading-color,
+        16px,
+        400,
+        22px,
+        default
+      );
+    }
+    &__active {
+      @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+      @include Button($header-cart__bg-color, none, 6px, 15px 20px, none);
+    }
+  }
 }

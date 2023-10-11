@@ -5,6 +5,7 @@ import { settingsEditIcon } from "./settings";
 import { Counter1, Counter2 } from "./counter";
 import { GroupCardFilter } from "./group-card";
 import { restangleCard1 } from "./restangle-card";
+import { HistoryIcon1, HistoryIcon2, HistoryIcon3 } from "./history";
 import { FooterIcon1, FooterIcon2, FooterIcon3, FooterIcon4 } from "./footer";
 import { HeaderTopAccount, HeaderTopDown, HeaderTopLocation } from "./header";
 import {
@@ -48,6 +49,9 @@ export {
   Categories6,
   Categories7,
   Categories8,
+  HistoryIcon1,
+  HistoryIcon2,
+  HistoryIcon3,
   locationIcon1,
   HeaderTopDown,
   restangleCard1,

@@ -1,3 +1,4 @@
 import Card from "./card";
+import Pagination from "./pagination";
 
-export { Card };
+export { Card, Pagination };
