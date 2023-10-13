@@ -1,8 +1,7 @@
-import { CardModal } from "components/UI";
 import { Cart1 } from "assets/images/png";
 import { Button } from "components/fields";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineShoppingCart } from "assets/react-icons";
+import { CardModal, Empty } from "components/UI";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
 
 type CardModalType = {
@@ -16,7 +15,7 @@ type cartModalDataType = {
   soum: string;
   size: string;
   title: string;
-}[];
+};
 
 const index = ({ isCartModalOpen, setIsCartModalOpen }: CardModalType) => {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ const index = ({ isCartModalOpen, setIsCartModalOpen }: CardModalType) => {
     setIsCartModalOpen(false);
   };
 
-  const cartModalData: cartModalDataType = [
+  const cartModalData: cartModalDataType[] = [
     {
       id: 1,
       img: Cart1,
@@ -68,27 +67,20 @@ const index = ({ isCartModalOpen, setIsCartModalOpen }: CardModalType) => {
             <div className="cart-modal__body">
               <ul className="cart-list">
                 {cartModalData.length > 0 &&
-                  cartModalData.map((el) => {
+                  cartModalData.map((el: cartModalDataType) => {
                     return (
                       <CardModal
-                        img={Cart1}
-                        title="Чикен Сладкий Чили adsadad sd"
-                        size="Традиционное тесто, 23 см adasdsada asdkasndk ajsdbas"
-                        soum="499 ₽"
+                        img={el.img}
+                        size={el.size}
+                        soum={el.soum}
+                        title={el.title}
                       />
                     );
                   })}
               </ul>
             </div>
           </div>
-          {cartModalData.length === 0 && (
-            <div className="cart-modal-empty">
-              <div className="cart-modal-empty__background">
-                <AiOutlineShoppingCart className="cart-modal-empty__background-icon" />
-              </div>
-              <h4 className="cart-modal-empty__heading">Your cart is empty</h4>
-            </div>
-          )}
+          {cartModalData.length === 0 && <Empty />}
           <div className="cart-modal__footer">
             <h4 className="cart-modal__footer-heading">Итого: 2 379 ₽</h4>
             <Button
