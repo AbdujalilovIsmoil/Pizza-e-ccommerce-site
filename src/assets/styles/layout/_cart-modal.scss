@@ -9,6 +9,31 @@
   backdrop-filter: blur(16px);
   transition: left 200ms linear;
   background-color: rgba(25, 25, 25, 0.4);
+  @include flexLayout(flex, flex-end, flex-start, 0, row nowrap);
+  &-empty {
+    text-align: center;
+    &__background {
+      width: 100px;
+      height: 100px;
+      margin: 20px auto;
+      border-radius: 50%;
+      background-color: $header-cart__bg-color;
+      @include flexLayout(flex, center, center, 0, row nowrap);
+      &-icon {
+        font-size: 30px;
+        color: $header__bg-color;
+      }
+    }
+    &__heading {
+      @include headingFonts(
+        $heading-top__heading-color,
+        22px,
+        550,
+        20px,
+        default
+      );
+    }
+  }
   &--open {
     left: 0;
     transition: left 200ms linear;
@@ -19,6 +44,9 @@
     border-radius: 12px;
     background-color: $header__bg-color;
     border: 1px solid $header-top__border-color;
+    &__content {
+      max-width: 200px;
+    }
     @include flexLayout(flex, flex-start, center, 16px, row nowrap);
     &__footer {
       @include flexLayout(flex, space-between, center, 135px, row nowrap);
@@ -33,6 +61,9 @@
         object-fit: contain;
       }
       &-title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         @include headingFonts(
           $heading-top__heading-color,
           16px,
@@ -41,8 +72,12 @@
           default
         );
       }
+
       &-size {
+        overflow: hidden;
+        white-space: nowrap;
         margin: 8px 0 12px 0;
+        text-overflow: ellipsis;
         @include headingFonts(
           $heading-top__heading-color,
           14px,
@@ -76,12 +111,12 @@
     @include flexLayout(flex, space-between, center, 0, row nowrap);
   }
   &__background {
-    left: 68.1%;
+    width: 420px;
     overflow: auto;
-    max-width: 430px;
-    min-height: 700px;
+    min-height: 100%;
     position: relative;
     background-color: $header__bg-color;
+    @include flexLayout(flex, space-between, space-between, 0, column nowrap);
   }
   &__box {
     &-heading {

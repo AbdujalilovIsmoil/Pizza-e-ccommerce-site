@@ -1,15 +1,14 @@
-import Routes from "routes";
-import { Home, Error } from "pages";
+import Routes from "./routes";
 import { lazy, Suspense } from "react";
 import { Loader } from "components/layouts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const App = () => {
-  const Login = lazy(() => import("pages/Login"));
+  const Home = lazy(() => import("pages/Home"));
+  const Error = lazy(() => import("pages/Error"));
   const Basket = lazy(() => import("pages/Basket"));
   const History = lazy(() => import("pages/History"));
   const Settigs = lazy(() => import("pages/Settings"));
-  const Registration = lazy(() => import("pages/Registration"));
 
   const routes = createBrowserRouter([
     {
@@ -37,14 +36,6 @@ const App = () => {
     {
       path: "*",
       element: <Error />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/registration",
-      element: <Registration />,
     },
   ]);
 

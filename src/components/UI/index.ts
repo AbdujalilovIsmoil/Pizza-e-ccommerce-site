@@ -1,4 +1,6 @@
-import Card from "./card";
-import Pagination from "./pagination";
+import Card from "./Card";
+import Login from "./Login";
+import CardModal from "./CardModal";
+import Pagination from "./Pagination";
 
-export { Card, Pagination };
+export { Card, Login, Pagination, CardModal };

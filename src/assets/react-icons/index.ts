@@ -1,4 +1,13 @@
 import { BsChevronDown } from "./bs";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "./ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineShoppingCart,
+} from "./ai";
 
-export { BsChevronDown, AiOutlineEye, AiOutlineEyeInvisible };
+export {
+  AiOutlineEye,
+  BsChevronDown,
+  AiOutlineEyeInvisible,
+  AiOutlineShoppingCart,
+};

@@ -1,3 +1,7 @@
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 
-export { AiOutlineEye, AiOutlineEyeInvisible };
+export { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineShoppingCart };
