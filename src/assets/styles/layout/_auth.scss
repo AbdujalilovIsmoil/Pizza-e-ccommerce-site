@@ -55,6 +55,7 @@
     }
     &-btn {
       width: 100%;
+      margin-top: 8px;
       @include headingFonts($header__bg-color, 16px, 400, 22px, default);
       @include Button(
         $header-cart__bg-color,
@@ -90,6 +91,19 @@
         1px solid $header-top__border-color,
         6px,
         0
+      );
+      &--error {
+        border: 1px solid $categories__heading-color;
+      }
+    }
+    &-error {
+      text-align: left;
+      @include headingFonts(
+        $categories__heading-color,
+        15px,
+        400,
+        22px,
+        default
       );
     }
   }

@@ -16,20 +16,12 @@ type TregistrValues = {
   password: string;
 };
 
-const index = ({ isAuthModalOpen, setIsAuthModalOpen }: AuthType) => {
-  const [registrValues, setRegistrValues] = useState<any>({
-    email: "",
-    userName: "",
-    password: "",
-  });
-
-  const changeLoginInput = ({ name, value }: any) => {
-    registrValues[name] = value;
-    setRegistrValues(registrValues);
-  };
+const index = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
+  const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(true);
 
   const submitRegistr = (values: TregistrValues) => {
     console.log(values);
+    setIsRegistrAndLogin(false);
   };
 
   const initialValues: TregistrValues = {
@@ -44,11 +36,12 @@ const index = ({ isAuthModalOpen, setIsAuthModalOpen }: AuthType) => {
 
   const validationSchema = Yup.object({
     userName: Yup.string().trim().required("Username is not entered"),
+    password: Yup.string().trim().required("Password is not entered"),
     email: Yup.string()
       .trim()
       .required("Email is not entered")
       .email("User email is invalid")
-      .matches(regex),
+      .matches(regex, "User email is invalid"),
   });
 
   return (
@@ -69,7 +62,7 @@ const index = ({ isAuthModalOpen, setIsAuthModalOpen }: AuthType) => {
               <h4 className="auth-modal__background-desc">
                 Сможете быстро оформлять заказы, использовать бонусы
               </h4>
-              {isAuthModalOpen ? (
+              {isRegistrAndLogin ? (
                 <Formik
                   initialValues={initialValues}
                   validationSchema={validationSchema}
@@ -77,42 +70,74 @@ const index = ({ isAuthModalOpen, setIsAuthModalOpen }: AuthType) => {
                 >
                   <Form className="auth-modal__form">
                     <Field name="userName">
-                      {({ field }: any) => {
+                      {({ field, meta }: any) => {
                         return (
-                          <Input
-                            type="text"
-                            placeholder="имя пользователя"
-                            className="auth-modal__form-input"
-                            {...field}
-                          />
+                          <>
+                            <Input
+                              type="text"
+                              {...field}
+                              placeholder="имя пользователя"
+                              className={`auth-modal__form-input ${
+                                meta.touched &&
+                                meta.error &&
+                                "auth-modal__form-input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="auth-modal__form-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </>
                         );
                       }}
                     </Field>
-
-                    <Input
-                      type="email"
-                      name="email"
-                      placeholder="электронная почта"
-                      className="auth-modal__form-input"
-                      onChange={(e) => {
-                        changeLoginInput({
-                          name: e.target.name,
-                          value: e.target.value,
-                        });
+                    <Field name="email">
+                      {({ field, meta }: any) => {
+                        return (
+                          <>
+                            <Input
+                              {...field}
+                              type="email"
+                              placeholder="электронная почта"
+                              className={`auth-modal__form-input ${
+                                meta.touched &&
+                                meta.error &&
+                                "auth-modal__form-input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="auth-modal__form-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </>
+                        );
                       }}
-                    />
-                    <Input
-                      type="password"
-                      name="password"
-                      placeholder="пароль"
-                      className="auth-modal__form-input"
-                      onChange={(e) => {
-                        changeLoginInput({
-                          name: e.target.name,
-                          value: e.target.value,
-                        });
+                    </Field>
+                    <Field name="password">
+                      {({ field, meta }: any) => {
+                        return (
+                          <>
+                            <Input
+                              {...field}
+                              type="password"
+                              placeholder="пароль"
+                              className={`auth-modal__form-input ${
+                                meta.touched &&
+                                meta.error &&
+                                "auth-modal__form-input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="auth-modal__form-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </>
+                        );
                       }}
-                    />
+                    </Field>
                     <Button
                       type="submit"
                       className="auth-modal__background-btn"
