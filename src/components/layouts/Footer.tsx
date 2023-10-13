@@ -6,7 +6,102 @@ import {
   FooterIcon4,
 } from "assets/images/svg";
 
+type TfooterDataOuside = {
+  id: number;
+  title: string;
+  data: TfooterDataInside[];
+};
+
+type TfooterDataInside = {
+  id: number;
+  title: string;
+};
+
+type mediaData = {
+  id: 1;
+};
+
 const index = () => {
+  const footerData: TfooterDataOuside[] = [
+    {
+      id: 1,
+      title: "Куда пицца",
+      data: [
+        {
+          id: 1,
+          title: "О компании",
+        },
+        {
+          id: 2,
+          title: "Пользовательское соглашение",
+        },
+        {
+          id: 3,
+          title: "Условия гарантии",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Помощь",
+      data: [
+        {
+          id: 1,
+          title: "Ресторан",
+        },
+        {
+          id: 2,
+          title: "Контакты",
+        },
+        {
+          id: 3,
+          title: "Поддержка",
+        },
+        {
+          id: 4,
+          title: "Отследить заказ",
+        },
+      ],
+    },
+  ];
+
+  const mediaData = [
+    {
+      id: 1,
+      title: "Контакты",
+      outsideData: [
+        {
+          id: 1,
+          alt: "phone",
+          img: FooterIcon1,
+          title: "+7 (926) 223-10-11",
+        },
+        {
+          id: 2,
+          alt: "location",
+          img: FooterIcon2,
+          title: "Москва, ул. Юных Ленинцев, д.99",
+        },
+        {
+          insideData: [
+            {
+              id: 1,
+              alt: "Facebok",
+              img: FooterIcon3,
+              title: "Facebok",
+            },
+            {
+              id: 2,
+              alt: "Instagram",
+              img: FooterIcon4,
+              title: "Instagram",
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
   return (
     <>
       <footer className="footer">
@@ -25,116 +120,93 @@ const index = () => {
                 </div>
               </a>
             </li>
-            <li className="footer__item">
-              <h4 className="footer__item-heading">Куда пицца</h4>
-              <ul className="footer-categories">
-                <li className="footer-categories__item">
-                  <a href="#" className="footer-categories__item-heading">
-                    О компании
-                  </a>
-                </li>
-                <li className="footer-categories__item">
-                  <a href="#" className="footer-categories__item-heading">
-                    Пользовательское соглашение
-                  </a>
-                </li>
-                <li className="footer-categories__item">
-                  <a href="#" className="footer-categories__item-heading">
-                    Условия гарантии
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="footer__item">
-              <h4 className="footer__item-heading">Помощь</h4>
-              <ul className="footer-categories">
-                <li className="footer-categories__item">
-                  <a href="#" className="footer-categories__item-heading">
-                    Ресторан
-                  </a>
-                </li>
-                <li className="footer-categories__item">
-                  <a href="#" className="footer-categories__item-heading">
-                    Контакты
-                  </a>
-                </li>
-                <li className="footer-categories__item">
-                  <a href="#" className="footer-categories__item-heading">
-                    Поддержка
-                  </a>
-                </li>
-                <li className="footer-categories__item">
-                  <a href="#" className="footer-categories__item-heading">
-                    Отследить заказ
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="footer__item">
-              <h4 className="footer__item-heading">Контакты</h4>
-              <ul className="footer-medias">
-                <li className="footer-medias__item">
-                  <a href="#" target="_blank">
-                    <div className="footer-medias__container">
-                      <img
-                        title="phone"
-                        src={FooterIcon1}
-                        alt="footer-icon1"
-                        className="footer-medias__item-icon"
-                      />
-                      <h4 className="footer-medias__item-heading">
-                        +7 (926) 223-10-11
-                      </h4>
-                    </div>
-                  </a>
-                </li>
-                <li className="footer-medias__item">
-                  <a href="#" target="_blank">
-                    <div className="footer-medias__container">
-                      <img
-                        title="location"
-                        src={FooterIcon2}
-                        alt="footer-icon2"
-                        className="footer-medias__item-icon"
-                      />
-                      <h4 className="footer-medias__item-heading">
-                        Москва, ул. Юных Ленинцев, д.99
-                      </h4>
-                    </div>
-                  </a>
-                </li>
-                <ul className="footer-medias__list">
-                  <li className="footer-medias__item">
-                    <a href="#" target="_blank">
-                      <div className="footer-medias__container">
-                        <img
-                          title="facebook"
-                          src={FooterIcon3}
-                          alt="footer-icon3"
-                          className="footer-medias__item-icon"
-                        />
-                        <h4 className="footer-medias__item-heading">Facebok</h4>
-                      </div>
-                    </a>
+            {footerData.length > 0 &&
+              footerData.map((el: TfooterDataOuside) => {
+                return (
+                  <li className="footer__item" key={el.id}>
+                    <h4 className="footer__item-heading">{el.title}</h4>
+                    <ul className="footer-categories">
+                      {el.data.length > 0 &&
+                        el.data.map((el: TfooterDataInside) => {
+                          return (
+                            <li className="footer-categories__item">
+                              <a
+                                href="#"
+                                className="footer-categories__item-heading"
+                              >
+                                {el.title}
+                              </a>
+                            </li>
+                          );
+                        })}
+                    </ul>
                   </li>
-                  <li className="footer-medias__item">
-                    <a href="#" target="_blank">
-                      <div className="footer-medias__container">
-                        <img
-                          title="facebook"
-                          src={FooterIcon4}
-                          alt="footer-icon4"
-                          className="footer-medias__item-icon"
-                        />
-                        <h4 className="footer-medias__item-heading">
-                          Instagram
-                        </h4>
-                      </div>
-                    </a>
+                );
+              })}
+
+            {mediaData.length > 0 &&
+              mediaData.map((el) => {
+                return (
+                  <li className="footer__item" key={el.id}>
+                    <h4 className="footer__item-heading">{el.title}</h4>
+
+                    <ul className="footer-medias">
+                      {el.outsideData.length > 0 &&
+                        el.outsideData.slice(0, 2).map((el) => {
+                          return (
+                            <>
+                              <li className="footer-medias__item" key={el.id}>
+                                <a href="#" target="_blank">
+                                  <div className="footer-medias__container">
+                                    <img
+                                      src={el.img}
+                                      alt={el.alt}
+                                      title={el.title}
+                                      className="footer-medias__item-icon"
+                                    />
+                                    <h4 className="footer-medias__item-heading">
+                                      {el.title}
+                                    </h4>
+                                  </div>
+                                </a>
+                              </li>
+                            </>
+                          );
+                        })}
+                      <ul className="footer-medias__list">
+                        {el.outsideData.length > 0 &&
+                          el.outsideData.map((el: any) => {
+                            return (
+                              el?.insideData?.length > 0 &&
+                              el?.insideData?.map((el: any) => {
+                                return (
+                                  <li
+                                    className="footer-medias__item"
+                                    key={el.id}
+                                  >
+                                    <a href="#" target="_blank">
+                                      <div className="footer-medias__container">
+                                        <img
+                                          src={el.img}
+                                          alt={el.alt}
+                                          title={el.title}
+                                          className="footer-medias__item-icon"
+                                        />
+                                        <h4 className="footer-medias__item-heading">
+                                          {el.title}
+                                        </h4>
+                                      </div>
+                                    </a>
+                                  </li>
+                                );
+                              })
+                            );
+                          })}
+                      </ul>
+                    </ul>
                   </li>
-                </ul>
-              </ul>
-            </li>
+                );
+              })}
           </ul>
           <div className="footer__copy">
             <h4 className="footer__copy-heading">

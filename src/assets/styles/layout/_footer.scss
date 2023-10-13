@@ -41,6 +41,7 @@
     &__item {
       margin-bottom: 22px;
       &-heading {
+        transition: color 150ms linear;
         @include headingFonts(
           $heading-top__heading-color,
           16px,
@@ -48,12 +49,18 @@
           22px,
           default
         );
+        &:hover {
+          color: $header-cart__bg-color;
+        }
       }
     }
   }
   &-medias {
     &__container {
       @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+    }
+    &__list {
+      @include flexLayout(flex, flex-start, flex-start, 24px, row nowrap);
     }
     &__item {
       margin-bottom: 22px;
@@ -62,6 +69,7 @@
         height: 20px;
       }
       &-heading {
+        transition: color 150ms linear;
         @include headingFonts(
           $heading-top__heading-color,
           16px,
@@ -69,6 +77,9 @@
           22px,
           default
         );
+        &:hover {
+          color: $header-cart__bg-color;
+        }
       }
     }
   }
