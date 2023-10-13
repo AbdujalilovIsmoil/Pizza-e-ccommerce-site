@@ -16,6 +16,39 @@ const index = () => {
   } else {
     document.body.classList.remove("hidden");
   }
+
+  type Tcategories = {
+    id: number;
+    title: string;
+  };
+
+  const categories: Tcategories[] = [
+    {
+      id: 1,
+      title: "Суши",
+    },
+    {
+      id: 2,
+      title: "Напитки",
+    },
+    {
+      id: 3,
+      title: "Закуски",
+    },
+    {
+      id: 4,
+      title: "Комбо",
+    },
+    {
+      id: 5,
+      title: "Десерты",
+    },
+    {
+      id: 6,
+      title: "Соусы",
+    },
+  ];
+
   return (
     <>
       <header className="header">
@@ -126,79 +159,22 @@ const index = () => {
                 </div>
               </Link>
               <ul className="header-list-menu">
-                <li className="header-list-menu__item">
-                  <h4 className="header-list-menu__item-heading">Акции</h4>
-                </li>
-                <li className="header-list-menu__item">
-                  <h4 className="header-list-menu__item-heading">Суши</h4>
-                </li>
-                <li className="header-list-menu__item">
-                  <h4 className="header-list-menu__item-heading">Напитки</h4>
-                </li>
-                <li className="header-list-menu__item">
-                  <h4 className="header-list-menu__item-heading">Закуски</h4>
-                </li>
-                <li className="header-list-menu__item">
-                  <h4 className="header-list-menu__item-heading">Комбо</h4>
-                </li>
-                <li className="header-list-menu__item">
-                  <h4 className="header-list-menu__item-heading">Десерты</h4>
-                </li>
-                <li className="header-list-menu__item">
-                  <h4 className="header-list-menu__item-heading">Соусы</h4>
-                </li>
-                <li className="header-list-menu__item">
-                  <div className="header-list-menu__item-block">
-                    <h4 className="header-list-menu__item-heading">Другое</h4>
-                    <BsChevronDown className="header-list-menu__item-down" />
-                  </div>
-                  <ul className="header-drop-down">
-                    <li className="header-drop-down__block">
-                      <h4 className="header-drop-down__block-title">Акции</h4>
-                    </li>
-                    <li className="header-drop-down__block">
-                      <h4 className="header-drop-down__block-title">
-                        О компании{" "}
-                      </h4>
-                    </li>
-                    <li className="header-drop-down__block">
-                      <h4 className="header-drop-down__block-title">
-                        Пользовательское соглашение
-                      </h4>
-                    </li>
-                    <li className="header-drop-down__block">
-                      <h4 className="header-drop-down__block-title">
-                        Условия гарантии
-                      </h4>
-                    </li>
-                    <li className="header-drop-down__block">
-                      <h4 className="header-drop-down__block-title">
-                        Ресторан
-                      </h4>
-                    </li>
-                    <li className="header-drop-down__block">
-                      <h4 className="header-drop-down__block-title">
-                        Контакты
-                      </h4>
-                    </li>
-                    <li className="header-drop-down__block">
-                      <h4 className="header-drop-down__block-title">
-                        Поддержка
-                      </h4>
-                    </li>
-                    <li className="header-drop-down__block">
-                      <h4 className="header-drop-down__block-title">
-                        Отследить заказ
-                      </h4>
-                    </li>
-                  </ul>
-                </li>
+                {categories.length > 0 &&
+                  categories.map((el: Tcategories) => {
+                    return (
+                      <li className="header-list-menu__item" key={el.id}>
+                        <h4 className="header-list-menu__item-heading">
+                          {el.title}
+                        </h4>
+                      </li>
+                    );
+                  })}
               </ul>
             </div>
             <div className="header-list__modal">
               <Button
-                className="header-list__btn"
                 type="button"
+                className="header-list__btn"
                 onClick={() => setIsCartModalOpen(true)}
               >
                 <img
