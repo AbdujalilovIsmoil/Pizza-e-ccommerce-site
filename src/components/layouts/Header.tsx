@@ -106,11 +106,6 @@ const index = () => {
 
                     <ul className="header-open">
                       <li className="header-open__item">
-                        <h4 className="header-open__item-heading">
-                          100 бонусов
-                        </h4>
-                      </li>
-                      <li className="header-open__item">
                         <Link to="/pages/history">
                           <h4 className="header-open__item-heading header-open__item-heading--regular">
                             История заказов
