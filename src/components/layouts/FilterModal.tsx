@@ -6,6 +6,17 @@ type TfilterModal = {
   setIsOpenFilterModal: (e: boolean) => void;
 };
 
+type TfilterDataInside = {
+  id: number;
+  title: string;
+}[];
+
+type TfilterData = {
+  id: number;
+  title: string;
+  data: TfilterDataInside;
+}[];
+
 const FilterModal = ({
   isOpenFilterModal,
   setIsOpenFilterModal,
@@ -16,7 +27,7 @@ const FilterModal = ({
     }
   };
 
-  const filterData = [
+  const filterData: TfilterData = [
     {
       id: 1,
       title: "Общее",
