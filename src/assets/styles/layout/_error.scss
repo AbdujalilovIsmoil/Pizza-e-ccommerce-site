@@ -176,9 +176,9 @@
 }
 
 #rucksack {
-  animation: ruck-anim 3s linear infinite;
   transform-origin: top;
   transform-box: fill-box;
+  animation: ruck-anim 3s linear infinite;
 }
 
 @keyframes ruck-anim {
@@ -188,10 +188,10 @@
 }
 
 .circle {
-  animation: circle-anim ease infinite;
-  transform-origin: center;
-  transform-box: fill-box;
   perspective: 0px;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: circle-anim ease infinite;
 }
 
 .circle.c1 {
@@ -230,21 +230,30 @@
 }
 
 .four.a {
-  transform-origin: bottom left;
   animation-duration: 3s;
   transform-box: fill-box;
+  transform-origin: bottom left;
 }
 
 .four.b {
-  transform-origin: bottom right;
   animation-duration: 3s;
   transform-box: fill-box;
+  transform-origin: bottom right;
+}
+
+.wrapper {
+  width: 100%;
+  @include flexLayout(flex, center, center, 0, row nowrap);
+}
+
+svg {
+  height: 350px;
 }
 
 #ou {
   animation-duration: 6s;
-  transform-origin: center;
   transform-box: fill-box;
+  transform-origin: center;
 }
 
 @keyframes four-anim {

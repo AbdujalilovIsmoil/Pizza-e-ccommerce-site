@@ -1,4 +1,3 @@
-import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import { Button, Input } from "components/fields";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,626 +9,323 @@ import {
   Basket2 as BasketIcon2,
 } from "assets/images/svg";
 import {
-  Basket1,
   Card1,
+  Basket1,
   Basket2,
-  Basket3,
-  Basket4,
   Basket5,
   Basket6,
   Basket7,
   Basket8,
 } from "assets/images/png";
 
+type TCart = {
+  id: number;
+  img: string;
+  size: string;
+  price: string;
+  title: string;
+  quantity: number;
+};
+
+type sliderDataInside = {
+  id: number;
+  img: string;
+  text: string;
+  price: string;
+  title: string;
+};
+
+type sliderData = {
+  id: number;
+  title: string;
+  data: sliderDataInside[];
+};
+
 const index = () => {
+  const basketData: TCart[] = [
+    {
+      id: 1,
+      img: Card1,
+      quantity: 1,
+      price: "399 ₽",
+      title: "Пепперони по-деревенски",
+      size: "Традиционное тесто, 23 см",
+    },
+    {
+      id: 2,
+      img: Card1,
+      quantity: 1,
+      price: "399 ₽",
+      title: "Пепперони по-деревенски",
+      size: "Традиционное тесто, 23 см",
+    },
+  ];
+
+  const sliderData: sliderData[] = [
+    {
+      id: 1,
+      title: "Добавить к заказу?",
+      data: [
+        {
+          id: 1,
+          img: Basket1,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Картофель из печи",
+        },
+        {
+          id: 2,
+          img: Basket2,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Филадельфия крем-брюле",
+        },
+        {
+          id: 3,
+          img: Basket2,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Супер Филадельфия",
+        },
+        {
+          id: 4,
+          img: Basket2,
+          price: "179 ₽",
+          title: "Тигр мама",
+          text: "Порция 95 г",
+        },
+        {
+          id: 5,
+          img: Basket1,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Картофель из печи",
+        },
+        {
+          id: 6,
+          img: Basket2,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Филадельфия крем-брюле",
+        },
+        {
+          id: 7,
+          img: Basket2,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Супер Филадельфия",
+        },
+        {
+          id: 8,
+          img: Basket2,
+          price: "179 ₽",
+          title: "Тигр мама",
+          text: "Порция 95 г",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Соусы",
+      data: [
+        {
+          id: 1,
+          img: Basket5,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Картофель из печи",
+        },
+        {
+          id: 2,
+          img: Basket6,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Филадельфия крем-брюле",
+        },
+        {
+          id: 3,
+          img: Basket7,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Супер Филадельфия",
+        },
+        {
+          id: 4,
+          img: Basket8,
+          price: "179 ₽",
+          title: "Тигр мама",
+          text: "Порция 95 г",
+        },
+        {
+          id: 5,
+          img: Basket5,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Картофель из печи",
+        },
+        {
+          id: 6,
+          img: Basket6,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Филадельфия крем-брюле",
+        },
+        {
+          id: 7,
+          img: Basket7,
+          price: "179 ₽",
+          text: "Порция 95 г",
+          title: "Супер Филадельфия",
+        },
+        {
+          id: 8,
+          img: Basket8,
+          price: "179 ₽",
+          title: "Тигр мама",
+          text: "Порция 95 г",
+        },
+      ],
+    },
+  ];
+
   return (
     <>
       <section className="basket">
         <div className="container">
           <h4 className="basket__heading">Ваш заказ</h4>
           <ul className="basket-cart">
-            <li className="basket-cart__item">
-              <div className="basket-cart__box">
-                <div className="basket-cart__small">
-                  <img
-                    src={Card1}
-                    alt="card1"
-                    title="card"
-                    className="basket-cart__small-img"
-                  />
-                </div>
-                <div className="basket-cart__small">
-                  <h4 className="basket-cart__small-heading">
-                    Пепперони по-деревенски
-                  </h4>
-                  <h5 className="basket-cart__small-regular">
-                    Традиционное тесто, 23 см
-                  </h5>
-                </div>
-              </div>
-              <div className="basket-cart__box">
-                <div className="basket-cart__counter">
-                  <div className="counter">
-                    <img className="counter__icon" src={Counter1} alt="plus" />
-                    <h5 className="counter__heading">1</h5>
-                    <img className="counter__icon" src={Counter2} alt="minus" />
-                  </div>
-                </div>
-                <div className="basket-cart__counter">
-                  <h4 className="basket-cart__counter-price">399 ₽</h4>
-                </div>
-              </div>
-            </li>
-            <li className="basket-cart__item">
-              <div className="basket-cart__box">
-                <div className="basket-cart__small">
-                  <img
-                    src={Card1}
-                    alt="card1"
-                    title="card"
-                    className="basket-cart__small-img"
-                  />
-                </div>
-                <div className="basket-cart__small">
-                  <h4 className="basket-cart__small-heading">
-                    Пепперони по-деревенски
-                  </h4>
-                  <h5 className="basket-cart__small-regular">
-                    Традиционное тесто, 23 см
-                  </h5>
-                </div>
-              </div>
-              <div className="basket-cart__box">
-                <div className="basket-cart__counter">
-                  <div className="counter">
-                    <img className="counter__icon" src={Counter1} alt="plus" />
-                    <h5 className="counter__heading">1</h5>
-                    <img className="counter__icon" src={Counter2} alt="minus" />
-                  </div>
-                </div>
-                <div className="basket-cart__counter">
-                  <h4 className="basket-cart__counter-price">399 ₽</h4>
-                </div>
-              </div>
-            </li>
+            {basketData.length > 0 &&
+              basketData.map((el: TCart) => {
+                return (
+                  <li className="basket-cart__item">
+                    <div className="basket-cart__box">
+                      <div className="basket-cart__small">
+                        <img
+                          src={el.img}
+                          alt={el.title}
+                          title={el.title}
+                          className="basket-cart__small-img"
+                        />
+                      </div>
+                      <div className="basket-cart__small">
+                        <h4 className="basket-cart__small-heading">
+                          {el.title}
+                        </h4>
+                        <h5 className="basket-cart__small-regular">
+                          {el.size}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="basket-cart__box">
+                      <div className="basket-cart__counter">
+                        <div className="counter">
+                          <img
+                            className="counter__icon"
+                            src={Counter1}
+                            alt="plus"
+                          />
+                          <h5 className="counter__heading">{el.quantity}</h5>
+                          <img
+                            className="counter__icon"
+                            src={Counter2}
+                            alt="minus"
+                          />
+                        </div>
+                      </div>
+                      <div className="basket-cart__counter">
+                        <h4 className="basket-cart__counter-price">
+                          {el.price}
+                        </h4>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+
             <li className="basket-cart__item">
               <div className="basket-price">
                 <h4 className="basket-price__heading">Итого: 2 379 ₽</h4>
               </div>
             </li>
           </ul>
-          <div className="basket-carousel">
-            <h4 className="basket-carousel__heading">Добавить к заказу?</h4>
-            <ul className="basket-carousel__list">
-              <Swiper
-                loop={true}
-                spaceBetween={30}
-                navigation={{
-                  nextEl: ".basket-carousel__navigation-btn--right",
-                  prevEl: ".basket-carousel__navigation-btn--left",
-                }}
-                slidesPerView={5}
-                grabCursor={true}
-                modules={[Autoplay, Navigation]}
-                autoplay={{
-                  delay: 2000,
-                  disableOnInteraction: false,
-                }}
-              >
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket1}
-                      alt="basket1"
-                      title="basket"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Картофель из печи
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
+          {sliderData.length > 0 &&
+            sliderData.map((el: sliderData) => {
+              return (
+                <div className="basket-carousel" key={el.id}>
+                  <h4 className="basket-carousel__heading">{el.title}</h4>
+                  <ul className="basket-carousel__list">
+                    <Swiper
+                      loop={true}
+                      spaceBetween={30}
+                      navigation={{
+                        nextEl: ".basket-carousel__navigation-btn--right",
+                        prevEl: ".basket-carousel__navigation-btn--left",
+                      }}
+                      slidesPerView={5}
+                      grabCursor={true}
+                      modules={[Autoplay, Navigation]}
+                      autoplay={{
+                        delay: 2000,
+                        disableOnInteraction: false,
+                      }}
+                    >
+                      {el.data.length > 0 &&
+                        el.data.map((el: sliderDataInside) => {
+                          return (
+                            <SwiperSlide>
+                              <li className="basket-carousel__item">
+                                <img
+                                  src={el.img}
+                                  alt={el.title}
+                                  title={el.title}
+                                  className="basket-carousel__item-img"
+                                />
+                                <div className="basket-carousel__content">
+                                  <h4 className="basket-carousel__content-heading">
+                                    {el.title}
+                                  </h4>
+                                  <h5 className="basket-carousel__content-regular">
+                                    {el.text}
+                                  </h5>
+                                  <Button
+                                    type="button"
+                                    className="basket-carousel__content-btn"
+                                  >
+                                    {el.price}
+                                  </Button>
+                                </div>
+                              </li>
+                            </SwiperSlide>
+                          );
+                        })}
+                    </Swiper>
+                    <div className="basket-carousel__navigation">
                       <Button
-                        className="basket-carousel__content-btn"
                         type="button"
+                        className="basket-carousel__navigation-btn basket-carousel__navigation-btn--left"
                       >
-                        179 ₽
+                        <img
+                          alt="basket2"
+                          src={BasketIcon2}
+                          className="basket-carousel__navigation-icon"
+                        />
+                      </Button>
+                      <Button
+                        type="button"
+                        className="basket-carousel__navigation-btn basket-carousel__navigation-btn--right"
+                      >
+                        <img
+                          alt="basket1"
+                          src={BasketIcon1}
+                          className="basket-carousel__navigation-icon"
+                        />
                       </Button>
                     </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket2}
-                      alt="Basket2"
-                      title="Basket2"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Филадельфия крем-брюле
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket3}
-                      alt="basket3"
-                      title="basket3"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Супер Филадельфия
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket4}
-                      alt="basket4"
-                      title="basket4"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Тигр мама
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket1}
-                      alt="basket1"
-                      title="basket"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Картофель из печи
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket1}
-                      alt="basket1"
-                      title="basket"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Картофель из печи
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket2}
-                      alt="Basket2"
-                      title="Basket2"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Филадельфия крем-брюле
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket3}
-                      alt="basket3"
-                      title="basket3"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Супер Филадельфия
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket4}
-                      alt="basket4"
-                      title="basket4"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Тигр мама
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket1}
-                      alt="basket1"
-                      title="basket"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Картофель из печи
-                      </h4>
-                      <h5 className="basket-carousel__content-regular">
-                        Порция 95 г
-                      </h5>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-              </Swiper>
-              <div className="basket-carousel__navigation">
-                <Button
-                  type="button"
-                  className="basket-carousel__navigation-btn basket-carousel__navigation-btn--left"
-                >
-                  <img
-                    alt="basket2"
-                    src={BasketIcon2}
-                    className="basket-carousel__navigation-icon"
-                  />
-                </Button>
-                <Button
-                  type="button"
-                  className="basket-carousel__navigation-btn basket-carousel__navigation-btn--right"
-                >
-                  <img
-                    alt="basket1"
-                    src={BasketIcon1}
-                    className="basket-carousel__navigation-icon"
-                  />
-                </Button>
-              </div>
-            </ul>
-          </div>
-          <div className="basket-carousel">
-            <h4 className="basket-carousel__heading">Соусы</h4>
-            <ul className="basket-carousel__list">
-              <Swiper
-                loop={true}
-                spaceBetween={30}
-                navigation={{
-                  nextEl: ".basket-carousel__navigation-btn--right",
-                  prevEl: ".basket-carousel__navigation-btn--left",
-                }}
-                slidesPerView={5}
-                grabCursor={true}
-                modules={[Autoplay, Navigation]}
-                autoplay={{
-                  delay: 2000,
-                  disableOnInteraction: false,
-                }}
-              >
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket5}
-                      alt="basket5"
-                      title="basket"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Сырный соус
-                      </h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        39 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket6}
-                      alt="Basket6"
-                      title="Basket6"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Барбфекю
-                      </h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        39 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket7}
-                      alt="basket7"
-                      title="basket7"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">Ранч</h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        39 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket4}
-                      alt="basket4"
-                      title="basket4"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Тигр мама
-                      </h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket8}
-                      alt="basket8"
-                      title="basket8"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Сгущёнка
-                      </h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        39 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket5}
-                      alt="basket5"
-                      title="basket"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Сырный соус
-                      </h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        39 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket6}
-                      alt="Basket6"
-                      title="Basket6"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Барбфекю
-                      </h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        39 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket7}
-                      alt="basket7"
-                      title="basket7"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">Ранч</h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        39 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket4}
-                      alt="basket4"
-                      title="basket4"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Тигр мама
-                      </h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        179 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <li className="basket-carousel__item">
-                    <img
-                      src={Basket8}
-                      alt="basket8"
-                      title="basket8"
-                      className="basket-carousel__item-img"
-                    />
-                    <div className="basket-carousel__content">
-                      <h4 className="basket-carousel__content-heading">
-                        Сгущёнка
-                      </h4>
-                      <Button
-                        className="basket-carousel__content-btn"
-                        type="button"
-                      >
-                        39 ₽
-                      </Button>
-                    </div>
-                  </li>
-                </SwiperSlide>
-              </Swiper>
-              <div className="basket-carousel__navigation">
-                <Button
-                  type="button"
-                  className="basket-carousel__navigation-btn basket-carousel__navigation-btn--left"
-                >
-                  <img
-                    alt="basket2"
-                    src={BasketIcon2}
-                    className="basket-carousel__navigation-icon"
-                  />
-                </Button>
-                <Button
-                  type="button"
-                  className="basket-carousel__navigation-btn basket-carousel__navigation-btn--right"
-                >
-                  <img
-                    alt="basket1"
-                    src={BasketIcon1}
-                    className="basket-carousel__navigation-icon"
-                  />
-                </Button>
-              </div>
-            </ul>
-          </div>
+                  </ul>
+                </div>
+              );
+            })}
+
           <div className="basket-form">
             <form className="basket-form-user">
               <h4 className="basket-form-user__title">О вас</h4>

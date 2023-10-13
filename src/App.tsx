@@ -1,4 +1,4 @@
-import Routes from "./routes";
+import Routes from "./Routes";
 import { lazy, Suspense } from "react";
 import { Loader } from "components/layouts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -31,11 +31,11 @@ const App = () => {
           path: "/pages/basket",
           element: <Basket />,
         },
+        {
+          path: "*",
+          element: <Error />,
+        },
       ],
-    },
-    {
-      path: "*",
-      element: <Error />,
     },
   ]);
 

@@ -13,10 +13,10 @@ type TgroupCardData = {
 type TgroupCardDatas = {
   id: number;
   img: string;
-  category: string;
+  text: string;
   price: string;
   title: string;
-  text: string;
+  category: string;
 };
 
 const GroupCard = () => {
