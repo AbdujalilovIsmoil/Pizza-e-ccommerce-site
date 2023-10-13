@@ -17,8 +17,24 @@ type TfooterDataInside = {
   title: string;
 };
 
+type insideData = {
+  id: number;
+  alt: string;
+  img: string;
+  title: string;
+};
+
+type mediaOutsideData = {
+  id: number;
+  alt: string;
+  img: string;
+  title: string;
+};
+
 type mediaData = {
-  id: 1;
+  id: number;
+  title: string;
+  outsideData: mediaOutsideData[];
 };
 
 const index = () => {
@@ -65,7 +81,22 @@ const index = () => {
     },
   ];
 
-  const mediaData = [
+  const insideData: insideData[] = [
+    {
+      id: 1,
+      alt: "Facebok",
+      img: FooterIcon3,
+      title: "Facebok",
+    },
+    {
+      id: 2,
+      alt: "Instagram",
+      img: FooterIcon4,
+      title: "Instagram",
+    },
+  ];
+
+  const mediaData: mediaData[] = [
     {
       id: 1,
       title: "Контакты",
@@ -81,22 +112,6 @@ const index = () => {
           alt: "location",
           img: FooterIcon2,
           title: "Москва, ул. Юных Ленинцев, д.99",
-        },
-        {
-          insideData: [
-            {
-              id: 1,
-              alt: "Facebok",
-              img: FooterIcon3,
-              title: "Facebok",
-            },
-            {
-              id: 2,
-              alt: "Instagram",
-              img: FooterIcon4,
-              title: "Instagram",
-            },
-          ],
         },
       ],
     },
@@ -174,32 +189,24 @@ const index = () => {
                           );
                         })}
                       <ul className="footer-medias__list">
-                        {el.outsideData.length > 0 &&
-                          el.outsideData.map((el: any) => {
+                        {insideData.length > 0 &&
+                          insideData.map((el: insideData) => {
                             return (
-                              el?.insideData?.length > 0 &&
-                              el?.insideData?.map((el: any) => {
-                                return (
-                                  <li
-                                    className="footer-medias__item"
-                                    key={el.id}
-                                  >
-                                    <a href="#" target="_blank">
-                                      <div className="footer-medias__container">
-                                        <img
-                                          src={el.img}
-                                          alt={el.alt}
-                                          title={el.title}
-                                          className="footer-medias__item-icon"
-                                        />
-                                        <h4 className="footer-medias__item-heading">
-                                          {el.title}
-                                        </h4>
-                                      </div>
-                                    </a>
-                                  </li>
-                                );
-                              })
+                              <li className="footer-medias__item" key={el.id}>
+                                <a href="#" target="_blank">
+                                  <div className="footer-medias__container">
+                                    <img
+                                      src={el.img}
+                                      alt={el.alt}
+                                      title={el.title}
+                                      className="footer-medias__item-icon"
+                                    />
+                                    <h4 className="footer-medias__item-heading">
+                                      {el.title}
+                                    </h4>
+                                  </div>
+                                </a>
+                              </li>
                             );
                           })}
                       </ul>
