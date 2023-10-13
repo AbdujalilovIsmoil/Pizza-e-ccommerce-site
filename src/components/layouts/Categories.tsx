@@ -1,7 +1,6 @@
 import { Autoplay } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
 import {
-  Categories1,
   Categories2,
   Categories3,
   Categories4,
@@ -11,7 +10,96 @@ import {
   Categories8,
 } from "assets/images/svg";
 
-const index = () => {
+const Categories = () => {
+  type Tcategories = {
+    id: number;
+    img: string;
+    title: string;
+  };
+
+  const categories: Tcategories[] = [
+    {
+      id: 1,
+      img: Categories2,
+      title: "Пицца",
+    },
+    {
+      id: 2,
+      img: Categories3,
+      title: "Суши",
+    },
+    {
+      id: 3,
+      img: Categories4,
+      title: "Напитки",
+    },
+    {
+      id: 4,
+      img: Categories5,
+      title: "Закуски",
+    },
+    {
+      id: 5,
+      img: Categories6,
+      title: "Коa",
+    },
+    {
+      id: 6,
+      img: Categories7,
+      title: "Десерты",
+    },
+    {
+      id: 7,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 8,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 9,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 10,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 11,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 12,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 13,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 14,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 15,
+      img: Categories8,
+      title: "Соусы",
+    },
+    {
+      id: 16,
+      img: Categories8,
+      title: "Соусы",
+    },
+  ];
+
   return (
     <>
       <div className="container">
@@ -28,214 +116,24 @@ const index = () => {
               disableOnInteraction: false,
             }}
           >
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories1}
-                  alt="categories-1"
-                  title="categories-1"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Акции</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories2}
-                  alt="categories-2"
-                  title="categories-2"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Пицца</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories3}
-                  alt="categories-3"
-                  title="categories-3"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Суши</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories4}
-                  alt="categories-4"
-                  title="categories-4"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Напитки</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories5}
-                  alt="categories-5"
-                  title="categories-5"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Закуски</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories6}
-                  alt="categories-6"
-                  title="categories-6"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Коa </h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories7}
-                  alt="categories-7"
-                  title="categories-7"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Десерты</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories8}
-                  alt="categories-8"
-                  title="categories-8"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Соусы</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories1}
-                  alt="categories-1"
-                  title="categories-1"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Акции</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories2}
-                  alt="categories-2"
-                  title="categories-2"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Пицца</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories3}
-                  alt="categories-3"
-                  title="categories-3"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Суши</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories4}
-                  alt="categories-4"
-                  title="categories-4"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Напитки</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories5}
-                  alt="categories-5"
-                  title="categories-5"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Закуски</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories6}
-                  alt="categories-6"
-                  title="categories-6"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Коa </h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories7}
-                  alt="categories-7"
-                  title="categories-7"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Десерты</h4>
-                </div>
-              </li>
-            </SwiperSlide>
-            <SwiperSlide>
-              <li className="categories__item">
-                <img
-                  src={Categories8}
-                  alt="categories-8"
-                  title="categories-8"
-                  className="categories__item-img"
-                />
-                <div className="categories__item-desc">
-                  <h4 className="categories__item-heading">Соусы</h4>
-                </div>
-              </li>
-            </SwiperSlide>
+            {categories.length > 0 &&
+              categories.map((el: Tcategories) => {
+                return (
+                  <SwiperSlide key={el.id}>
+                    <li className="categories__item">
+                      <img
+                        src={el.img}
+                        alt="categories-8"
+                        title="categories-8"
+                        className="categories__item-img"
+                      />
+                      <div className="categories__item-desc">
+                        <h4 className="categories__item-heading">{el.title}</h4>
+                      </div>
+                    </li>
+                  </SwiperSlide>
+                );
+              })}
           </Swiper>
         </section>
       </div>
@@ -243,4 +141,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Categories;
