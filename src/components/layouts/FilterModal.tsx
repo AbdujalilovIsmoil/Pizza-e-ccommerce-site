@@ -1,18 +1,380 @@
 import { Button, Input } from "components/fields";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
 
-const index = ({
-  isOpenFilterModal,
-  setIsOpenFilterModal,
-}: {
+type TfilterModal = {
   isOpenFilterModal: boolean;
   setIsOpenFilterModal: (e: boolean) => void;
-}) => {
+};
+
+const FilterModal = ({
+  isOpenFilterModal,
+  setIsOpenFilterModal,
+}: TfilterModal) => {
   const closeFilterModal = (e: any) => {
     if (e.target?.getAttribute("class") === "filter-modal filter-modal--open") {
       setIsOpenFilterModal(false);
     }
   };
+
+  const filterData = [
+    {
+      id: 1,
+      title: "Общее",
+      data: [
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Хит",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Новинка",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "С мясом",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Вегетарианская",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Вегетарианская",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "С курицей",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Без лука",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "С грибами",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "С морепродуктами",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Барбекью",
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: "Сыр",
+      data: [
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Реджанито",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Моцарелла",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Чеддер",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "С голубой плесенью",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Смесь итальянских сыров",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Мягкий молодой сыр",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "Мясо",
+      data: [
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Пепперони",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Свинина",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Ветчина",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Бекон",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Чоризо",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Колбаски",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Куриная грудка",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Компонент",
+      data: [
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Креветка",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Ананасы",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Шампиньоны",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Лук",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Перец халапеньо",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Орегано",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Зеленый перец",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Томаты",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Чеснок",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Красный перец",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Оливки",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Маслины",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Клубника",
+        },
+        {
+          id:
+            new Date().getMilliseconds() *
+              new Date().getMilliseconds() *
+              Math.random() *
+              10 +
+            new Date().getMilliseconds(),
+          title: "Смесь итальянских трав",
+        },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -38,242 +400,35 @@ const index = ({
               </div>
             </div>
             <ul className="filter-modal__list">
-              <li className="filter-modal__item">
-                <h2 className="filter-modal__item-heading">Общее</h2>
-                <ul className="filter-modal__check-list">
-                  <li className="filter-modal__check">
-                    <input type="radio" id="1" name="data" value="1" />
-                    <label htmlFor="1" className="filter-modal__check-btn">
-                      Хит
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="2" name="data" value="2" />
-                    <label className="filter-modal__check-btn" htmlFor="2">
-                      Новинка
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="3" name="data" value="3" />
-                    <label className="filter-modal__check-btn" htmlFor="3">
-                      С мясом
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="4" name="data" value="4" />
-                    <label className="filter-modal__check-btn" htmlFor="4">
-                      Вегетарианская
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="5" name="data" value="5" />
-                    <label className="filter-modal__check-btn" htmlFor="5">
-                      С курицей
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="6" name="data" value="6" />
-                    <label className="filter-modal__check-btn" htmlFor="6">
-                      Без лука
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="7" name="data" value="7" />
-                    <label className="filter-modal__check-btn" htmlFor="7">
-                      С грибами
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="8" name="data" value="8" />
-                    <label className="filter-modal__check-btn" htmlFor="8">
-                      С морепродуктами
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="9" name="data" value="9" />
-                    <label className="filter-modal__check-btn" htmlFor="9">
-                      Барбекью
-                    </label>
-                  </li>
-                </ul>
-              </li>
-              <li className="filter-modal__item">
-                <h2 className="filter-modal__item-heading">Сыр</h2>
-                <ul className="filter-modal__check-list">
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="10" name="data" value="10" />
-                    <label className="filter-modal__check-btn" htmlFor="10">
-                      Реджанито
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="12" name="data" value="12" />
-                    <label className="filter-modal__check-btn" htmlFor="12">
-                      Моцарелла
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="13" name="data" value="13" />
-                    <label className="filter-modal__check-btn" htmlFor="13">
-                      Чеддер
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="14" name="data" value="14" />
-                    <label className="filter-modal__check-btn" htmlFor="14">
-                      С голубой плесенью
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="15" name="data" value="15" />
-                    <label className="filter-modal__check-btn" htmlFor="15">
-                      Смесь итальянских сыров
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="16" name="data" value="16" />
-                    <label className="filter-modal__check-btn" htmlFor="16">
-                      Мягкий молодой сыр
-                    </label>
-                  </li>
-                </ul>
-              </li>
-              <li className="filter-modal__item">
-                <h2 className="filter-modal__item-heading">Мясо</h2>
-                <ul className="filter-modal__check-list">
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="17" name="data" value="17" />
-                    <label className="filter-modal__check-btn" htmlFor="17">
-                      Пепперони
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="18" name="data" value="18" />
-                    <label className="filter-modal__check-btn" htmlFor="18">
-                      Свинина
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="19" name="data" value="19" />
-                    <label className="filter-modal__check-btn" htmlFor="19">
-                      Ветчина
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="20" name="data" value="20" />
-                    <label className="filter-modal__check-btn" htmlFor="20">
-                      Бекон
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="21" name="data" value="21" />
-                    <label className="filter-modal__check-btn" htmlFor="21">
-                      Чоризо
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="22" name="data" value="22" />
-                    <label className="filter-modal__check-btn" htmlFor="22">
-                      Колбаски
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="23" name="data" value="23" />
-                    <label className="filter-modal__check-btn" htmlFor="23">
-                      Куриная грудка
-                    </label>
-                  </li>
-                </ul>
-              </li>
-              <li className="filter-modal__item">
-                <h2 className="filter-modal__item-heading">Компонент</h2>
-                <ul className="filter-modal__check-list">
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="24" name="data" value="24" />
-                    <label className="filter-modal__check-btn" htmlFor="24">
-                      Креветка
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="25" name="data" value="25" />
-                    <label className="filter-modal__check-btn" htmlFor="25">
-                      Ананасы
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="26" name="data" value="26" />
-                    <label className="filter-modal__check-btn" htmlFor="26">
-                      Шампиньоны
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="27" name="data" value="27" />
-                    <label className="filter-modal__check-btn" htmlFor="27">
-                      Лук
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="28" name="data" value="28" />
-                    <label className="filter-modal__check-btn" htmlFor="28">
-                      Перец халапеньо
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="29" name="data" value="29" />
-                    <label className="filter-modal__check-btn" htmlFor="29">
-                      Орегано
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="30" name="data" value="30" />
-                    <label className="filter-modal__check-btn" htmlFor="30">
-                      Зеленый перец
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="31" name="data" value="31" />
-                    <label className="filter-modal__check-btn" htmlFor="31">
-                      Томаты
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="32" name="data" value="32" />
-                    <label className="filter-modal__check-btn" htmlFor="32">
-                      Чеснок
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="33" name="data" value="33" />
-                    <label className="filter-modal__check-btn" htmlFor="33">
-                      Красный перец
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="34" name="data" value="34" />
-                    <label className="filter-modal__check-btn" htmlFor="34">
-                      Оливки
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="35" name="data" value="35" />
-                    <label className="filter-modal__check-btn" htmlFor="35">
-                      Маслины
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="36" name="data" value="36" />
-                    <label className="filter-modal__check-btn" htmlFor="36">
-                      Клубника
-                    </label>
-                  </li>
-                  <li className="filter-modal__check">
-                    <Input type="radio" id="37" name="data" value="37" />
-                    <label className="filter-modal__check-btn" htmlFor="37">
-                      Смесь итальянских трав
-                    </label>
-                  </li>
-                </ul>
-              </li>
+              {filterData.length > 0 &&
+                filterData.map((el) => {
+                  return (
+                    <li className="filter-modal__item" key={el.id}>
+                      <h2 className="filter-modal__item-heading">{el.title}</h2>
+                      <ul className="filter-modal__check-list">
+                        {el?.data?.length > 0 &&
+                          el?.data?.map((el) => {
+                            return (
+                              <li className="filter-modal__check">
+                                <Input
+                                  name="data"
+                                  type="radio"
+                                  id={`${el.id}`}
+                                  value={`${el.id}`}
+                                />
+                                <label
+                                  htmlFor={`${el.id}`}
+                                  className="filter-modal__check-btn"
+                                >
+                                  {el.title}
+                                </label>
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
           <div className="filter-modal__footer">
@@ -290,4 +445,4 @@ const index = ({
   );
 };
 
-export default index;
+export default FilterModal;
