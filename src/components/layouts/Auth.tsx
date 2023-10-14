@@ -18,7 +18,7 @@ type TregistrValues = {
   password: string;
 };
 
-const index = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
+const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
   const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(true);
   const submitRegistr = (values: TregistrValues) => {
     setIsRegistrAndLogin(false);
@@ -163,4 +163,4 @@ const index = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
   );
 };
 
-export default index;
+export default Auth;
