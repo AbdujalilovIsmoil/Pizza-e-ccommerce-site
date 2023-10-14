@@ -564,7 +564,7 @@ const GroupCard = () => {
                       {el.data.length > 0 &&
                         el.data.map((el: TgroupCardDatas) => {
                           return (
-                            <li className="cards__item">
+                            <li className="cards__item" key={el.id}>
                               <div className="cards__image">
                                 <div className="cards__category">
                                   <h4 className="cards__category-heading">

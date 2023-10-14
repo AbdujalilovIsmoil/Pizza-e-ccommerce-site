@@ -1,7 +1,9 @@
+import * as Yup from "yup";
 import PhoneInput from "react-phone-input-2";
 import { Button, Input } from "components/fields";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
+import { FastFieldProps, Field, Form, Formik } from "formik";
 import {
   Counter1,
   Counter2,
@@ -60,6 +62,8 @@ const index = () => {
       size: "Традиционное тесто, 23 см",
     },
   ];
+
+  interface FieldProps extends FastFieldProps {}
 
   const sliderData: sliderData[] = [
     {
@@ -188,6 +192,46 @@ const index = () => {
     },
   ];
 
+  const onBasketUser = (e: any) => {
+    console.log(e);
+  };
+
+  const regex = new RegExp(
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+
+  const validationSchema = Yup.object({
+    userName: Yup.string().trim().required("Username is not entered"),
+    phone: Yup.string().trim().required("Phone is not entered"),
+    email: Yup.string()
+      .trim()
+      .required("Email is not entered")
+      .email("User email is invalid")
+      .matches(regex, "User email is invalid"),
+    send: Yup.string().required("Send is not entered"),
+    home: Yup.string().required("Home is not entered"),
+    text: Yup.string().required("Text is not entered"),
+    floor: Yup.string().required("Floor is not entered"),
+    enter: Yup.string().required("Enter is not entered "),
+    street: Yup.string().required("Street is not entered"),
+    intercom: Yup.string().required("Intercom is not entered"),
+    apartment: Yup.string().required("Apartment is not entered"),
+  });
+
+  const initialState = {
+    text: "",
+    home: "",
+    phone: "",
+    email: "",
+    floor: "",
+    enter: "",
+    street: "",
+    send: false,
+    userName: "",
+    intercom: "",
+    apartment: "",
+  };
+
   return (
     <>
       <section className="basket">
@@ -272,7 +316,7 @@ const index = () => {
                       {el.data.length > 0 &&
                         el.data.map((el: sliderDataInside) => {
                           return (
-                            <SwiperSlide>
+                            <SwiperSlide key={el.id}>
                               <li className="basket-carousel__item">
                                 <img
                                   src={el.img}
@@ -327,216 +371,542 @@ const index = () => {
             })}
 
           <div className="basket-form">
-            <form className="basket-form-user">
-              <h4 className="basket-form-user__title">О вас</h4>
-              <div className="user">
-                <label className="user-label" htmlFor="username">
-                  <h4 className="user-label-heading">Имя*</h4>
-                  <Input
-                    type="text"
-                    id="username"
-                    placeholder="Алексей"
-                    className="user__input"
-                  />
-                </label>
-                <label className="user-label" htmlFor="phone">
-                  <h4 className="user-label-heading">Номер телефона*</h4>
-                  <PhoneInput
-                    country={"uz"}
-                    inputClass="user__input"
-                    placeholder="Номер телефона*"
-                  />
-                </label>
-                <label className="user-label" htmlFor="email">
-                  <h4 className="user-label-heading">Почта</h4>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="mail@gmail.com"
-                    className="user__input"
-                  />
-                </label>
-              </div>
-            </form>
-            <div className="basket-form-header">
-              <div className="basket-form-header__box">
-                <h4 className="basket-form-header__box-heading">Доставка</h4>
-              </div>
-              <div className="basket-form-header__container">
-                <div className="basket-form-header__send">
-                  <Input
-                    id="send1"
-                    name="send"
-                    type="radio"
-                    value="send1"
-                    className="basket-form-header__send-input"
-                  />
-                  <label className="basket-form-header__label" htmlFor="send1">
-                    Доставка
+            <Formik
+              initialValues={initialState}
+              validationSchema={validationSchema}
+              onSubmit={(values) => onBasketUser(values)}
+            >
+              <Form className="basket-form-user">
+                <h4 className="basket-form-user__title">О вас</h4>
+                <div className="user">
+                  <label className="user-label" htmlFor="userName">
+                    <h4 className="user-label-heading">Имя*</h4>
+                    <Field name="userName">
+                      {({ field, meta }: FieldProps) => {
+                        return (
+                          <>
+                            <Input
+                              type="text"
+                              {...field}
+                              id="userName"
+                              className={`user__input ${
+                                meta.touched &&
+                                meta.error &&
+                                "user__input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="user__input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </>
+                        );
+                      }}
+                    </Field>
+                  </label>
+                  <label className="user-label" htmlFor="phone">
+                    <h4 className="user-label-heading">Номер телефона*</h4>
+                    <PhoneInput country={"uz"} inputClass="user__input" />
+                  </label>
+                  <label className="user-label" htmlFor="email">
+                    <h4 className="user-label-heading">Почта</h4>
+                    <Field name="email">
+                      {({ field, meta }: FieldProps) => {
+                        console.log(field, meta);
+                        return (
+                          <>
+                            <Input
+                              {...field}
+                              id="email"
+                              type="email"
+                              className={`user__input ${
+                                meta.touched &&
+                                meta.error &&
+                                "user__input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="user__input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </>
+                        );
+                      }}
+                    </Field>
                   </label>
                 </div>
-                <div className="basket-form-header__send">
-                  <Input
-                    id="send2"
-                    name="send"
-                    type="radio"
-                    value="send2"
-                    className="basket-form-header__send-input"
-                  />
-                  <label className="basket-form-header__label" htmlFor="send2">
-                    Самовывоз
-                  </label>
-                </div>
-              </div>
-            </div>
-            <form className="basket-form-delivery">
-              <label htmlFor="street" className="basket-form-delivery__label">
-                <h4 className="basket-form-delivery__label-heading">Улица*</h4>
-                <Input
-                  type="text"
-                  id="street"
-                  className="basket-form-delivery__label-input"
-                />
-              </label>
-              <div className="basket-form-delivery__container">
-                <label htmlFor="home" className="basket-form-delivery__label">
-                  <h4 className="basket-form-delivery__label-heading">Дом</h4>
-                  <Input
-                    id="home"
-                    type="text"
-                    className="basket-form-delivery__label-input"
-                  />
-                </label>
-                <label htmlFor="enter" className="basket-form-delivery__label">
-                  <h4 className="basket-form-delivery__label-heading">
-                    Подъезд
-                  </h4>
-                  <Input
-                    id="enter"
-                    type="number"
-                    className="basket-form-delivery__label-input"
-                  />
-                </label>
-                <label htmlFor="floor" className="basket-form-delivery__label">
-                  <h4 className="basket-form-delivery__label-heading">Этаж</h4>
-                  <Input
-                    id="floor"
-                    type="number"
-                    className="basket-form-delivery__label-input"
-                  />
-                </label>
-                <label
-                  htmlFor="Apartment"
-                  className="basket-form-delivery__label"
-                >
-                  <h4 className="basket-form-delivery__label-heading">
-                    Квартира
-                  </h4>
-                  <Input
-                    id="Apartment"
-                    type="number"
-                    className="basket-form-delivery__label-input"
-                  />
-                </label>
-                <label
-                  htmlFor="Intercom"
-                  className="basket-form-delivery__label"
-                >
-                  <h4 className="basket-form-delivery__label-heading">
-                    Домофон
-                  </h4>
-                  <Input
-                    id="Intercom"
-                    type="number"
-                    className="basket-form-delivery__label-input"
-                  />
-                </label>
-              </div>
-            </form>
-            <ul className="basket-form-order">
-              <li className="basket-form-order__item">
-                <h4 className="basket-form-order__item-regular">
-                  Когда выполнить заказ?
-                </h4>
-                <div className="basket-form-order__wrapper">
-                  <label htmlFor="often1" className="basket-form-order__label">
-                    <Input
-                      id="often1"
-                      type="radio"
-                      name="order1"
-                      className="basket-form-order__label-input"
-                    />
-                    <h4 className="basket-form-order__label-heading">
-                      Как можно скорее
-                    </h4>
-                  </label>
 
-                  <label htmlFor="often2" className="basket-form-order__label">
-                    <Input
-                      id="often2"
-                      type="radio"
-                      name="order1"
-                      className="basket-form-order__label-input"
-                    />
-                    <h4 className="basket-form-order__label-heading">
-                      По времени
+                <div className="basket-form-header">
+                  <div className="basket-form-header__box">
+                    <h4 className="basket-form-header__box-heading">
+                      Доставка
                     </h4>
-                  </label>
+                  </div>
+                  <div className="basket-form-header__container">
+                    <div className="basket-form-header__send">
+                      <Field name="send">
+                        {({ field, meta }: FieldProps) => {
+                          console.log(field, meta);
+                          return (
+                            <>
+                              <Input
+                                id="send1"
+                                {...field}
+                                type="radio"
+                                className={`basket-form-header__send-input ${
+                                  meta.touched &&
+                                  meta.error &&
+                                  "user__input--error"
+                                }`}
+                              />
+                              <label
+                                className="basket-form-header__label"
+                                htmlFor="send1"
+                              >
+                                Доставка
+                              </label>
+                              {meta.touched && meta.error && (
+                                <h4 className="user__input-error">
+                                  {meta.error}
+                                </h4>
+                              )}
+                            </>
+                          );
+                        }}
+                      </Field>
+                    </div>
+                    <div className="basket-form-header__send">
+                      <Field name="send">
+                        {({ field, meta }: FieldProps) => {
+                          console.log(field, meta);
+                          return (
+                            <>
+                              <Input
+                                id="send2"
+                                {...field}
+                                type="radio"
+                                className={`basket-form-header__send-input ${
+                                  meta.touched &&
+                                  meta.error &&
+                                  "user__input--error"
+                                }`}
+                              />
+                              <label
+                                htmlFor="send2"
+                                className="basket-form-header__label"
+                              >
+                                Самовывоз
+                              </label>
+                              {meta.touched && meta.error && (
+                                <h4 className="user__input-error">
+                                  {meta.error}
+                                </h4>
+                              )}
+                            </>
+                          );
+                        }}
+                      </Field>
+                    </div>
+                  </div>
                 </div>
-              </li>
-              <li className="basket-form-order__item">
-                <h4 className="basket-form-order__item-title">Оплата</h4>
-                <div className="basket-form-order__wrapper">
-                  <label htmlFor="often3" className="basket-form-order__label">
-                    <Input
-                      id="often3"
-                      type="radio"
-                      name="order2"
-                      className="basket-form-order__label-input"
-                    />
-                    <h4 className="basket-form-order__label-heading">
-                      Наличными
-                    </h4>
-                  </label>
+                <div className="basket-form-delivery">
+                  <Field name="street">
+                    {({ field, meta }: FieldProps) => {
+                      return (
+                        <label
+                          htmlFor="street"
+                          className="basket-form-delivery__label"
+                        >
+                          <h4 className="basket-form-delivery__label-heading">
+                            Улица*
+                          </h4>
+                          <Input
+                            {...field}
+                            id="street"
+                            type="text"
+                            className={`basket-form-delivery__label-input ${
+                              meta.touched &&
+                              meta.error &&
+                              "basket-form-delivery__label-input--error"
+                            }`}
+                          />
+                          {meta.touched && meta.error && (
+                            <h4 className="basket-form-delivery__label-input-error">
+                              {meta.error}
+                            </h4>
+                          )}
+                        </label>
+                      );
+                    }}
+                  </Field>
 
-                  <label htmlFor="often4" className="basket-form-order__label">
-                    <Input
-                      id="often4"
-                      type="radio"
-                      name="order2"
-                      className="basket-form-order__label-input"
-                    />
-                    <h4 className="basket-form-order__label-heading">Картой</h4>
-                  </label>
-                  <label htmlFor="often5" className="basket-form-order__label">
-                    <Input
-                      id="often5"
-                      type="radio"
-                      name="order2"
-                      className="basket-form-order__label-input"
-                    />
-                    <h4 className="basket-form-order__label-heading">
-                      Apple Pay
-                    </h4>
-                  </label>
+                  <div className="basket-form-delivery__container">
+                    <Field name="home">
+                      {({ field, meta }: FieldProps) => {
+                        console.log(field, meta);
+                        return (
+                          <label
+                            htmlFor="home"
+                            className="basket-form-delivery__label"
+                          >
+                            <h4 className="basket-form-delivery__label-heading">
+                              Дом
+                            </h4>
+                            <Input
+                              id="home"
+                              {...field}
+                              type="number"
+                              className={`basket-form-delivery__label-input ${
+                                meta.touched &&
+                                meta.error &&
+                                "basket-form-delivery__label-input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="basket-form-delivery__label-input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </label>
+                        );
+                      }}
+                    </Field>
+                    <Field name="enter">
+                      {({ field, meta }: FieldProps) => {
+                        console.log(field, meta);
+                        return (
+                          <label
+                            htmlFor="enter"
+                            className="basket-form-delivery__label"
+                          >
+                            <h4 className="basket-form-delivery__label-heading">
+                              Подъезд
+                            </h4>
+                            <Input
+                              id="enter"
+                              {...field}
+                              type="number"
+                              className={`basket-form-delivery__label-input ${
+                                meta.touched &&
+                                meta.error &&
+                                "basket-form-delivery__label-input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="basket-form-delivery__label-input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </label>
+                        );
+                      }}
+                    </Field>
+                    <Field name="floor">
+                      {({ field, meta }: FieldProps) => {
+                        console.log(field, meta);
+                        return (
+                          <label
+                            htmlFor="floor"
+                            className="basket-form-delivery__label"
+                          >
+                            <h4 className="basket-form-delivery__label-heading">
+                              Этаж
+                            </h4>
+                            <Input
+                              id="floor"
+                              {...field}
+                              type="number"
+                              className={`basket-form-delivery__label-input ${
+                                meta.touched &&
+                                meta.error &&
+                                "basket-form-delivery__label-input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="basket-form-delivery__label-input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </label>
+                        );
+                      }}
+                    </Field>
+                    <Field name="apartment">
+                      {({ field, meta }: FieldProps) => {
+                        console.log(field, meta);
+                        return (
+                          <label
+                            htmlFor="apartment"
+                            className="basket-form-delivery__label"
+                          >
+                            <h4 className="basket-form-delivery__label-heading">
+                              Квартира
+                            </h4>
+                            <Input
+                              {...field}
+                              type="number"
+                              id="apartment"
+                              className={`basket-form-delivery__label-input ${
+                                meta.touched &&
+                                meta.error &&
+                                "basket-form-delivery__label-input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="basket-form-delivery__label-input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </label>
+                        );
+                      }}
+                    </Field>
+                    <Field name="intercom">
+                      {({ field, meta }: FieldProps) => {
+                        console.log(field, meta);
+                        return (
+                          <label
+                            htmlFor="intercom"
+                            className="basket-form-delivery__label"
+                          >
+                            <h4 className="basket-form-delivery__label-heading">
+                              Домофон
+                            </h4>
+                            <Input
+                              {...field}
+                              type="number"
+                              id="intercom"
+                              className={`basket-form-delivery__label-input ${
+                                meta.touched &&
+                                meta.error &&
+                                "basket-form-delivery__label-input--error"
+                              }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="basket-form-delivery__label-input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </label>
+                        );
+                      }}
+                    </Field>
+                  </div>
                 </div>
-              </li>
-              <li className="basket-form-order__item">
-                <h4 className="basket-form-order__item-title">Комментарий</h4>
-                <textarea
-                  placeholder="Есть уточнения?"
-                  className="basket-form-order__item-text"
-                ></textarea>
-              </li>
-              <li className="basket-form-order__footer">
-                <h4 className="basket-form-order__footer-heading">
-                  Итого: 2 379 ₽
-                </h4>
-                <Button type="button" className="basket-form-order__footer-btn">
-                  Оформить заказ
-                </Button>
-              </li>
-            </ul>
+                <ul className="basket-form-order">
+                  <li className="basket-form-order__item">
+                    <h4 className="basket-form-order__item-regular">
+                      Когда выполнить заказ?
+                    </h4>
+                    <div className="basket-form-order__wrapper">
+                      <Field name="often">
+                        {({ field, meta }: FieldProps) => {
+                          console.log(field, meta);
+                          return (
+                            <label
+                              htmlFor="often1"
+                              className="basket-form-order__label"
+                            >
+                              <Input
+                                id="often1"
+                                {...field}
+                                type="radio"
+                                className={`basket-form-order__label-input ${
+                                  meta.touched &&
+                                  meta.error &&
+                                  "user__input--error"
+                                }`}
+                              />
+                              <h4 className="basket-form-order__label-heading">
+                                Как можно скорее
+                              </h4>
+                              {meta.touched && meta.error && (
+                                <h4 className="user__input-error">
+                                  {meta.error}
+                                </h4>
+                              )}
+                            </label>
+                          );
+                        }}
+                      </Field>
+                      <Field name="often">
+                        {({ field, meta }: FieldProps) => {
+                          console.log(field, meta);
+                          return (
+                            <label
+                              htmlFor="often2"
+                              className="basket-form-order__label"
+                            >
+                              <Input
+                                id="often2"
+                                {...field}
+                                type="radio"
+                                className={`basket-form-order__label-input ${
+                                  meta.touched &&
+                                  meta.error &&
+                                  "user__input--error"
+                                }`}
+                              />
+                              <h4 className="basket-form-order__label-heading">
+                                По времени
+                              </h4>
+                              {meta.touched && meta.error && (
+                                <h4 className="user__input-error">
+                                  {meta.error}
+                                </h4>
+                              )}
+                            </label>
+                          );
+                        }}
+                      </Field>
+                    </div>
+                  </li>
+                  <li className="basket-form-order__item">
+                    <h4 className="basket-form-order__item-title">Оплата</h4>
+                    <div className="basket-form-order__wrapper">
+                      <Field name="often4">
+                        {({ field, meta }: FieldProps) => {
+                          console.log(field, meta);
+                          return (
+                            <label
+                              htmlFor="often3"
+                              className="basket-form-order__label"
+                            >
+                              <Input
+                                id="often3"
+                                {...field}
+                                type="radio"
+                                className={`basket-form-order__label-input ${
+                                  meta.touched &&
+                                  meta.error &&
+                                  "user__input--error"
+                                }`}
+                              />
+                              <h4 className="basket-form-order__label-heading">
+                                Наличными
+                              </h4>
+                              {meta.touched && meta.error && (
+                                <h4 className="user__input-error">
+                                  {meta.error}
+                                </h4>
+                              )}
+                            </label>
+                          );
+                        }}
+                      </Field>
+
+                      <Field name="often4">
+                        {({ field, meta }: FieldProps) => {
+                          console.log(field, meta);
+                          return (
+                            <label
+                              htmlFor="often4"
+                              className="basket-form-order__label"
+                            >
+                              <Input
+                                {...field}
+                                id="often4"
+                                type="radio"
+                                className={`basket-form-order__label-input ${
+                                  meta.touched &&
+                                  meta.error &&
+                                  "user__input--error"
+                                }`}
+                              />
+                              <h4 className="basket-form-order__label-heading">
+                                Картой
+                              </h4>
+                              {meta.touched && meta.error && (
+                                <h4 className="user__input-error">
+                                  {meta.error}
+                                </h4>
+                              )}
+                            </label>
+                          );
+                        }}
+                      </Field>
+                      <Field name="often4">
+                        {({ field, meta }: FieldProps) => {
+                          console.log(field, meta);
+                          return (
+                            <label
+                              htmlFor="often5"
+                              className="basket-form-order__label"
+                            >
+                              <Input
+                                id="often5"
+                                {...field}
+                                type="radio"
+                                className={`basket-form-order__label-input ${
+                                  meta.touched &&
+                                  meta.error &&
+                                  "user__input--error"
+                                }`}
+                              />
+                              <h4 className="basket-form-order__label-heading">
+                                Apple Pay
+                              </h4>
+                              {meta.touched && meta.error && (
+                                <h4 className="user__input-error">
+                                  {meta.error}
+                                </h4>
+                              )}
+                            </label>
+                          );
+                        }}
+                      </Field>
+                    </div>
+                  </li>
+                  <li className="basket-form-order__item">
+                    <h4 className="basket-form-order__item-title">
+                      Комментарий
+                    </h4>
+                    <Field name="text">
+                      {({ field, meta }: FieldProps) => {
+                        return (
+                          <label
+                            htmlFor="text"
+                            className="basket-form-delivery__label"
+                          >
+                            <h4 className="basket-form-delivery__label-heading">
+                              Улица*
+                            </h4>
+                            <textarea
+                              {...field}
+                              placeholder="Есть уточнения?"
+                              className={`basket-form-order__item-text ${
+                                meta.touched &&
+                                meta.error &&
+                                "basket-form-order__item-text--error"
+                              }`}
+                            ></textarea>
+
+                            {meta.touched && meta.error && (
+                              <h4 className="basket-form-delivery__label-input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </label>
+                        );
+                      }}
+                    </Field>
+                  </li>
+                  <li className="basket-form-order__footer">
+                    <h4 className="basket-form-order__footer-heading">
+                      Итого: 2 379 ₽
+                    </h4>
+                    <Button
+                      type="submit"
+                      className="basket-form-order__footer-btn"
+                    >
+                      Оформить заказ
+                    </Button>
+                  </li>
+                </ul>
+              </Form>
+            </Formik>
           </div>
         </div>
       </section>

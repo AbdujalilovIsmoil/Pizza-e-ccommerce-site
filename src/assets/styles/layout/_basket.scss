@@ -202,6 +202,7 @@
         width: 100% !important;
         @include flexLayout(flex, space-between, center, 20px, row nowrap);
         &-label {
+          position: relative;
           width: 100% !important;
           &-heading {
             margin-bottom: 8px;
@@ -226,6 +227,21 @@
             6px,
             0
           );
+          &--error {
+            border: 1px solid $categories__heading-color;
+          }
+          &-error {
+            bottom: -25px;
+            text-align: left;
+            position: absolute;
+            @include headingFonts(
+              $categories__heading-color,
+              15px,
+              400,
+              22px,
+              default
+            );
+          }
         }
       }
     }
@@ -310,6 +326,20 @@
             6px,
             0
           );
+          &--error {
+            border: 1px solid $categories__heading-color;
+          }
+          &-error {
+            transform: translateY(10px);
+            text-align: left;
+            @include headingFonts(
+              $categories__heading-color,
+              15px,
+              400,
+              22px,
+              default
+            );
+          }
         }
       }
     }
