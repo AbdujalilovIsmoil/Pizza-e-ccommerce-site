@@ -21,10 +21,9 @@ const index = ({ isCartModalOpen, setIsCartModalOpen }: CardModalType) => {
   const navigate = useNavigate();
 
   const closeCartModal = (e: any) => {
-    console.log(e);
     if (e.target?.getAttribute("class") === "cart-modal cart-modal--open") {
       setIsCartModalOpen(false);
-    }
+    } else return false;
   };
 
   const openBasketPage = () => {
@@ -71,6 +70,7 @@ const index = ({ isCartModalOpen, setIsCartModalOpen }: CardModalType) => {
                   cartModalData.map((el: cartModalDataType) => {
                     return (
                       <CardModal
+                        key={el.id}
                         img={el.img}
                         size={el.size}
                         soum={el.soum}
