@@ -1,9 +1,11 @@
 import * as Yup from "yup";
 import { useState } from "react";
 import { Login } from "components/UI";
-import { Formik, Form, Field } from "formik";
 import { Button, Input } from "components/fields";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
+import { Formik, Form, Field, FastFieldProps } from "formik";
+
+interface FieldProps extends FastFieldProps {}
 
 type AuthType = {
   isAuthModalOpen: boolean;
@@ -18,7 +20,6 @@ type TregistrValues = {
 
 const index = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
   const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(true);
-
   const submitRegistr = (values: TregistrValues) => {
     console.log(values);
     setIsRegistrAndLogin(false);
@@ -70,7 +71,7 @@ const index = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                 >
                   <Form className="auth-modal__form">
                     <Field name="userName">
-                      {({ field, meta }: any) => {
+                      {({ field, meta }: FieldProps) => {
                         return (
                           <>
                             <Input
@@ -93,7 +94,8 @@ const index = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                       }}
                     </Field>
                     <Field name="email">
-                      {({ field, meta }: any) => {
+                      {({ field, meta }: FieldProps) => {
+                        console.log(field, meta);
                         return (
                           <>
                             <Input
@@ -116,7 +118,7 @@ const index = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                       }}
                     </Field>
                     <Field name="password">
-                      {({ field, meta }: any) => {
+                      {({ field, meta }: FieldProps) => {
                         return (
                           <>
                             <Input
