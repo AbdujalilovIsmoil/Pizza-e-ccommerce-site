@@ -21,6 +21,7 @@ const index = ({ isCartModalOpen, setIsCartModalOpen }: CardModalType) => {
   const navigate = useNavigate();
 
   const closeCartModal = (e: any) => {
+    console.log(e);
     if (e.target?.getAttribute("class") === "cart-modal cart-modal--open") {
       setIsCartModalOpen(false);
     }

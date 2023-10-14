@@ -9,13 +9,13 @@ type TfilterModal = {
 type TfilterDataInside = {
   id: number;
   title: string;
-}[];
+};
 
 type TfilterData = {
   id: number;
   title: string;
-  data: TfilterDataInside;
-}[];
+  data: TfilterDataInside[];
+};
 
 const FilterModal = ({
   isOpenFilterModal,
@@ -27,7 +27,7 @@ const FilterModal = ({
     }
   };
 
-  const filterData: TfilterData = [
+  const filterData: TfilterData[] = [
     {
       id: 1,
       title: "Общее",
@@ -412,15 +412,15 @@ const FilterModal = ({
             </div>
             <ul className="filter-modal__list">
               {filterData.length > 0 &&
-                filterData.map((el) => {
+                filterData.map((el: TfilterData) => {
                   return (
                     <li className="filter-modal__item" key={el.id}>
                       <h2 className="filter-modal__item-heading">{el.title}</h2>
                       <ul className="filter-modal__check-list">
                         {el?.data?.length > 0 &&
-                          el?.data?.map((el) => {
+                          el?.data?.map((el: TfilterDataInside) => {
                             return (
-                              <li className="filter-modal__check">
+                              <li className="filter-modal__check" key={el.id}>
                                 <Input
                                   name="data"
                                   type="radio"

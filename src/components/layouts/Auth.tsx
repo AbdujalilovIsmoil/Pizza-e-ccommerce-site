@@ -21,8 +21,8 @@ type TregistrValues = {
 const index = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
   const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(true);
   const submitRegistr = (values: TregistrValues) => {
-    console.log(values);
     setIsRegistrAndLogin(false);
+    console.log(values);
   };
 
   const initialValues: TregistrValues = {
