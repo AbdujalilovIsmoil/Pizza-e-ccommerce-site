@@ -1,5 +1,4 @@
 import {
-  Location,
   GroupCard,
   Categories,
   RestangleCard,
@@ -10,7 +9,6 @@ const index = () => {
     <>
       <Categories />
       <RestangleCard />
-      <Location />
       <GroupCard />
     </>
   );
