@@ -23,6 +23,7 @@
     min-height: 700px;
     position: relative;
     background-color: $header__bg-color;
+    @include flexLayout(flex, space-between, space-between, 0, column nowrap);
   }
   &__header {
     @include flexLayout(flex, space-between, center, 0, row nowrap);
