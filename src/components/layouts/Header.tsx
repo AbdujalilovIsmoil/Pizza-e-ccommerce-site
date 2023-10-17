@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "components/fields";
-import { BsChevronDown } from "assets/react-icons";
-import { CardModal, Auth } from "components/layouts";
+import { CardModal, Auth, CloseAccount } from "components/layouts";
+import { HeaderTopAccount } from "assets/images/svg";
 import { HeaderListIntro } from "assets/images/svg/header";
 import { HeaderListCart } from "assets/images/svg/header/header-list";
-import { HeaderTopAccount, HeaderTopLocation } from "assets/images/svg";
 
 const Header = () => {
+  const [isCloseAccount, setIsCloseAccount] = useState<boolean>(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
 
@@ -60,6 +60,10 @@ const Header = () => {
           isAuthModalOpen={isAuthModalOpen}
           setIsAuthModalOpen={setIsAuthModalOpen}
         />
+        <CloseAccount
+          isCloseAccount={isCloseAccount}
+          setIsCloseAccount={setIsCloseAccount}
+        />
         <div className="header__border-bottom">
           <div className="container">
             <div className="header-top">
@@ -101,7 +105,11 @@ const Header = () => {
                       </Button>
                     </li>
                     <li className="header-open__item header-open__item--border">
-                      <Button className="header-open__item-btn" type="button">
+                      <Button
+                        type="button"
+                        className="header-open__item-btn"
+                        onClick={() => setIsCloseAccount(true)}
+                      >
                         Выход из аккаунта
                       </Button>
                     </li>

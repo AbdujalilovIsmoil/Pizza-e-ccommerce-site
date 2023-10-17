@@ -4,7 +4,7 @@ import { Login } from "components/UI";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import { Button, Input } from "components/fields";
-import { FilterModalIcon1 } from "assets/images/svg/filter";
+import { FilterModalIcon2 } from "assets/images/svg/filter";
 import { Formik, Form, Field, FastFieldProps } from "formik";
 
 interface FieldProps extends FastFieldProps {}
@@ -21,7 +21,7 @@ type TregistrValues = {
 };
 
 const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
-  const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(false);
+  const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(true);
   const submitRegistr = (values: TregistrValues) => {
     setIsRegistrAndLogin(false);
     console.log(values);
@@ -46,7 +46,7 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
         <div className="container">
           <div className="auth-modal__container">
             <img
-              src={FilterModalIcon1}
+              src={FilterModalIcon2}
               alt="auth-modal-close"
               className="auth-modal__container-close"
               onClick={() => setIsAuthModalOpen(false)}
@@ -113,7 +113,7 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                           );
                         }}
                       </Field>
-                      
+
                       <PhoneInput
                         country={"uz"}
                         placeholder="Номер телефона*"

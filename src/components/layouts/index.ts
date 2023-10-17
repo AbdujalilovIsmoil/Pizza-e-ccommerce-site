@@ -8,6 +8,7 @@ import CardModal from "./CardModal";
 import Categories from "./Categories";
 import FilterModal from "./FilterModal";
 import ProductModal from "./ProductModal";
+import CloseAccount from "./CloseAccount";
 import RestangleCard from "./RestangleCard";
 
 export {
@@ -20,6 +21,7 @@ export {
   CardModal,
   Categories,
   FilterModal,
+  CloseAccount,
   ProductModal,
   RestangleCard,
 };
