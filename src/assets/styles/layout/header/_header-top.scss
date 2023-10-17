@@ -3,7 +3,8 @@
   position: relative;
   @include flexLayout(flex, space-between, center, 0, row nowrap);
   &__list {
-    @include flexLayout(flex, flex-start, center, 40px, row nowrap);
+    width: 100%;
+    @include flexLayout(flex, space-between, center, 40px, row nowrap);
   }
   &__item {
     @include flexLayout(flex, center, center, 10px, row nowrap);
@@ -24,10 +25,6 @@
         visibility: visible;
         transition: all 150ms linear;
       }
-    }
-    &-location {
-      width: 20px;
-      height: 20px;
     }
     &-heading {
       transition: color 150ms linear;

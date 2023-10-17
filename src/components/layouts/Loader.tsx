@@ -1,4 +1,4 @@
-const index = () => {
+const Loader = () => {
   return (
     <>
       <div className="loader">
@@ -81,4 +81,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Loader;

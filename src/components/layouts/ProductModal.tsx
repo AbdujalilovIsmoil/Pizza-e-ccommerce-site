@@ -18,7 +18,7 @@ type OpenProductType = {
   setIsOpenProductModal: (e: boolean) => void;
 };
 
-const index = ({
+const ProductModal = ({
   isOpenProductModal,
   setIsOpenProductModal,
 }: OpenProductType) => {
@@ -411,4 +411,4 @@ const index = ({
   );
 };
 
-export default index;
+export default ProductModal;

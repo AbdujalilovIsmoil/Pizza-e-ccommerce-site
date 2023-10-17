@@ -37,7 +37,7 @@ type mediaData = {
   outsideData: mediaOutsideData[];
 };
 
-const index = () => {
+const Footer = () => {
   const footerData: TfooterDataOuside[] = [
     {
       id: 1,
@@ -224,4 +224,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Footer;

@@ -2,7 +2,7 @@ import { Autoplay } from "swiper/modules";
 import { restangleCard1 } from "assets/images/svg";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const index = () => {
+const RestangleCard = () => {
   return (
     <>
       <section className="restangle-card">
@@ -132,4 +132,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default RestangleCard;

@@ -10,6 +10,15 @@
   transition: transform 200ms linear;
   background-color: rgba(25, 25, 25, 0.4);
   @include flexLayout(flex, center, center, 0, row nowrap);
+  &__container {
+    position: relative;
+    &-close {
+      top: 0;
+      right: 0;
+      cursor: pointer;
+      position: absolute;
+    }
+  }
   &--open {
     transform: scale(1);
     transition: transform 200ms linear;
@@ -17,7 +26,6 @@
   &__content {
     margin: 0 auto;
     max-width: 320px;
-    text-align: center;
   }
   &__background {
     padding: 60px;
@@ -35,6 +43,7 @@
       position: absolute;
     }
     &-heading {
+      text-align: center;
       @include headingFonts(
         $heading-top__heading-color,
         32px,
@@ -44,6 +53,7 @@
       );
     }
     &-desc {
+      text-align: center;
       margin: 16px 0 20px 0;
       @include headingFonts(
         $heading-top__heading-color,
@@ -71,6 +81,7 @@
     &-text {
       opacity: 0.4;
       margin-top: 12px;
+      text-align: center;
       @include headingFonts(
         $heading-top__heading-color,
         14px,
@@ -82,8 +93,9 @@
   }
   &__form {
     &-input {
-      margin: 8px 0;
       padding: 14px 16px;
+      width: 100% !important;
+      margin: 0 0 8px 0 !important;
       @include Input(
         $heading-cart__heading-color,
         $heading-cart__heading-color,
@@ -93,10 +105,13 @@
         0
       );
       &--error {
-        border: 1px solid $categories__heading-color;
+        text-align: left !important;
+        margin: 0px !important;
+        border: 1px solid $categories__heading-color !important;
       }
     }
     &-error {
+      margin: 8px 0;
       text-align: left;
       @include headingFonts(
         $categories__heading-color,
@@ -105,6 +120,9 @@
         22px,
         default
       );
+      &--phone {
+        margin: 8px 0 0 0 !important;
+      }
     }
   }
 }

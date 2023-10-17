@@ -1,7 +1,7 @@
 import { Input, Button } from "components/fields";
 import { locationIcon1 } from "assets/images/svg";
 
-const index = () => {
+const Location = () => {
   return (
     <>
       <section className="location">
@@ -38,4 +38,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Location;

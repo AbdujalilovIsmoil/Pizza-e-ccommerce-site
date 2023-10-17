@@ -17,7 +17,10 @@ type cartModalDataType = {
   title: string;
 };
 
-const index = ({ isCartModalOpen, setIsCartModalOpen }: CardModalType) => {
+const CardModalComponent = ({
+  isCartModalOpen,
+  setIsCartModalOpen,
+}: CardModalType) => {
   const navigate = useNavigate();
 
   const closeCartModal = (e: any) => {
@@ -98,4 +101,4 @@ const index = ({ isCartModalOpen, setIsCartModalOpen }: CardModalType) => {
   );
 };
 
-export default index;
+export default CardModalComponent;
