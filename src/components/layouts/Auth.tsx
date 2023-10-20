@@ -1,12 +1,13 @@
 import * as Yup from "yup";
 import { usePost } from "hook";
-import { useState } from "react";
+import { storage } from "services";
 import { Login } from "components/UI";
 import "react-phone-input-2/lib/style.css";
+import { useEffect, useState } from "react";
 import { Button, Input } from "components/fields";
+import { useQueryClient } from "@tanstack/react-query";
 import { FilterModalIcon2 } from "assets/images/svg/filter";
 import { Formik, Form, Field, FastFieldProps } from "formik";
-import { storage } from "services";
 
 interface FieldProps extends FastFieldProps { }
 
@@ -22,16 +23,17 @@ type TregistrValues = {
 };
 
 const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
-  const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(true);
+  const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(
+    JSON.parse(storage.get("storage") as string) || false
+  );
 
   const { mutate } = usePost({
-    path: "/register",
+    path: "/user/register",
     queryKey: "registration",
     onSuccess: () => {
       setIsRegistrAndLogin(false);
-      alert("Success ")
+      storage.set("storage", "false");
     },
-    onError: () => { },
   });
 
   const submitRegistr = (values: TregistrValues) => {
@@ -47,8 +49,22 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
   const validationSchema = Yup.object({
     username: Yup.string().trim().required("Username is not entered"),
     password: Yup.string().trim().required("Password is not entered"),
-    mobile: Yup.string().trim().required("Mobile phone is not entered")
+    mobile: Yup.string().trim().required("Mobile phone is not entered"),
   });
+
+  const loginFunction = () => {
+    if (isRegistrAndLogin) {
+      setIsRegistrAndLogin(false);
+      storage.set("storage", "false");
+    } else {
+      setIsRegistrAndLogin(true);
+      storage.set("storage", "true");
+    }
+  };
+
+  useEffect(() => {
+    storage.set("storage", isRegistrAndLogin);
+  }, [isRegistrAndLogin]);
 
   return (
     <>
@@ -71,7 +87,7 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                 <h4 className="auth-modal__background-desc">
                   Сможете быстро оформлять заказы, использовать бонусы
                 </h4>
-                {storage.get("token") ? (
+                {isRegistrAndLogin ? (
                   <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -156,12 +172,18 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                     </Form>
                   </Formik>
                 ) : (
-                  <Login setIsAuthModalOpen={setIsAuthModalOpen} isAuthModalOpen={isAuthModalOpen} />
+                  <Login
+                    setIsAuthModalOpen={setIsAuthModalOpen}
+                    isAuthModalOpen={isAuthModalOpen}
+                  />
                 )}
-                <h4 className="auth-modal__background-text">
-                  Продолжая, вы соглашаетесь со сбором и обработкой персональных
-                  данных и пользовательским соглашением
-                </h4>
+                <Button
+                  type="button"
+                  onClick={() => loginFunction()}
+                  className="auth-modal__background-btn"
+                >
+                  {isRegistrAndLogin ? "Login" : "Registration"}
+                </Button>
               </div>
             </div>
           </div>

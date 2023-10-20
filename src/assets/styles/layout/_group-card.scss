@@ -1,5 +1,6 @@
 .group-card {
   &__header {
+    margin: 30px 0;
     @include flexLayout(flex, space-between, center, 0, row nowrap);
   }
   &__box {

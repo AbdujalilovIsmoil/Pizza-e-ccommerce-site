@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { storage } from "services";
 import { Link } from "react-router-dom";
 import { Button } from "components/fields";
 import { HeaderTopAccount } from "assets/images/svg";
 import { HeaderListIntro } from "assets/images/svg/header";
 import { CardModal, Auth, CloseAccount } from "components/layouts";
 import { HeaderListCart } from "assets/images/svg/header/header-list";
-import { storage } from "services";
 
 const Header = () => {
   const [isCloseAccount, setIsCloseAccount] = useState<boolean>(false);
@@ -26,29 +26,34 @@ const Header = () => {
   const categories: Tcategories[] = [
     {
       id: 1,
-      title: "Суши",
+      title: "Пицца",
     },
     {
       id: 2,
-      title: "Напитки",
+      title: "Суши",
     },
     {
       id: 3,
-      title: "Закуски",
+      title: "Напитки",
     },
     {
       id: 4,
-      title: "Комбо",
+      title: "Закуски",
     },
     {
       id: 5,
-      title: "Десерты",
+      title: "Комбо",
     },
     {
       id: 6,
+      title: "Десерты",
+    },
+    {
+      id: 7,
       title: "Соусы",
     },
   ];
+
 
   return (
     <>

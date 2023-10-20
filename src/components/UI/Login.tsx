@@ -24,8 +24,8 @@ type LoginValues = {
 
 const Login = ({ setIsAuthModalOpen }: AuthType) => {
   const { mutate } = usePost({
-    path: "/login",
     queryKey: "login",
+    path: "/user/login",
     onSuccess: (values: LoginValues) => {
       storage.set("userId", values._id);
       storage.set("token", values.token);

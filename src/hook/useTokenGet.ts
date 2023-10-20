@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { api } from "services";
+import { api, storage } from "services";
 import { useQuery } from "@tanstack/react-query";
 
 type typeUseGet = {
@@ -7,7 +7,7 @@ type typeUseGet = {
   queryKey?: string;
 };
 
-const useGet = ({ path = "/", queryKey }: typeUseGet) => {
+const useTokenGet = ({ path = "/", queryKey }: typeUseGet) => {
   const data = useQuery({
     queryKey: [queryKey],
     queryFn: () =>
@@ -15,6 +15,7 @@ const useGet = ({ path = "/", queryKey }: typeUseGet) => {
         .get(path, {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${storage.get("token")}`,
           },
         })
         .then((response) => get(response, "data")),
@@ -23,4 +24,4 @@ const useGet = ({ path = "/", queryKey }: typeUseGet) => {
   return data;
 };
 
-export default useGet;
+export default useTokenGet;

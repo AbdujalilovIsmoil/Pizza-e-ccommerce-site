@@ -63,7 +63,7 @@ const index = () => {
     },
   ];
 
-  interface FieldProps extends FastFieldProps {}
+  interface FieldProps extends FastFieldProps { }
 
   const sliderData: sliderData[] = [
     {
@@ -389,11 +389,10 @@ const index = () => {
                               type="text"
                               {...field}
                               id="userName"
-                              className={`user__input ${
-                                meta.touched &&
+                              className={`user__input ${meta.touched &&
                                 meta.error &&
                                 "user__input--error"
-                              }`}
+                                }`}
                             />
                             {meta.touched && meta.error && (
                               <h4 className="user__input-error">
@@ -407,7 +406,29 @@ const index = () => {
                   </label>
                   <label className="user-label" htmlFor="phone">
                     <h4 className="user-label-heading">Номер телефона*</h4>
-                    <PhoneInput country={"uz"} inputClass="user__input" />
+                    <Field name="phone">
+                      {({ field, meta }: FieldProps) => {
+                        console.log(field, meta);
+                        return (
+                          <>
+                            <Input
+                              {...field}
+                              id="phone"
+                              type="number"
+                              className={`user__input ${meta.touched &&
+                                meta.error &&
+                                "user__input--error"
+                                }`}
+                            />
+                            {meta.touched && meta.error && (
+                              <h4 className="user__input-error">
+                                {meta.error}
+                              </h4>
+                            )}
+                          </>
+                        );
+                      }}
+                    </Field>
                   </label>
                   <label className="user-label" htmlFor="email">
                     <h4 className="user-label-heading">Почта</h4>
@@ -420,11 +441,10 @@ const index = () => {
                               {...field}
                               id="email"
                               type="email"
-                              className={`user__input ${
-                                meta.touched &&
+                              className={`user__input ${meta.touched &&
                                 meta.error &&
                                 "user__input--error"
-                              }`}
+                                }`}
                             />
                             {meta.touched && meta.error && (
                               <h4 className="user__input-error">
@@ -441,74 +461,8 @@ const index = () => {
                 <div className="basket-form-header">
                   <div className="basket-form-header__box">
                     <h4 className="basket-form-header__box-heading">
-                      Доставка
+                      Добавить к заказу?
                     </h4>
-                  </div>
-                  <div className="basket-form-header__container">
-                    <div className="basket-form-header__send">
-                      <Field name="send">
-                        {({ field, meta }: FieldProps) => {
-                          console.log(field, meta);
-                          return (
-                            <>
-                              <Input
-                                id="send1"
-                                {...field}
-                                type="radio"
-                                className={`basket-form-header__send-input ${
-                                  meta.touched &&
-                                  meta.error &&
-                                  "user__input--error"
-                                }`}
-                              />
-                              <label
-                                className="basket-form-header__label"
-                                htmlFor="send1"
-                              >
-                                Доставка
-                              </label>
-                              {meta.touched && meta.error && (
-                                <h4 className="user__input-error">
-                                  {meta.error}
-                                </h4>
-                              )}
-                            </>
-                          );
-                        }}
-                      </Field>
-                    </div>
-                    <div className="basket-form-header__send">
-                      <Field name="send">
-                        {({ field, meta }: FieldProps) => {
-                          console.log(field, meta);
-                          return (
-                            <>
-                              <Input
-                                id="send2"
-                                {...field}
-                                type="radio"
-                                className={`basket-form-header__send-input ${
-                                  meta.touched &&
-                                  meta.error &&
-                                  "user__input--error"
-                                }`}
-                              />
-                              <label
-                                htmlFor="send2"
-                                className="basket-form-header__label"
-                              >
-                                Самовывоз
-                              </label>
-                              {meta.touched && meta.error && (
-                                <h4 className="user__input-error">
-                                  {meta.error}
-                                </h4>
-                              )}
-                            </>
-                          );
-                        }}
-                      </Field>
-                    </div>
                   </div>
                 </div>
                 <div className="basket-form-delivery">
@@ -519,18 +473,14 @@ const index = () => {
                           htmlFor="street"
                           className="basket-form-delivery__label"
                         >
-                          <h4 className="basket-form-delivery__label-heading">
-                            Улица*
-                          </h4>
                           <Input
                             {...field}
                             id="street"
                             type="text"
-                            className={`basket-form-delivery__label-input ${
-                              meta.touched &&
+                            className={`basket-form-delivery__label-input ${meta.touched &&
                               meta.error &&
                               "basket-form-delivery__label-input--error"
-                            }`}
+                              }`}
                           />
                           {meta.touched && meta.error && (
                             <h4 className="basket-form-delivery__label-input-error">
@@ -558,11 +508,10 @@ const index = () => {
                               id="home"
                               {...field}
                               type="number"
-                              className={`basket-form-delivery__label-input ${
-                                meta.touched &&
+                              className={`basket-form-delivery__label-input ${meta.touched &&
                                 meta.error &&
                                 "basket-form-delivery__label-input--error"
-                              }`}
+                                }`}
                             />
                             {meta.touched && meta.error && (
                               <h4 className="basket-form-delivery__label-input-error">
@@ -588,11 +537,10 @@ const index = () => {
                               id="enter"
                               {...field}
                               type="number"
-                              className={`basket-form-delivery__label-input ${
-                                meta.touched &&
+                              className={`basket-form-delivery__label-input ${meta.touched &&
                                 meta.error &&
                                 "basket-form-delivery__label-input--error"
-                              }`}
+                                }`}
                             />
                             {meta.touched && meta.error && (
                               <h4 className="basket-form-delivery__label-input-error">
@@ -618,11 +566,10 @@ const index = () => {
                               id="floor"
                               {...field}
                               type="number"
-                              className={`basket-form-delivery__label-input ${
-                                meta.touched &&
+                              className={`basket-form-delivery__label-input ${meta.touched &&
                                 meta.error &&
                                 "basket-form-delivery__label-input--error"
-                              }`}
+                                }`}
                             />
                             {meta.touched && meta.error && (
                               <h4 className="basket-form-delivery__label-input-error">
@@ -648,11 +595,10 @@ const index = () => {
                               {...field}
                               type="number"
                               id="apartment"
-                              className={`basket-form-delivery__label-input ${
-                                meta.touched &&
+                              className={`basket-form-delivery__label-input ${meta.touched &&
                                 meta.error &&
                                 "basket-form-delivery__label-input--error"
-                              }`}
+                                }`}
                             />
                             {meta.touched && meta.error && (
                               <h4 className="basket-form-delivery__label-input-error">
@@ -678,11 +624,10 @@ const index = () => {
                               {...field}
                               type="number"
                               id="intercom"
-                              className={`basket-form-delivery__label-input ${
-                                meta.touched &&
+                              className={`basket-form-delivery__label-input ${meta.touched &&
                                 meta.error &&
                                 "basket-form-delivery__label-input--error"
-                              }`}
+                                }`}
                             />
                             {meta.touched && meta.error && (
                               <h4 className="basket-form-delivery__label-input-error">
@@ -710,14 +655,14 @@ const index = () => {
                               className="basket-form-order__label"
                             >
                               <Input
-                                id="often1"
                                 {...field}
+                                id="often1"
                                 type="radio"
-                                className={`basket-form-order__label-input ${
-                                  meta.touched &&
+                                checked={true}
+                                className={`basket-form-order__label-input ${meta.touched &&
                                   meta.error &&
                                   "user__input--error"
-                                }`}
+                                  }`}
                               />
                               <h4 className="basket-form-order__label-heading">
                                 Как можно скорее
@@ -740,14 +685,13 @@ const index = () => {
                               className="basket-form-order__label"
                             >
                               <Input
-                                id="often2"
                                 {...field}
+                                id="often2"
                                 type="radio"
-                                className={`basket-form-order__label-input ${
-                                  meta.touched &&
+                                className={`basket-form-order__label-input ${meta.touched &&
                                   meta.error &&
                                   "user__input--error"
-                                }`}
+                                  }`}
                               />
                               <h4 className="basket-form-order__label-heading">
                                 По времени
@@ -775,14 +719,14 @@ const index = () => {
                               className="basket-form-order__label"
                             >
                               <Input
-                                id="often3"
                                 {...field}
+                                id="often3"
                                 type="radio"
-                                className={`basket-form-order__label-input ${
-                                  meta.touched &&
+                                checked={true}
+                                className={`basket-form-order__label-input ${meta.touched &&
                                   meta.error &&
                                   "user__input--error"
-                                }`}
+                                  }`}
                               />
                               <h4 className="basket-form-order__label-heading">
                                 Наличными
@@ -809,11 +753,10 @@ const index = () => {
                                 {...field}
                                 id="often4"
                                 type="radio"
-                                className={`basket-form-order__label-input ${
-                                  meta.touched &&
+                                className={`basket-form-order__label-input ${meta.touched &&
                                   meta.error &&
                                   "user__input--error"
-                                }`}
+                                  }`}
                               />
                               <h4 className="basket-form-order__label-heading">
                                 Картой
@@ -839,11 +782,10 @@ const index = () => {
                                 id="often5"
                                 {...field}
                                 type="radio"
-                                className={`basket-form-order__label-input ${
-                                  meta.touched &&
+                                className={`basket-form-order__label-input ${meta.touched &&
                                   meta.error &&
                                   "user__input--error"
-                                }`}
+                                  }`}
                               />
                               <h4 className="basket-form-order__label-heading">
                                 Apple Pay
@@ -876,11 +818,10 @@ const index = () => {
                             <textarea
                               {...field}
                               placeholder="Есть уточнения?"
-                              className={`basket-form-order__item-text ${
-                                meta.touched &&
+                              className={`basket-form-order__item-text ${meta.touched &&
                                 meta.error &&
                                 "basket-form-order__item-text--error"
-                              }`}
+                                }`}
                             ></textarea>
 
                             {meta.touched && meta.error && (
