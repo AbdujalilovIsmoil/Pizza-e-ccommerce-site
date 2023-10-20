@@ -1,5 +1,6 @@
 import { FilterModalIcon2 } from "assets/images/svg/filter";
 import { Button } from "components/fields";
+import { storage } from "services";
 
 type TCloseAccount = {
   isCloseAccount: boolean;
@@ -7,12 +8,20 @@ type TCloseAccount = {
 };
 
 function CloseAccount({ isCloseAccount, setIsCloseAccount }: TCloseAccount) {
+
+  const closeAccountFunction = () => {
+    storage.clear();
+    setIsCloseAccount(false);
+    setTimeout(() => {
+      window.location.reload()
+    }, 1500);
+  }
+
   return (
     <>
       <section
-        className={`close-account-modal ${
-          isCloseAccount && "close-account-modal--open"
-        }`}
+        className={`close-account-modal ${isCloseAccount && "close-account-modal--open"
+          }`}
       >
         <div className="container">
           <div className="close-account-modal__container">
@@ -28,7 +37,7 @@ function CloseAccount({ isCloseAccount, setIsCloseAccount }: TCloseAccount) {
                   Вы действительно хотите покинуть сайт?
                 </h4>
                 <div className="close-account-modal__buttons">
-                  <Button type="button" className="close-account-modal-btn">
+                  <Button onClick={() => closeAccountFunction()} type="button" className="close-account-modal-btn">
                     Да
                   </Button>
                   <Button

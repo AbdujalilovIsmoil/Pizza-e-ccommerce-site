@@ -1,12 +1,17 @@
+import { useEffect } from "react";
+import { storage } from "services";
 import { Pagination } from "components/UI";
 import { HistoryIcon1 } from "assets/images/svg";
 import { Button, Input } from "components/fields";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card1, Card2, Card3 } from "assets/images/png";
 
 const index = () => {
-  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!storage.get("token")) navigate("/");
+  }, [])
   return (
     <>
       <section className="history">
@@ -19,22 +24,9 @@ const index = () => {
               <Link
                 type="button"
                 to="/pages/history"
-                className={`history-header__block-btn ${
-                  pathname === "/pages/history" &&
-                  "history-header__block-btn--active"
-                }`}
+                className="history-header__block-btn history-header__block-btn--active"
               >
                 История заказов
-              </Link>
-              <Link
-                type="button"
-                to="/pages/settings"
-                className={`history-header__block-btn ${
-                  pathname === "/pages/settings" &&
-                  "history-header__block-btn--active"
-                }`}
-              >
-                Настройки
               </Link>
             </div>
           </div>

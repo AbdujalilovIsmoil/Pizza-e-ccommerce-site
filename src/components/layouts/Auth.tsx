@@ -1,13 +1,14 @@
 import * as Yup from "yup";
+import { usePost } from "hook";
 import { useState } from "react";
 import { Login } from "components/UI";
 import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
 import { Button, Input } from "components/fields";
 import { FilterModalIcon2 } from "assets/images/svg/filter";
 import { Formik, Form, Field, FastFieldProps } from "formik";
+import { storage } from "services";
 
-interface FieldProps extends FastFieldProps {}
+interface FieldProps extends FastFieldProps { }
 
 type AuthType = {
   isAuthModalOpen: boolean;
@@ -15,27 +16,38 @@ type AuthType = {
 };
 
 type TregistrValues = {
-  phone: string;
-  userName: string;
+  mobile: string;
+  username: string;
   password: string;
 };
 
 const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
   const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(true);
+
+  const { mutate } = usePost({
+    path: "/register",
+    queryKey: "registration",
+    onSuccess: () => {
+      setIsRegistrAndLogin(false);
+      alert("Success ")
+    },
+    onError: () => { },
+  });
+
   const submitRegistr = (values: TregistrValues) => {
-    setIsRegistrAndLogin(false);
-    console.log(values);
+    mutate(values);
   };
 
   const initialValues: TregistrValues = {
-    phone: "",
-    userName: "",
+    mobile: "",
+    username: "",
     password: "",
   };
 
   const validationSchema = Yup.object({
-    userName: Yup.string().trim().required("Username is not entered"),
+    username: Yup.string().trim().required("Username is not entered"),
     password: Yup.string().trim().required("Password is not entered"),
+    mobile: Yup.string().trim().required("Mobile phone is not entered")
   });
 
   return (
@@ -59,27 +71,26 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                 <h4 className="auth-modal__background-desc">
                   Сможете быстро оформлять заказы, использовать бонусы
                 </h4>
-                {isRegistrAndLogin ? (
+                {storage.get("token") ? (
                   <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={(values) => submitRegistr(values)}
                   >
                     <Form className="auth-modal__form">
-                      <Field name="userName">
+                      <Field name="username">
                         {({ field, meta }: FieldProps) => {
                           return (
                             <>
                               <Input
                                 {...field}
                                 type="text"
-                                id="userName"
+                                id="username"
                                 placeholder="имя пользователя"
-                                className={`auth-modal__form-input ${
-                                  meta.touched &&
+                                className={`auth-modal__form-input ${meta.touched &&
                                   meta.error &&
                                   "auth-modal__form-input--error"
-                                }`}
+                                  }`}
                               />
                               {meta.touched && meta.error && (
                                 <h4 className="auth-modal__form-error">
@@ -98,11 +109,10 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                                 {...field}
                                 type="password"
                                 placeholder="пароль"
-                                className={`auth-modal__form-input ${
-                                  meta.touched &&
+                                className={`auth-modal__form-input ${meta.touched &&
                                   meta.error &&
                                   "auth-modal__form-input--error"
-                                }`}
+                                  }`}
                               />
                               {meta.touched && meta.error && (
                                 <h4 className="auth-modal__form-error">
@@ -114,11 +124,28 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                         }}
                       </Field>
 
-                      <PhoneInput
-                        country={"uz"}
-                        placeholder="Номер телефона*"
-                        inputClass="auth-modal__form-input"
-                      />
+                      <Field name="mobile">
+                        {({ field, meta }: FieldProps) => {
+                          return (
+                            <>
+                              <Input
+                                {...field}
+                                type="number"
+                                placeholder="телефон"
+                                className={`auth-modal__form-input ${meta.touched &&
+                                  meta.error &&
+                                  "auth-modal__form-input--error"
+                                  }`}
+                              />
+                              {meta.touched && meta.error && (
+                                <h4 className="auth-modal__form-error">
+                                  {meta.error}
+                                </h4>
+                              )}
+                            </>
+                          );
+                        }}
+                      </Field>
 
                       <Button
                         type="submit"
@@ -129,7 +156,7 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                     </Form>
                   </Formik>
                 ) : (
-                  <Login />
+                  <Login setIsAuthModalOpen={setIsAuthModalOpen} isAuthModalOpen={isAuthModalOpen} />
                 )}
                 <h4 className="auth-modal__background-text">
                   Продолжая, вы соглашаетесь со сбором и обработкой персональных

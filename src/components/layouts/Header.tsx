@@ -5,6 +5,7 @@ import { HeaderTopAccount } from "assets/images/svg";
 import { HeaderListIntro } from "assets/images/svg/header";
 import { CardModal, Auth, CloseAccount } from "components/layouts";
 import { HeaderListCart } from "assets/images/svg/header/header-list";
+import { storage } from "services";
 
 const Header = () => {
   const [isCloseAccount, setIsCloseAccount] = useState<boolean>(false);
@@ -79,32 +80,20 @@ const Header = () => {
                     alt="header-top__item-account"
                     className="header-top__item-account"
                   />
-                  <h4 className="header-top__item-heading">Войти в аккаунт</h4>
+                  <h4 className="header-top__item-heading">{storage.get("username") ?? "Войти в аккаунт"}</h4>
 
                   <ul className="header-open">
-                    <li className="header-open__item">
-                      <Link to="/pages/history">
-                        <h4 className="header-open__item-heading header-open__item-heading--regular">
-                          История заказов
-                        </h4>
-                      </Link>
-                    </li>
-                    <li className="header-open__item">
-                      <Link to="/pages/settings">
-                        <h4 className="header-open__item-heading header-open__item-heading--regular">
-                          Настройки
-                        </h4>
-                      </Link>
-                    </li>
-                    <li
-                      onClick={() => setIsAuthModalOpen(true)}
-                      className="header-open__item header-open__item--border"
-                    >
-                      <Button type="button" className="header-open__item-btn">
-                        Вход в аккаунт
-                      </Button>
-                    </li>
-                    <li className="header-open__item header-open__item--border">
+                    {storage.get("token") &&
+                      <li className="header-open__item">
+                        <Link to="/pages/history">
+                          <h4 className="header-open__item-heading header-open__item-heading--regular">
+                            История заказов
+                          </h4>
+                        </Link>
+                      </li>
+
+                    }
+                    {storage.get("token") ? <li className="header-open__item">
                       <Button
                         type="button"
                         className="header-open__item-btn"
@@ -112,7 +101,16 @@ const Header = () => {
                       >
                         Выход из аккаунта
                       </Button>
-                    </li>
+                    </li> :
+                      <li
+                        onClick={() => setIsAuthModalOpen(true)}
+                        className="header-open__item"
+                      >
+                        <Button type="button" className="header-open__item-btn">
+                          Вход в аккаунт
+                        </Button>
+                      </li>
+                    }
                   </ul>
                 </li>
               </ul>
