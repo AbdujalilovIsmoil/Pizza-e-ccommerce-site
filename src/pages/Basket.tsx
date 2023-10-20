@@ -1,5 +1,4 @@
 import * as Yup from "yup";
-import PhoneInput from "react-phone-input-2";
 import { Button, Input } from "components/fields";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
