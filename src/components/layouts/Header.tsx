@@ -7,7 +7,7 @@ import { getCategories } from "store/categoryData";
 import { HeaderTopAccount } from "assets/images/svg";
 import { HeaderListIntro } from "assets/images/svg/header";
 import { CardModal, Auth, CloseAccount } from "components/layouts";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { HeaderListCart } from "assets/images/svg/header/header-list";
 import { useDispatch } from "react-redux";
 
@@ -73,7 +73,6 @@ const Header = () => {
       params.set("category", storage.get("category") as string);
       return params;
     });
-
     dispatch(getCategories(title));
   };
 
