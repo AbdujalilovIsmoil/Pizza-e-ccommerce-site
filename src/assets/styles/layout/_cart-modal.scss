@@ -58,6 +58,7 @@
       &-img {
         width: 94px;
         height: 94px;
+        border-radius: 5px;
         object-fit: contain;
       }
       &-title {
@@ -73,16 +74,17 @@
         );
       }
 
-      &-size {
+      &-desc {
+        margin: 10px 0;
         overflow: hidden;
-        white-space: nowrap;
-        margin: 8px 0 12px 0;
-        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
         @include headingFonts(
           $heading-top__heading-color,
-          14px,
+          13px,
           400,
-          18px,
+          20px,
           default
         );
       }
@@ -128,6 +130,7 @@
         default
       );
     }
+
     &-icon {
       width: 24px;
       height: 24px;

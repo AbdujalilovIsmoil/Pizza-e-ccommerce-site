@@ -38,6 +38,7 @@
   }
   &__category {
     left: 0;
+    z-index: 1;
     padding: 8px 18px;
     position: absolute;
     display: inline-block;
@@ -48,11 +49,18 @@
     }
   }
   &__list {
-    @include flexLayout(flex, space-between, center, 60px, row nowrap);
+    height: 100%;
+    position: relative;
+    @include flexLayout(flex, space-between, space-between, 60px, row nowrap);
+  }
+  &__boxes {
+    @include flexLayout(flex, flex-end, space-between, 0, column nowrap);
   }
   &__item {
     &:nth-child(2) {
       width: 450px;
+      min-height: 100%;
+      @include flexLayout(flex, space-between, space-between, 0, column nowrap);
     }
     &-img {
       width: 450px;

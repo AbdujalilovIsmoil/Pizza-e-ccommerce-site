@@ -2,9 +2,9 @@ import { get } from "lodash";
 import { useGet } from "hook";
 import { Button } from "components/fields";
 import { GroupCardFilter } from "assets/images/svg";
-import { toggleProductModal } from "store/productData";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
+import { toggleProductModal, setProductId } from "store/productData";
 
 const GroupCard = () => {
   const dispatch = useDispatch();
@@ -22,6 +22,11 @@ const GroupCard = () => {
     path: "/product",
     queryKey: "product",
   });
+
+  const clickButton = (id: string) => {
+    dispatch(setProductId(id));
+    dispatch(toggleProductModal());
+  };
 
   return (
     <section className="group-card">
@@ -88,7 +93,7 @@ const GroupCard = () => {
                             <Button
                               type="button"
                               className="cards-footer__box-btn"
-                              onClick={() => dispatch(toggleProductModal())}
+                              onClick={() => clickButton(el._id)}
                             >
                               Выбрать
                             </Button>

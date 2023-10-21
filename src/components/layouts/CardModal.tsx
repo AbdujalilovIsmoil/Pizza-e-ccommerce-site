@@ -1,3 +1,4 @@
+import { useTokenGet } from "hook";
 import { Cart1 } from "assets/images/png";
 import { Button } from "components/fields";
 import { useNavigate } from "react-router-dom";
@@ -44,6 +45,13 @@ const CardModalComponent = ({
     },
   ];
 
+  const { data } = useTokenGet({
+    queryKey: "cart",
+    path: "/user/cart",
+  });
+
+  console.log(data);
+
   return (
     <>
       <section
@@ -69,16 +77,21 @@ const CardModalComponent = ({
             </div>
             <div className="cart-modal__body">
               <ul className="cart-list">
-                {cartModalData.length > 0 &&
-                  cartModalData.map((el: cartModalDataType) => {
+                {data?.length > 0 &&
+                  data.map((el: any) => {
                     return (
-                      <CardModal
-                        key={el.id}
-                        img={el.img}
-                        size={el.size}
-                        soum={el.soum}
-                        title={el.title}
-                      />
+                      el?.items?.length > 0 &&
+                      el.items.map((el: any) => {
+                        return (
+                          <CardModal
+                            key={el._id}
+                            price={el.price}
+                            name={el?.productId.name}
+                            img={el?.productId.images.home}
+                            description={el?.productId.description}
+                          />
+                        );
+                      })
                     );
                   })}
               </ul>

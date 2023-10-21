@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { api } from "services";
+import { api, storage } from "services";
 import { useMutation } from "@tanstack/react-query";
 
 interface typeUsePost {
@@ -7,7 +7,7 @@ interface typeUsePost {
   queryKey?: string;
   onError?: (data: any) => void;
   onSuccess?: (data: any) => void;
-};
+}
 
 const usePost = ({
   path = "",
@@ -16,9 +16,16 @@ const usePost = ({
 }: typeUsePost) => {
   const response = useMutation({
     mutationFn: (data: any) => {
-      return api.post(path, data).then((response) => {
-        return get(response, "data");
-      });
+      return api
+        .post(path, data, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${storage.get("token")}`,
+          },
+        })
+        .then((response) => {
+          return get(response, "data");
+        });
     },
     onError: (error) => onError(error),
     onSuccess: (successData) => onSuccess(successData),

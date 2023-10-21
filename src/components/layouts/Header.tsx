@@ -65,7 +65,6 @@ const Header = () => {
   ];
 
   const getCategory = (title: string) => {
-    console.log(title);
     navigate(`/pages/category`);
     storage.set("category", title);
     setCategoryTitle(title);
