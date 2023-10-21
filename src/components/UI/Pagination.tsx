@@ -14,7 +14,6 @@ function PaginatedItems({ itemsPerPage }: any) {
     const newOffset = (event.selected * itemsPerPage) % items.length;
 
     setItemOffset(newOffset);
-    console.log(currentItems);
   };
 
   return (

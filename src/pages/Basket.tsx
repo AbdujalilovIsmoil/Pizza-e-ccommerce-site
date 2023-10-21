@@ -192,7 +192,6 @@ const index = () => {
   ];
 
   const onBasketUser = (e: any) => {
-    console.log(e);
   };
 
   const regex = new RegExp(
@@ -407,7 +406,6 @@ const index = () => {
                     <h4 className="user-label-heading">Номер телефона*</h4>
                     <Field name="phone">
                       {({ field, meta }: FieldProps) => {
-                        console.log(field, meta);
                         return (
                           <>
                             <Input
@@ -433,7 +431,6 @@ const index = () => {
                     <h4 className="user-label-heading">Почта</h4>
                     <Field name="email">
                       {({ field, meta }: FieldProps) => {
-                        console.log(field, meta);
                         return (
                           <>
                             <Input
@@ -494,7 +491,6 @@ const index = () => {
                   <div className="basket-form-delivery__container">
                     <Field name="home">
                       {({ field, meta }: FieldProps) => {
-                        console.log(field, meta);
                         return (
                           <label
                             htmlFor="home"
@@ -523,7 +519,6 @@ const index = () => {
                     </Field>
                     <Field name="enter">
                       {({ field, meta }: FieldProps) => {
-                        console.log(field, meta);
                         return (
                           <label
                             htmlFor="enter"
@@ -552,7 +547,6 @@ const index = () => {
                     </Field>
                     <Field name="floor">
                       {({ field, meta }: FieldProps) => {
-                        console.log(field, meta);
                         return (
                           <label
                             htmlFor="floor"
@@ -581,7 +575,6 @@ const index = () => {
                     </Field>
                     <Field name="apartment">
                       {({ field, meta }: FieldProps) => {
-                        console.log(field, meta);
                         return (
                           <label
                             htmlFor="apartment"
@@ -610,7 +603,6 @@ const index = () => {
                     </Field>
                     <Field name="intercom">
                       {({ field, meta }: FieldProps) => {
-                        console.log(field, meta);
                         return (
                           <label
                             htmlFor="intercom"
@@ -647,7 +639,6 @@ const index = () => {
                     <div className="basket-form-order__wrapper">
                       <Field name="often">
                         {({ field, meta }: FieldProps) => {
-                          console.log(field, meta);
                           return (
                             <label
                               htmlFor="often1"
@@ -677,7 +668,6 @@ const index = () => {
                       </Field>
                       <Field name="often">
                         {({ field, meta }: FieldProps) => {
-                          console.log(field, meta);
                           return (
                             <label
                               htmlFor="often2"
@@ -711,7 +701,6 @@ const index = () => {
                     <div className="basket-form-order__wrapper">
                       <Field name="often4">
                         {({ field, meta }: FieldProps) => {
-                          console.log(field, meta);
                           return (
                             <label
                               htmlFor="often3"
@@ -742,7 +731,6 @@ const index = () => {
 
                       <Field name="often4">
                         {({ field, meta }: FieldProps) => {
-                          console.log(field, meta);
                           return (
                             <label
                               htmlFor="often4"
@@ -771,7 +759,6 @@ const index = () => {
                       </Field>
                       <Field name="often4">
                         {({ field, meta }: FieldProps) => {
-                          console.log(field, meta);
                           return (
                             <label
                               htmlFor="often5"

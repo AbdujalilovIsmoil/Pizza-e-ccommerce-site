@@ -8,6 +8,7 @@ const App = () => {
   const Error = lazy(() => import("pages/Error"));
   const Basket = lazy(() => import("pages/Basket"));
   const History = lazy(() => import("pages/History"));
+  const Category = lazy(() => import("pages/Category"));
 
   const routes = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const App = () => {
         {
           path: "/pages/basket",
           element: <Basket />,
+        },
+        {
+          path: "/pages/:id",
+          element: <Category />,
         },
         {
           path: "*",
