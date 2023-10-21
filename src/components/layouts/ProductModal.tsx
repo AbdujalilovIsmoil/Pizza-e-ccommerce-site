@@ -1,5 +1,9 @@
+import { get } from "lodash";
 import { Card1 } from "assets/images/png";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Input } from "components/fields";
+import { toggleProductModal } from "store/productData";
+
 import {
   ProductModalIcon1,
   ProductModalIcon2,
@@ -13,28 +17,23 @@ import {
   ProductModalIcon10,
 } from "assets/images/svg";
 
-type OpenProductType = {
-  isOpenProductModal: boolean;
-  setIsOpenProductModal: (e: boolean) => void;
-};
+const ProductModal = () => {
+  const dispatch = useDispatch();
+  const { isProductModal }: any = useSelector((state) =>
+    get(state, "productData")
+  );
 
-const ProductModal = ({
-  isOpenProductModal,
-  setIsOpenProductModal,
-}: OpenProductType) => {
   return (
     <>
       <section
-        className={`product-modal ${
-          isOpenProductModal && "product-modal--open"
-        }`}
+        className={`product-modal ${isProductModal && "product-modal--open"}`}
       >
         <div className="container">
           <div className="product-modal__container">
             <img
               src={ProductModalIcon1}
               alt="product-modal-close"
-              onClick={() => setIsOpenProductModal(false)}
+              onClick={() => dispatch(toggleProductModal())}
               className="product-modal__container-times"
             />
             <div className="product-modal__background">

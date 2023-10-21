@@ -1,6 +1,6 @@
 import Routes from "./Routes";
 import { lazy, Suspense } from "react";
-import { Loader } from "components/layouts";
+import { FilterModal, Loader, ProductModal } from "components/layouts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const App = () => {
@@ -41,6 +41,8 @@ const App = () => {
 
   return (
     <>
+      <FilterModal />
+      <ProductModal />
       <Suspense fallback={<Loader />}>
         <RouterProvider router={routes} />
       </Suspense>

@@ -1,10 +1,8 @@
+import { get } from "lodash";
 import { Button, Input } from "components/fields";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFilterOpenModal } from "store/filterData";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
-
-type TfilterModal = {
-  isOpenFilterModal: boolean;
-  setIsOpenFilterModal: (e: boolean) => void;
-};
 
 type TfilterDataInside = {
   id: number;
@@ -17,13 +15,11 @@ type TfilterData = {
   data: TfilterDataInside[];
 };
 
-const FilterModal = ({
-  isOpenFilterModal,
-  setIsOpenFilterModal,
-}: TfilterModal) => {
+const FilterModal = () => {
+  const dispatch = useDispatch();
   const closeFilterModal = (e: any) => {
     if (e.target?.getAttribute("class") === "filter-modal filter-modal--open") {
-      setIsOpenFilterModal(false);
+      dispatch(toggleFilterOpenModal());
     }
   };
 
@@ -387,72 +383,74 @@ const FilterModal = ({
     },
   ];
 
+  const { isFilterModalOpen }: any = useSelector((state) =>
+    get(state, "filterData")
+  );
+
   return (
-    <>
-      <section
-        onClick={(e) => closeFilterModal(e)}
-        className={`filter-modal ${isOpenFilterModal && "filter-modal--open"}`}
-      >
-        <div className="filter-modal__background">
-          <div className="filter-modal__border">
-            <div className="filter-modal__header">
-              <div className="filter-modal__box">
-                <h4 className="filter-modal__box-heading">Фильтры</h4>
-              </div>
-              <div
-                className="filter-modal__box"
-                onClick={() => setIsOpenFilterModal(false)}
-              >
-                <img
-                  src={FilterModalIcon1}
-                  alt="filter-modal-icon"
-                  className="filter-modal__box-icon"
-                />
-              </div>
+    <section
+      onClick={(e) => closeFilterModal(e)}
+      className={`filter-modal ${isFilterModalOpen && "filter-modal--open"}`}
+    >
+      <div className="filter-modal__background">
+        <div className="filter-modal__border">
+          <div className="filter-modal__header">
+            <div className="filter-modal__box">
+              <h4 className="filter-modal__box-heading">Фильтры</h4>
             </div>
-            <ul className="filter-modal__list">
-              {filterData.length > 0 &&
-                filterData.map((el: TfilterData) => {
-                  return (
-                    <li className="filter-modal__item" key={el.id}>
-                      <h2 className="filter-modal__item-heading">{el.title}</h2>
-                      <ul className="filter-modal__check-list">
-                        {el?.data?.length > 0 &&
-                          el?.data?.map((el: TfilterDataInside) => {
-                            return (
-                              <li className="filter-modal__check" key={el.id}>
-                                <Input
-                                  name="data"
-                                  type="radio"
-                                  id={`${el.id}`}
-                                  value={`${el.id}`}
-                                />
-                                <label
-                                  htmlFor={`${el.id}`}
-                                  className="filter-modal__check-btn"
-                                >
-                                  {el.title}
-                                </label>
-                              </li>
-                            );
-                          })}
-                      </ul>
-                    </li>
-                  );
-                })}
-            </ul>
+            <div
+              className="filter-modal__box"
+              onClick={() => dispatch(toggleFilterOpenModal())}
+            >
+              <img
+                src={FilterModalIcon1}
+                alt="filter-modal-icon"
+                className="filter-modal__box-icon"
+              />
+            </div>
           </div>
-          <div className="filter-modal__footer">
-            <Button type="button" className="filter-modal__footer-btn">
-              Сбросить
-            </Button>
-            <Button type="button" className="filter-modal__footer-btn">
-              Применить
-            </Button>
-          </div>
+          <ul className="filter-modal__list">
+            {filterData.length > 0 &&
+              filterData.map((el: TfilterData) => {
+                return (
+                  <li className="filter-modal__item" key={el.id}>
+                    <h2 className="filter-modal__item-heading">{el.title}</h2>
+                    <ul className="filter-modal__check-list">
+                      {el?.data?.length > 0 &&
+                        el?.data?.map((el: TfilterDataInside) => {
+                          return (
+                            <li className="filter-modal__check" key={el.id}>
+                              <Input
+                                name="data"
+                                type="radio"
+                                id={`${el.id}`}
+                                value={`${el.id}`}
+                              />
+                              <label
+                                htmlFor={`${el.id}`}
+                                className="filter-modal__check-btn"
+                              >
+                                {el.title}
+                              </label>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  </li>
+                );
+              })}
+          </ul>
         </div>
-      </section>
-    </>
+        <div className="filter-modal__footer">
+          <Button type="button" className="filter-modal__footer-btn">
+            Сбросить
+          </Button>
+          <Button type="button" className="filter-modal__footer-btn">
+            Применить
+          </Button>
+        </div>
+      </div>
+    </section>
   );
 };
 

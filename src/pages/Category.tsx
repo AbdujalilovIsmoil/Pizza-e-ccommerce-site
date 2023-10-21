@@ -4,15 +4,20 @@ import { Button } from "components/fields";
 import { memo, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GroupCardFilter } from "assets/images/svg";
+import { toggleProductModal } from "store/productData";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFilterOpenModal } from "store/filterData";
 
 const Category = () => {
+  const dispatch = useDispatch();
   const [category, _] = useSearchParams();
   const [isError, setIsError] = useState(false);
   const categoryQuery = category.get("category");
   const [isLoading, setIsLoading] = useState(false);
   const [categoryData, setCategoryData] = useState<any>([]);
-  const [isOpenFilterModal, setIsOpenFilterModal] = useState<boolean>(false);
-  const [isOpenProductModal, setIsOpenProductModal] = useState<boolean>(false);
+  const { isFilterModalOpen }: any = useSelector((state) =>
+    get(state, "filterData")
+  );
 
   useEffect(() => {
     setIsLoading(true);
@@ -28,6 +33,12 @@ const Category = () => {
       });
   }, [categoryQuery]);
 
+  if (isFilterModalOpen) {
+    document.body.classList.add("hidden");
+  } else {
+    document.body.classList.remove("hidden");
+  }
+
   return (
     <div className="container">
       <ul className="group-card__list">
@@ -38,9 +49,9 @@ const Category = () => {
             </div>
             <div className="group-card__box">
               <Button
-                className="group-card__filter"
                 type="button"
-                onClick={() => setIsOpenFilterModal(true)}
+                className="group-card__filter"
+                onClick={() => dispatch(toggleFilterOpenModal())}
               >
                 <img
                   src={GroupCardFilter}
@@ -88,7 +99,7 @@ const Category = () => {
                           <Button
                             type="button"
                             className="cards-footer__box-btn"
-                            onClick={() => setIsOpenProductModal(true)}
+                            onClick={() => dispatch(toggleProductModal())}
                           >
                             Выбрать
                           </Button>
