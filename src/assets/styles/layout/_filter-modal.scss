@@ -9,6 +9,7 @@
   backdrop-filter: blur(16px);
   transition: left 200ms linear;
   background-color: rgba(25, 25, 25, 0.4);
+  @include flexLayout(flex, flex-end, flex-start, 0, row nowrap);
   &--open {
     left: 0;
     transition: left 200ms linear;
@@ -17,10 +18,9 @@
     padding: 32px 20px 15px 20px;
   }
   &__background {
-    left: 65.15%;
+    width: 470px;
     overflow: auto;
-    max-width: 470px;
-    min-height: 700px;
+    min-height: 100%;
     position: relative;
     background-color: $header__bg-color;
     @include flexLayout(flex, space-between, space-between, 0, column nowrap);

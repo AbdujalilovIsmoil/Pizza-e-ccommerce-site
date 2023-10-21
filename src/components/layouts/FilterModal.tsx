@@ -1,19 +1,9 @@
 import { get } from "lodash";
+import { useTokenGet } from "hook";
 import { Button, Input } from "components/fields";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
-
-type TfilterDataInside = {
-  id: number;
-  title: string;
-};
-
-type TfilterData = {
-  id: number;
-  title: string;
-  data: TfilterDataInside[];
-};
 
 const FilterModal = () => {
   const dispatch = useDispatch();
@@ -23,369 +13,14 @@ const FilterModal = () => {
     }
   };
 
-  const filterData: TfilterData[] = [
-    {
-      id: 1,
-      title: "Общее",
-      data: [
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Хит",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Новинка",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "С мясом",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Вегетарианская",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Вегетарианская",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "С курицей",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Без лука",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "С грибами",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "С морепродуктами",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Барбекью",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Сыр",
-      data: [
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Реджанито",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Моцарелла",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Чеддер",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "С голубой плесенью",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Смесь итальянских сыров",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Мягкий молодой сыр",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "Мясо",
-      data: [
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Пепперони",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Свинина",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Ветчина",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Бекон",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Чоризо",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Колбаски",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Куриная грудка",
-        },
-      ],
-    },
-    {
-      id: 4,
-      title: "Компонент",
-      data: [
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Креветка",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Ананасы",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Шампиньоны",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Лук",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Перец халапеньо",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Орегано",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Зеленый перец",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Томаты",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Чеснок",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Красный перец",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Оливки",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Маслины",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Клубника",
-        },
-        {
-          id:
-            new Date().getMilliseconds() *
-              new Date().getMilliseconds() *
-              Math.random() *
-              10 +
-            new Date().getMilliseconds(),
-          title: "Смесь итальянских трав",
-        },
-      ],
-    },
-  ];
-
   const { isFilterModalOpen }: any = useSelector((state) =>
     get(state, "filterData")
   );
+
+  const { data, isError, isLoading } = useTokenGet({
+    queryKey: "reting",
+    path: "/reting/views",
+  });
 
   return (
     <section
@@ -409,36 +44,43 @@ const FilterModal = () => {
               />
             </div>
           </div>
+          {isError && (
+            <div>
+              <h2>NOT FOUND</h2>
+            </div>
+          )}
+          {!isError && isLoading && (
+            <div>
+              <h2>Loader</h2>
+            </div>
+          )}
+          {!isLoading && !isError && get(data, "reting", []).length === 0 && (
+            <div>
+              <h2>NO DATA</h2>
+            </div>
+          )}
           <ul className="filter-modal__list">
-            {filterData.length > 0 &&
-              filterData.map((el: TfilterData) => {
-                return (
-                  <li className="filter-modal__item" key={el.id}>
-                    <h2 className="filter-modal__item-heading">{el.title}</h2>
-                    <ul className="filter-modal__check-list">
-                      {el?.data?.length > 0 &&
-                        el?.data?.map((el: TfilterDataInside) => {
-                          return (
-                            <li className="filter-modal__check" key={el.id}>
-                              <Input
-                                name="data"
-                                type="radio"
-                                id={`${el.id}`}
-                                value={`${el.id}`}
-                              />
-                              <label
-                                htmlFor={`${el.id}`}
-                                className="filter-modal__check-btn"
-                              >
-                                {el.title}
-                              </label>
-                            </li>
-                          );
-                        })}
-                    </ul>
-                  </li>
-                );
-              })}
+            <ul className="filter-modal__check-list">
+              {get(data, "reting", []).length > 0 &&
+                get(data, "reting", []).map((el: any) => {
+                  return (
+                    <li className="filter-modal__check" key={el._id}>
+                      <Input
+                        name="data"
+                        type="radio"
+                        id={`${el._id}`}
+                        value={`${el.name}`}
+                      />
+                      <label
+                        htmlFor={`${el._id}`}
+                        className="filter-modal__check-btn"
+                      >
+                        {el.name}
+                      </label>
+                    </li>
+                  );
+                })}
+            </ul>
           </ul>
         </div>
         <div className="filter-modal__footer">
