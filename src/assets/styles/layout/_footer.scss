@@ -13,6 +13,9 @@
   }
   &__intro {
     @include flexLayout(flex, flex-start, center, 15px, row nowrap);
+    @include mediaQueries($sm) {
+      margin-bottom: 10px;
+    }
   }
   &__item {
     &:hover &-title {
