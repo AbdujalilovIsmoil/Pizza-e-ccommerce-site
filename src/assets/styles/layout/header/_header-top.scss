@@ -11,6 +11,10 @@
     @include flexLayout(flex, center, center, 10px, row nowrap);
     &--hover {
       cursor: pointer;
+      @include mediaQueries($sm) {
+        display: block;
+        text-align: center;
+      }
       &:hover .header-top__item-down {
         transform: rotate(180deg);
         color: $header-cart__bg-color;
