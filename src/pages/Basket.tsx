@@ -192,6 +192,7 @@ const index = () => {
   ];
 
   const onBasketUser = (e: any) => {
+    console.log(e);
   };
 
   const regex = new RegExp(

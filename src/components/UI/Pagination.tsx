@@ -16,6 +16,8 @@ function PaginatedItems({ itemsPerPage }: any) {
     setItemOffset(newOffset);
   };
 
+  console.log(currentItems);
+
   return (
     <>
       <ReactPaginate

@@ -20,6 +20,8 @@ const ProductModal = () => {
     get(state, "productData")
   );
 
+  console.log(client);
+
   useEffect(() => {
     api.get(`/product/${modalId}`).then((res) => {
       setProductModalData([get(res, "data.viewProduct", {})]);
