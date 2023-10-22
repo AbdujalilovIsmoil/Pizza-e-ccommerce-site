@@ -38,20 +38,28 @@
     left: 0;
     transition: left 200ms linear;
   }
+
   .cart-item {
     padding: 16px;
     margin: 20px 0;
+    position: relative;
     border-radius: 12px;
     background-color: $header__bg-color;
     border: 1px solid $header-top__border-color;
-    &__content {
-      max-width: 200px;
-    }
     @include flexLayout(flex, flex-start, center, 16px, row nowrap);
+    &__content {
+      max-width: 250px;
+      position: relative;
+    }
     &__footer {
-      @include flexLayout(flex, space-between, center, 135px, row nowrap);
+      @include flexLayout(flex, space-between, center, 0, row nowrap);
       &-soum {
         @include headingFonts($header-cart__bg-color, 16px, 600, 20px, default);
+      }
+      &-delete {
+        height: 20px;
+        cursor: pointer;
+        object-fit: cover;
       }
     }
     &__box {
@@ -110,6 +118,7 @@
     padding: 32px 20px 15px 20px;
   }
   &__header {
+    position: relative;
     @include flexLayout(flex, space-between, center, 0, row nowrap);
   }
   &__background {
@@ -141,6 +150,7 @@
     padding: 22px 20px;
     border-top: 1px solid $header-top__border-color;
     @include flexLayout(flex, space-between, center, 0px, row nowrap);
+
     &-btn {
       @include headingFonts($header__bg-color, 16px, 400, 22px, default);
       @include Button(

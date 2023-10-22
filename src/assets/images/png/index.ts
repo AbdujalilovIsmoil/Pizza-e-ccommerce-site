@@ -1,4 +1,4 @@
-import { Cart1 } from "./cart";
+import { Cart1, Cart2 } from "./cart";
 import { Card1, Card2, Card3, Card4 } from "./cards";
 import {
   Basket1,
@@ -17,6 +17,7 @@ export {
   Card2,
   Card3,
   Card4,
+  Cart2,
   Basket1,
   Basket2,
   Basket3,

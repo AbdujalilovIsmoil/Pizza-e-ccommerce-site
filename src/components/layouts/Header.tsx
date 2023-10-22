@@ -9,7 +9,8 @@ import { HeaderListIntro } from "assets/images/svg/header";
 import { CardModal, Auth, CloseAccount } from "components/layouts";
 import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { HeaderListCart } from "assets/images/svg/header/header-list";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useTokenGet } from "hook";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -74,6 +75,17 @@ const Header = () => {
     });
     dispatch(getCategories(title));
   };
+
+  const { data } = useTokenGet({
+    path: "/cart",
+    queryKey: "cart",
+  });
+
+  const { smallProductModal }: any = useSelector((state) =>
+    get(state, "productData")
+  );
+
+  console.log(smallProductModal);
 
   return (
     <header className="header">
@@ -186,9 +198,17 @@ const Header = () => {
                 src={HeaderListCart}
                 className="header-list__btn-cart"
               />
-              <h4 className="header-list__btn-heading">0 ₽</h4>
+              <h4 className="header-list__btn-heading">
+                {{ ...data }[0]?.items?.length > 0
+                  ? { ...data }[0]?.items?.length
+                  : 0}
+              </h4>
             </Button>
-            <div className="small-modal small-modal--open">
+            <div
+              className={`small-modal ${
+                smallProductModal && "small-modal--open"
+              }`}
+            >
               <h4 className="small-modal__heading">Товар добавлен в корзину</h4>
             </div>
           </div>

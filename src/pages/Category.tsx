@@ -4,7 +4,7 @@ import { Button } from "components/fields";
 import { memo, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GroupCardFilter } from "assets/images/svg";
-import { toggleProductModal } from "store/productData";
+import { setProductId, toggleProductModal } from "store/productData";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
 
@@ -38,6 +38,11 @@ const Category = () => {
   } else {
     document.body.classList.remove("hidden");
   }
+
+  const clickButton = (id: string) => {
+    dispatch(setProductId(id));
+    dispatch(toggleProductModal());
+  };
 
   return (
     <div className="container">
@@ -99,7 +104,7 @@ const Category = () => {
                           <Button
                             type="button"
                             className="cards-footer__box-btn"
-                            onClick={() => dispatch(toggleProductModal())}
+                            onClick={() => clickButton(el._id)}
                           >
                             Выбрать
                           </Button>

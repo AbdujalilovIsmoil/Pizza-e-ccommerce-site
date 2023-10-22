@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 type TProduct = {
   modalId: string;
   isProductModal: boolean;
+  smallProductModal: boolean;
 };
 
 const initialState: TProduct = {
   modalId: "",
   isProductModal: false,
+  smallProductModal: false,
 };
 
 const productSlice = createSlice({
@@ -24,8 +26,12 @@ const productSlice = createSlice({
     setProductId: (state, action) => {
       state.modalId = action.payload;
     },
+    smallProductModal: (state, action) => {
+      state.smallProductModal = action.payload;
+    },
   },
 });
 
 export default productSlice.reducer;
-export const { toggleProductModal, setProductId } = productSlice.actions;
+export const { toggleProductModal, setProductId, smallProductModal } =
+  productSlice.actions;

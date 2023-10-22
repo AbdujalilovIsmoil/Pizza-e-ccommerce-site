@@ -1,5 +1,4 @@
 import { useTokenGet } from "hook";
-import { Cart1 } from "assets/images/png";
 import { Button } from "components/fields";
 import { useNavigate } from "react-router-dom";
 import { CardModal, Empty } from "components/UI";
@@ -10,18 +9,12 @@ type CardModalType = {
   setIsCartModalOpen: (e: boolean) => void;
 };
 
-type cartModalDataType = {
-  id: number;
-  img: string;
-  soum: string;
-  size: string;
-  title: string;
-};
-
 const CardModalComponent = ({
   isCartModalOpen,
   setIsCartModalOpen,
 }: CardModalType) => {
+  const id: string[] = [];
+  const price: number[] = [];
   const navigate = useNavigate();
 
   const closeCartModal = (e: any) => {
@@ -35,22 +28,33 @@ const CardModalComponent = ({
     setIsCartModalOpen(false);
   };
 
-  const cartModalData: cartModalDataType[] = [
-    {
-      id: 1,
-      img: Cart1,
-      size: "Традиционное тесто, 23 см asdhasjdsajdsabdasbd asdadad",
-      soum: "499 ₽",
-      title: "Чикен Сладкий Чили",
-    },
-  ];
-
   const { data } = useTokenGet({
     queryKey: "cart",
     path: "/user/cart",
   });
 
-  console.log(data);
+  const reduced = () => {
+    data?.length > 0 &&
+      data?.map((el: any) => {
+        return (
+          el?.items.length > 0 &&
+          el?.items.map((el: any) => {
+            price.push(el.price);
+          })
+        );
+      });
+    return price;
+  };
+
+  const calcPrice = () => {
+    return reduced().reduce((prev, curr) => prev + curr,0);
+  };
+
+  if (isCartModalOpen) {
+    document.body.classList.add("hidden");
+  } else {
+    document.body.classList.remove("hidden");
+  }
 
   return (
     <>
@@ -78,14 +82,18 @@ const CardModalComponent = ({
             <div className="cart-modal__body">
               <ul className="cart-list">
                 {data?.length > 0 &&
-                  data.map((el: any) => {
+                  data?.map((el: any) => {
+                    id.push(el._id);
                     return (
                       el?.items?.length > 0 &&
-                      el.items.map((el: any) => {
+                      el?.items?.map((el: any) => {
                         return (
                           <CardModal
+                            cartId={id}
+                            id={el._id}
                             key={el._id}
                             price={el.price}
+                            quantity={el?.quantity}
                             name={el?.productId.name}
                             img={el?.productId.images.home}
                             description={el?.productId.description}
@@ -97,9 +105,15 @@ const CardModalComponent = ({
               </ul>
             </div>
           </div>
-          {cartModalData.length === 0 && <Empty />}
+          {data?.length > 0 &&
+            data.map((el: any) => {
+              return el?.items.length === 0 && <Empty />;
+            })}
+
           <div className="cart-modal__footer">
-            <h4 className="cart-modal__footer-heading">Итого: 2 379 ₽</h4>
+            <h4 className="cart-modal__footer-heading">
+              Итого: {calcPrice()} ₽
+            </h4>
             <Button
               type="button"
               className="cart-modal__footer-btn"

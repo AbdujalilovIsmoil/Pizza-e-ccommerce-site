@@ -4,13 +4,13 @@ import { usePost } from "hook";
 import { useEffect, useState } from "react";
 import { Button, Input } from "components/fields";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleProductModal } from "store/productData";
+import { useQueryClient } from "@tanstack/react-query";
+import { toggleProductModal, smallProductModal } from "store/productData";
 import {
   ProductModalIcon1,
   ProductModalIcon2,
   ProductModalIcon3,
 } from "assets/images/svg";
-import { useQueryClient } from "@tanstack/react-query";
 
 const ProductModal = () => {
   const dispatch = useDispatch();
@@ -31,7 +31,12 @@ const ProductModal = () => {
     path: "/user/cart",
     onSuccess: () => {
       dispatch(toggleProductModal());
-      client.invalidateQueries({ queryKey: ["cart"] });
+      dispatch(smallProductModal(true));
+
+      setTimeout(() => {
+        dispatch(smallProductModal(false));
+        location.reload();
+      }, 3000);
     },
     onError: (error) => {
       console.log(error);

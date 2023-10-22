@@ -81,6 +81,7 @@
       );
     }
     label {
+      display: block;
       cursor: pointer;
       @include Button(
         $header__bg-color,
