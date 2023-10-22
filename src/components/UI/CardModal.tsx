@@ -38,19 +38,6 @@ const CardModal = ({
           <h5 className="cart-item__box-desc">{description}</h5>
         </div>
         <div className="cart-item__footer">
-          <div className="cart-item__counter">
-            <img
-              alt="counter1"
-              src={Counter1}
-              className="cart-item__counter-icon"
-            />
-            <h4 className="cart-item__counter-count">{quantity}</h4>
-            <img
-              alt="counter2"
-              src={Counter2}
-              className="cart-item__counter-icon"
-            />
-          </div>
           <h4 className="cart-item__footer-soum">{price} ₽</h4>
           <img
             src={Cart2}

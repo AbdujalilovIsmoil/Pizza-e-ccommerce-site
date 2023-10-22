@@ -47,7 +47,7 @@ const CardModalComponent = ({
   };
 
   const calcPrice = () => {
-    return reduced().reduce((prev, curr) => prev + curr,0);
+    return reduced().reduce((prev, curr) => prev + curr, 0);
   };
 
   if (isCartModalOpen) {
@@ -119,7 +119,7 @@ const CardModalComponent = ({
               className="cart-modal__footer-btn"
               onClick={() => openBasketPage()}
             >
-              Оформить заказ
+              Перейти к товару
             </Button>
           </div>
         </div>
