@@ -18,6 +18,20 @@ const RestangleCard = () => {
               delay: 2000,
               disableOnInteraction: false,
             }}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 3,
+              },
+              1300: {
+                slidesPerView: 4,
+              },
+            }}
           >
             <SwiperSlide>
               <li className="restangle-card__item">

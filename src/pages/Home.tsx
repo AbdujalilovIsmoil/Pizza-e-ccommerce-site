@@ -1,10 +1,10 @@
-// import { GroupCard, RestangleCard } from "components/layouts";
+import { GroupCard, RestangleCard } from "components/layouts";
 
 const index = () => {
   return (
     <>
-      {/* <RestangleCard />
-      <GroupCard /> */}
+      <RestangleCard />
+      <GroupCard />
     </>
   );
 };
