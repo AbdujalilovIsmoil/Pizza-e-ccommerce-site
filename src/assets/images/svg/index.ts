@@ -1,4 +1,5 @@
 import { AuthIcon1 } from "./auth";
+import { Menu1, Menu2 } from "./menu";
 import { locationIcon1 } from "./location";
 import { Basket1, Basket2 } from "./basket";
 import { settingsEditIcon } from "./settings";
@@ -32,6 +33,8 @@ import {
 } from "./product-modal";
 
 export {
+  Menu1,
+  Menu2,
   Basket1,
   Basket2,
   Counter1,

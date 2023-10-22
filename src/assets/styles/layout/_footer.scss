@@ -4,6 +4,12 @@
   background-color: $header__bg-color;
   &__list {
     @include flexLayout(flex, space-between, flex-start, 0, row nowrap);
+    @include mediaQueries(1000px) {
+      @include gridLayout(grid, 2, space-between, flex-start, 0);
+    }
+    @include mediaQueries($sm) {
+      @include flexLayout(flex, flex-start, flex-start, 12px, column nowrap);
+    }
   }
   &__intro {
     @include flexLayout(flex, flex-start, center, 15px, row nowrap);

@@ -1,27 +1,25 @@
 import { get } from "lodash";
-import { api } from "services";
 import { useState } from "react";
 import { storage } from "services";
-import { Button } from "components/fields";
-import { getCategories } from "store/categoryData";
-import { HeaderTopAccount } from "assets/images/svg";
-import { HeaderListIntro } from "assets/images/svg/header";
-import { CardModal, Auth, CloseAccount } from "components/layouts";
-import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
-import { HeaderListCart } from "assets/images/svg/header/header-list";
-import { useDispatch, useSelector } from "react-redux";
 import { useTokenGet } from "hook";
+import { Button } from "components/fields";
+import { isOpenModalMenu } from "store/menu";
+import { getCategories } from "store/categoryData";
+import { useDispatch, useSelector } from "react-redux";
+import { HeaderListIntro } from "assets/images/svg/header";
+import { HeaderTopAccount, Menu1, Menu2 } from "assets/images/svg";
+import { CardModal, Auth, CloseAccount } from "components/layouts";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { HeaderListCart } from "assets/images/svg/header/header-list";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
   const [isCloseAccount, setIsCloseAccount] = useState<boolean>(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
-  const [categoryTitle, setCategoryTitle] = useState<string>(
-    storage.get("category") || ""
-  );
+  const { isMenuOpen }: any = useSelector((state) => get(state, "menuData"));
 
   if (isCartModalOpen) {
     document.body.classList.add("hidden");
@@ -68,7 +66,6 @@ const Header = () => {
   const getCategory = (title: string) => {
     navigate(`/pages/category`);
     storage.set("category", title);
-    setCategoryTitle(title);
     setSearchParams((params: URLSearchParams) => {
       params.set("category", storage.get("category") as string);
       return params;
@@ -84,8 +81,6 @@ const Header = () => {
   const { smallProductModal }: any = useSelector((state) =>
     get(state, "productData")
   );
-
-  console.log(smallProductModal);
 
   return (
     <header className="header">
@@ -170,7 +165,11 @@ const Header = () => {
                 <h4 className="header-list__intro-heading">Куда пицца</h4>
               </div>
             </Link>
-            <ul className="header-list-menu">
+            <ul
+              className={`header-list-menu ${
+                isMenuOpen && "header-list-menu--open"
+              }`}
+            >
               {categories.length > 0 &&
                 categories.map((el: Tcategories) => {
                   return (
@@ -198,11 +197,13 @@ const Header = () => {
                 src={HeaderListCart}
                 className="header-list__btn-cart"
               />
-              <h4 className="header-list__btn-heading">
-                {{ ...data }[0]?.items?.length > 0
-                  ? { ...data }[0]?.items?.length
-                  : 0}
-              </h4>
+              <div className="header-list__background">
+                <h4 className="header-list__btn-heading">
+                  {{ ...data }[0]?.items?.length > 0
+                    ? { ...data }[0]?.items?.length
+                    : 2}
+                </h4>
+              </div>
             </Button>
             <div
               className={`small-modal ${
@@ -211,6 +212,23 @@ const Header = () => {
             >
               <h4 className="small-modal__heading">Товар добавлен в корзину</h4>
             </div>
+          </div>
+          <div className="header-list__menu">
+            {isMenuOpen ? (
+              <img
+                alt="times"
+                src={Menu2}
+                className="header-list__menu-icon"
+                onClick={() => dispatch(isOpenModalMenu())}
+              />
+            ) : (
+              <img
+                alt="bars"
+                src={Menu1}
+                className="header-list__menu-icon"
+                onClick={() => dispatch(isOpenModalMenu())}
+              />
+            )}
           </div>
         </div>
       </div>

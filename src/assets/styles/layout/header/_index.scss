@@ -3,7 +3,6 @@
 
 .header {
   top: 0;
-  z-index: 1000;
   position: sticky;
   background-color: $header__bg-color;
   &-open {
@@ -20,6 +19,9 @@
     background-color: $header__bg-color;
     border: 1px solid $header-top__border-color;
     box-shadow: 0px 2px 8px 0px $drop-down__bg-color;
+    @include mediaQueries($sm) {
+      right: 0;
+    }
     &::after {
       left: 65%;
       top: -15px;
@@ -30,9 +32,16 @@
       border-bottom: 16px solid $header__bg-color;
       -webkit-filter: drop-shadow(0px 2px 8px $drop-down__bg-color);
       filter: drop-shadow(0px 2px 8px $drop-down__bg-color);
+      @include mediaQueries($sm){
+        left: 80%;
+      }
     }
     &__item {
+      cursor: pointer;
       padding: 20px 20px;
+      @include mediaQueries($sm) {
+        padding: 15px 20px;
+      }
       &-btn {
         letter-spacing: 0.8px;
         transition: opacity 150ms linear;
@@ -47,8 +56,11 @@
         &:hover {
           opacity: 0.8;
         }
+        @include mediaQueries($sm) {
+          font-size: 14px;
+        }
       }
-      cursor: pointer;
+
       &:first-child {
         color: $header-cart__bg-color;
         border-bottom: 1px solid $header-top__border-color;
@@ -74,6 +86,9 @@
             20px,
             default
           );
+          @include mediaQueries($sm) {
+            font-size: 14px;
+          }
           &:hover {
             color: $header-cart__bg-color;
           }
@@ -89,8 +104,8 @@
   }
   &-drop-down {
     top: 80px;
+    right: 0;
     opacity: 0;
-    left: -100%;
     width: 285px;
     padding: 20px;
     min-height: 300px;
@@ -102,7 +117,6 @@
     border: 1px solid $header-top__border-color;
     box-shadow: 0px 2px 8px 0px $drop-down__bg-color;
     @include flexLayout(flex, flex-start, flex-start, 16px, column nowrap);
-
     &::after {
       left: 42%;
       top: -15px;
