@@ -1,17 +1,39 @@
-import { useEffect } from "react";
+import { useTokenGet } from "hook";
 import { storage } from "services";
 import { Pagination } from "components/UI";
+import { useEffect, useState } from "react";
 import { HistoryIcon1 } from "assets/images/svg";
 import { Button, Input } from "components/fields";
 import { Link, useNavigate } from "react-router-dom";
-import { Card1, Card2, Card3 } from "assets/images/png";
 
 const index = () => {
+  const allPageCount = [];
   const navigate = useNavigate();
+  const [index, _] = useState<number>(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const firstOperator = index * currentPage;
+  const lastOperator = firstOperator - index;
+
+  const { data } = useTokenGet({
+    path: "/order",
+    queryKey: "order",
+  });
+
+  const sliceHistoryProduct = data.slice(lastOperator, firstOperator);
+
+  for (let i = 0; i < Math.ceil(data.length / index); i++) {
+    allPageCount.push(i);
+  }
+
+  const handleClick = (data: any) => {
+    setCurrentPage(data.selected + 1);
+  };
 
   useEffect(() => {
     if (!storage.get("token")) navigate("/");
-  }, [])
+  }, []);
+
+  console.log(data);
   return (
     <>
       <section className="history">
@@ -30,596 +52,132 @@ const index = () => {
               </Link>
             </div>
           </div>
-          <div className="history__container">
-            <Input
-              type="checkbox"
-              id="history-radio1"
-              name="history-radio"
-              className="history__input"
-            />
-            <label htmlFor="history-radio1" className="history-top">
-              <ul className="history-top__list">
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Заказ</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">№130312</h4>
-                    <h5 className="history-top__numbers-date">22.06.21</h5>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Сумма заказа</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">399 ₽</h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Статус</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">
-                      Обрабатывается
-                    </h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Оплачено</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">Картой</h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <img
-                    alt="arrow-down"
-                    src={HistoryIcon1}
-                    className="history-top__item-icon"
+
+          {sliceHistoryProduct?.length > 0 &&
+            sliceHistoryProduct?.map((el: any) => {
+              return (
+                <div className="history__container">
+                  <Input
+                    id={el._id}
+                    type="checkbox"
+                    name="history-radio"
+                    className="history__input"
                   />
-                </li>
-              </ul>
-            </label>
-            <div className="history-background">
-              <ul className="history-background__list">
-                <li className="history-background__item">
-                  <div className="history-background__container">
-                    <div className="history-background__box">
-                      <h4 className="history-background__box-text">
-                        ул. Львовская 48/2, офис 301, 2 этаж, домофон 4801#
-                      </h4>
-                    </div>
-                    <div className="history-background__box">
-                      <img
-                        src={Card1}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                      <img
-                        src={Card2}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                      <img
-                        src={Card3}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                    </div>
+                  <label htmlFor={el._id} className="history-top">
+                    <ul className="history-top__list">
+                      <li className="history-top__item">
+                        <h5 className="history-top__item-heading">Заказ</h5>
+                        <div className="history-top__numbers">
+                          <h4 className="history-top__numbers-heading">
+                            №130312
+                          </h4>
+                          <h5 className="history-top__numbers-date">
+                            {el?.createdAt?.slice(0, 10)?.split("-")?.join(".")}
+                          </h5>
+                        </div>
+                      </li>
+                      <li className="history-top__item">
+                        <h5 className="history-top__item-heading">
+                          Сумма заказа
+                        </h5>
+                        <div className="history-top__numbers">
+                          <h4 className="history-top__numbers-heading">
+                            399 ₽
+                          </h4>
+                        </div>
+                      </li>
+                      <li className="history-top__item">
+                        <h5 className="history-top__item-heading">Статус</h5>
+                        <div className="history-top__numbers">
+                          <h4 className="history-top__numbers-heading">
+                            {el.status}
+                          </h4>
+                        </div>
+                      </li>
+                      <li className="history-top__item">
+                        <h5 className="history-top__item-heading">Оплачено</h5>
+                        <div className="history-top__numbers">
+                          <h4 className="history-top__numbers-heading">
+                            {el.payment}
+                          </h4>
+                        </div>
+                      </li>
+                      <li className="history-top__item">
+                        <img
+                          alt="arrow-down"
+                          src={HistoryIcon1}
+                          className="history-top__item-icon"
+                        />
+                      </li>
+                    </ul>
+                  </label>
+                  <div className="history-background">
+                    <ul className="history-background__list">
+                      <li className="history-background__item">
+                        <div className="history-background__container">
+                          <div className="history-background__box">
+                            <h4 className="history-background__box-text">
+                              ул. {el.street}, офис {el.kvartira}, 2 {el.etaj},
+                              домофон
+                              {el.domofon} #
+                            </h4>
+                          </div>
+                          <div className="history-background__box">
+                            {el?.orderItems?.length > 0 &&
+                              el?.orderItems?.map((el: any) => {
+                                return (
+                                  <img
+                                    alt={el?.productId?.name}
+                                    src={el?.productId?.images?.home}
+                                    className="history-background__box-img"
+                                  />
+                                );
+                              })}
+                          </div>
+                        </div>
+                        <ul className="history-background__elements">
+                          {el?.orderItems?.length > 0 &&
+                            el?.orderItems?.map((el: any) => {
+                              return (
+                                <li className="history-background__element">
+                                  <img
+                                    alt={el?.productId?.name}
+                                    src={el?.productId?.images?.home}
+                                    title="card"
+                                    className="history-background__element-img"
+                                  />
+                                  <div className="history-background__content">
+                                    <h4 className="history-background__element-heading">
+                                      {el?.productId?.name}
+                                    </h4>
+                                    <h5 className="history-background__element-regular">
+                                      {el?.productId?.description}
+                                    </h5>
+                                  </div>
+                                  <Button
+                                    type="button"
+                                    className="history-background__element-btn"
+                                  >
+                                    {el?.quantity} товар
+                                  </Button>
+                                  <h4 className="history-background__element-price">
+                                    {el?.productId?.price} ₽
+                                  </h4>
+                                </li>
+                              );
+                            })}
+                        </ul>
+                      </li>
+                    </ul>
                   </div>
-                  <ul className="history-background__elements">
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="history__container">
-            <Input
-              type="checkbox"
-              id="history-radio2"
-              name="history-radio"
-              className="history__input"
-            />
-            <label htmlFor="history-radio2" className="history-top">
-              <ul className="history-top__list">
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Заказ</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">№130312</h4>
-                    <h5 className="history-top__numbers-date">22.06.21</h5>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Сумма заказа</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">399 ₽</h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Статус</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">
-                      Обрабатывается
-                    </h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Оплачено</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">Картой</h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <img
-                    alt="arrow-down"
-                    src={HistoryIcon1}
-                    className="history-top__item-icon"
-                  />
-                </li>
-              </ul>
-            </label>
-            <div className="history-background">
-              <ul className="history-background__list">
-                <li className="history-background__item">
-                  <div className="history-background__container">
-                    <div className="history-background__box">
-                      <h4 className="history-background__box-text">
-                        ул. Львовская 48/2, офис 301, 2 этаж, домофон 4801#
-                      </h4>
-                    </div>
-                    <div className="history-background__box">
-                      <img
-                        src={Card1}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                      <img
-                        src={Card2}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                      <img
-                        src={Card3}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                    </div>
-                  </div>
-                  <ul className="history-background__elements">
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="history__container">
-            <Input
-              type="checkbox"
-              id="history-radio3"
-              name="history-radio"
-              className="history__input"
-            />
-            <label htmlFor="history-radio3" className="history-top">
-              <ul className="history-top__list">
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Заказ</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">№130312</h4>
-                    <h5 className="history-top__numbers-date">22.06.21</h5>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Сумма заказа</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">399 ₽</h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Статус</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">
-                      Обрабатывается
-                    </h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Оплачено</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">Картой</h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <img
-                    alt="arrow-down"
-                    src={HistoryIcon1}
-                    className="history-top__item-icon"
-                  />
-                </li>
-              </ul>
-            </label>
-            <div className="history-background">
-              <ul className="history-background__list">
-                <li className="history-background__item">
-                  <div className="history-background__container">
-                    <div className="history-background__box">
-                      <h4 className="history-background__box-text">
-                        ул. Львовская 48/2, офис 301, 2 этаж, домофон 4801#
-                      </h4>
-                    </div>
-                    <div className="history-background__box">
-                      <img
-                        src={Card1}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                      <img
-                        src={Card2}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                      <img
-                        src={Card3}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                    </div>
-                  </div>
-                  <ul className="history-background__elements">
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="history__container">
-            <Input
-              type="checkbox"
-              id="history-radio4"
-              name="history-radio"
-              className="history__input"
-            />
-            <label htmlFor="history-radio4" className="history-top">
-              <ul className="history-top__list">
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Заказ</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">№130312</h4>
-                    <h5 className="history-top__numbers-date">22.06.21</h5>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Сумма заказа</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">399 ₽</h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Статус</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">
-                      Обрабатывается
-                    </h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <h5 className="history-top__item-heading">Оплачено</h5>
-                  <div className="history-top__numbers">
-                    <h4 className="history-top__numbers-heading">Картой</h4>
-                  </div>
-                </li>
-                <li className="history-top__item">
-                  <img
-                    alt="arrow-down"
-                    src={HistoryIcon1}
-                    className="history-top__item-icon"
-                  />
-                </li>
-              </ul>
-            </label>
-            <div className="history-background">
-              <ul className="history-background__list">
-                <li className="history-background__item">
-                  <div className="history-background__container">
-                    <div className="history-background__box">
-                      <h4 className="history-background__box-text">
-                        ул. Львовская 48/2, офис 301, 2 этаж, домофон 4801#
-                      </h4>
-                    </div>
-                    <div className="history-background__box">
-                      <img
-                        src={Card1}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                      <img
-                        src={Card2}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                      <img
-                        src={Card3}
-                        className="history-background__box-img"
-                        alt="history-background-card"
-                      />
-                    </div>
-                  </div>
-                  <ul className="history-background__elements">
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                    <li className="history-background__element">
-                      <img
-                        alt="card"
-                        src={Card1}
-                        title="card"
-                        className="history-background__element-img"
-                      />
-                      <h4 className="history-background__element-heading">
-                        Пепперони по-деревенски
-                      </h4>
-                      <h5 className="history-background__element-regular">
-                        Традиционное тесто, 23 см
-                      </h5>
-                      <Button
-                        type="button"
-                        className="history-background__element-btn"
-                      >
-                        1 товар
-                      </Button>
-                      <h4 className="history-background__element-price">
-                        399 ₽
-                      </h4>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
+                </div>
+              );
+            })}
           <div className="history-pagination">
-            <Pagination itemsPerPage={4} />
+            <Pagination
+              onPageChange={handleClick}
+              pageCount={allPageCount?.length}
+            />
           </div>
         </div>
       </section>

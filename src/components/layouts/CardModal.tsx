@@ -94,9 +94,9 @@ const CardModalComponent = ({
                             key={el._id}
                             price={el.price}
                             quantity={el?.quantity}
-                            name={el?.productId.name}
-                            img={el?.productId.images.home}
-                            description={el?.productId.description}
+                            name={el?.productId?.name}
+                            img={el?.productId?.images?.home}
+                            description={el?.productId?.description}
                           />
                         );
                       })

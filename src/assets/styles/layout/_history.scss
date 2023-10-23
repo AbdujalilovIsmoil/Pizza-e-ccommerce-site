@@ -2,7 +2,7 @@
   max-width: 100%;
   margin: 40px auto 24px auto;
   &-header {
-    @include flexLayout(flex, space-between, center);
+    @include flexLayout(flex, space-between, center, 0, row nowrap);
 
     &__block {
       &-heading {
@@ -137,6 +137,10 @@
     border-radius: 0 0 12px 12px;
     transition: all 150ms linear;
     background-color: $header__bg-color;
+    &__content {
+      max-width: 475px;
+      @include flexLayout(flex, space-between, center, 10px, row nowrap);
+    }
     &__item {
       padding: 20px 0;
       border-bottom: 1px solid $header-top__border-color;
@@ -148,6 +152,7 @@
       @include flexLayout(flex, space-between, center, 0, row nowrap);
     }
     &__box {
+      @include flexLayout(flex, flex-end, center, 5px, row nowrap);
       &-img {
         width: 40px;
         height: 40px;
@@ -174,6 +179,9 @@
         border: 2px solid $header-top__border-color;
       }
       &-heading {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         @include headingFonts(
           $heading-top__heading-color,
           16px,
@@ -183,6 +191,9 @@
         );
       }
       &-regular {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         @include headingFonts(
           $heading-top__heading-color,
           14px,

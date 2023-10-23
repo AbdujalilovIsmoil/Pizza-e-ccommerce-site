@@ -64,7 +64,7 @@ const Header = () => {
   ];
 
   const getCategory = (title: string) => {
-    dispatch(isOpenModalMenu())
+    dispatch(isOpenModalMenu());
     navigate(`/pages/category`);
     storage.set("category", title);
     setSearchParams((params: URLSearchParams) => {
