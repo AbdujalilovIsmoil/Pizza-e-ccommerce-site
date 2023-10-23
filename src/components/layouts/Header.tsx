@@ -64,6 +64,7 @@ const Header = () => {
   ];
 
   const getCategory = (title: string) => {
+    dispatch(isOpenModalMenu())
     navigate(`/pages/category`);
     storage.set("category", title);
     setSearchParams((params: URLSearchParams) => {
@@ -201,7 +202,7 @@ const Header = () => {
                 <h4 className="header-list__btn-heading">
                   {{ ...data }[0]?.items?.length > 0
                     ? { ...data }[0]?.items?.length
-                    : 2}
+                    : 0}
                 </h4>
               </div>
             </Button>

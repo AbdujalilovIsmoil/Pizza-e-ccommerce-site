@@ -12,6 +12,12 @@
         48px,
         default
       );
+      @include mediaQueries($md) {
+        font-size: 30px;
+      }
+      @include mediaQueries($sm) {
+        font-size: 20px;
+      }
     }
   }
   &__filter {
@@ -23,6 +29,14 @@
       10px 16px,
       opacity 150ms linear
     );
+    &-img {
+      width: 18px;
+      height: 18px;
+      @include mediaQueries($sm) {
+        width: 12px;
+        height: 12px;
+      }
+    }
     &-heading {
       @include headingFonts(
         $heading-top__heading-color,
@@ -31,6 +45,9 @@
         22px,
         default
       );
+      @include mediaQueries($sm) {
+        font-size: 12px;
+      }
     }
     &:hover {
       opacity: 0.8;
@@ -42,6 +59,19 @@
       gap: 30px;
       margin-top: 30px;
       @include gridLayout(grid, 4, space-between, center, 30px);
+      @include mediaQueries(1299px) {
+        @include gridLayout(grid, 3, space-between, center, 30px);
+      }
+      @include mediaQueries($lg) {
+        @include gridLayout(grid, 2, space-between, center, 30px);
+      }
+      @include mediaQueries(700px) {
+        @include gridLayout(grid, 2, space-between, center, 10px);
+      }
+      @include mediaQueries($sm) {
+        display: flex;
+        flex-direction: column;
+      }
       &__category {
         left: 0;
         top: 20px;
@@ -64,6 +94,10 @@
             &:hover {
               opacity: 0.8;
             }
+            @include mediaQueries($sm) {
+              font-size: 14px;
+              padding: 12px 12px;
+            }
           }
           &-heading {
             @include headingFonts(
@@ -73,6 +107,9 @@
               24px,
               default
             );
+            @include mediaQueries($sm) {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -80,6 +117,9 @@
         max-width: 275px;
         margin-top: 16px;
         padding: 0 20px 20px 20px;
+        @include mediaQueries($sm) {
+          max-width: 225px;
+        }
         &-title {
           overflow: hidden;
           white-space: nowrap;
@@ -91,6 +131,9 @@
             24px,
             default
           );
+          @include mediaQueries($sm) {
+            font-size: 14px;
+          }
         }
         &-text {
           overflow: hidden;
@@ -105,6 +148,10 @@
             22px,
             default
           );
+          @include mediaQueries($sm) {
+            font-size: 12px;
+            margin: 8px 0 10px 0;
+          }
         }
       }
       &__image {
@@ -113,8 +160,29 @@
         margin: 0 auto;
         position: relative;
         @include flexLayout(flex, center, center, 0, row nowrap);
+        @include mediaQueries($md) {
+          height: 300px;
+        }
+        @include mediaQueries($sm) {
+          width: 200px;
+          height: 200px;
+        }
+        @include mediaQueries(450px) {
+          width: 150px;
+          height: 150px;
+        }
+        @include mediaQueries(390px) {
+          width: 120px;
+          height: 120px;
+        }
         &-img {
+          width: 100%;
           height: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+          @include mediaQueries(390px) {
+            object-fit: contain;
+          }
         }
       }
       &__item {
@@ -123,6 +191,12 @@
         border-radius: 12px;
         background-color: $header__bg-color;
         border: 1px solid $header-top__border-color;
+        @include mediaQueries($sm) {
+          width: 100%;
+          padding: 0px;
+          min-height: 50px;
+          @include flexLayout(flex, flex-start, center, 0, row nowrap);
+        }
       }
       &__category {
         height: 32px;
