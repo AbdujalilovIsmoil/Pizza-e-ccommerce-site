@@ -4,7 +4,6 @@ import { usePost } from "hook";
 import { useEffect, useState } from "react";
 import { Button, Input } from "components/fields";
 import { useDispatch, useSelector } from "react-redux";
-import { useQueryClient } from "@tanstack/react-query";
 import { toggleProductModal, smallProductModal } from "store/productData";
 import {
   ProductModalIcon1,
@@ -14,13 +13,10 @@ import {
 
 const ProductModal = () => {
   const dispatch = useDispatch();
-  const client = useQueryClient();
   const [productModalData, setProductModalData] = useState<any[]>([]);
   const { isProductModal, modalId }: any = useSelector((state) =>
     get(state, "productData")
   );
-
-  console.log(client);
 
   useEffect(() => {
     api.get(`/product/${modalId}`).then((res) => {
@@ -40,9 +36,7 @@ const ProductModal = () => {
         location.reload();
       }, 3000);
     },
-    onError: (error) => {
-      console.log(error);
-    },
+    onError: (error) => error,
   });
 
   return (
@@ -60,7 +54,6 @@ const ProductModal = () => {
           <div className="product-modal__background">
             {productModalData?.length > 0 &&
               productModalData?.map((el: any) => {
-                console.log(el);
                 return (
                   <ul className="product-modal__list" key={el._id}>
                     <li className="product-modal__item">
