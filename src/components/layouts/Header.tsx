@@ -65,10 +65,10 @@ const Header = () => {
 
   const getCategory = (title: string) => {
     dispatch(isOpenModalMenu());
-    navigate(`/pages/category`);
+    navigate(`/pages/categories/category`);
     storage.set("category", title);
     setSearchParams((params: URLSearchParams) => {
-      params.set("category", storage.get("category") as string);
+      params.set("search", storage.get("category") as string);
       return params;
     });
     dispatch(getCategories(title));

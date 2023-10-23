@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const App = () => {
   const Home = lazy(() => import("pages/Home"));
   const Error = lazy(() => import("pages/Error"));
+  const Filter = lazy(() => import("pages/Filter"));
   const Basket = lazy(() => import("pages/Basket"));
   const History = lazy(() => import("pages/History"));
   const Category = lazy(() => import("pages/Category"));
@@ -28,20 +29,24 @@ const App = () => {
           element: <Basket />,
         },
         {
-          path: "/pages/:id",
+          path: "/pages/categories/:category",
           element: <Category />,
+        },
+        {
+          path: "/pages/retings/:reting",
+          element: <Filter />,
         },
         {
           path: "*",
           element: <Error />,
         },
+       
       ],
     },
   ]);
 
   return (
     <>
-      <FilterModal />
       <ProductModal />
       <Suspense fallback={<Loader />}>
         <RouterProvider router={routes} />

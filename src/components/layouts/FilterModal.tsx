@@ -1,12 +1,16 @@
 import { get } from "lodash";
-import { useTokenGet } from "hook";
+import { useGet } from "hook";
+import { api, storage } from "services";
 import { Button, Input } from "components/fields";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const FilterModal = () => {
+  const [retingSearchParams, setRetingSearchParams] = useSearchParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const closeFilterModal = (e: any) => {
     if (e.target?.getAttribute("class") === "filter-modal filter-modal--open") {
       dispatch(toggleFilterOpenModal());
@@ -17,10 +21,32 @@ const FilterModal = () => {
     get(state, "filterData")
   );
 
-  const { data, isError, isLoading } = useTokenGet({
+  const { data, isError, isLoading } = useGet({
     queryKey: "reting",
-    path: "/reting/views",
+    path: "/product",
   });
+
+  const retings: any = [];
+
+  const getReting = () => {
+    return get(data, "allProduct", []).map((el: any) => {
+      if (!retings.includes(el.reting)) {
+        retings.push(el.reting);
+      }
+    });
+  };
+
+  getReting();
+
+  const changeFilterValue = (value: string) => {
+    navigate(`/pages/retings/reting`);
+    storage.set("reting", value);
+    setRetingSearchParams((params: URLSearchParams) => {
+      params.set("search", storage.get("reting") as string);
+      return params;
+    });
+    dispatch(toggleFilterOpenModal());
+  };
 
   return (
     <section
@@ -54,28 +80,31 @@ const FilterModal = () => {
               <h2>Loader</h2>
             </div>
           )}
-          {!isLoading && !isError && get(data, "reting", []).length === 0 && (
-            <div>
-              <h2>NO DATA</h2>
-            </div>
-          )}
+          {!isLoading &&
+            !isError &&
+            get(data, "allProduct", []).length === 0 && (
+              <div>
+                <h2>NO DATA</h2>
+              </div>
+            )}
           <ul className="filter-modal__list">
             <ul className="filter-modal__check-list">
-              {get(data, "reting", []).length > 0 &&
-                get(data, "reting", []).map((el: any) => {
+              {retings?.length > 0 &&
+                retings.map((el: any, index: number) => {
                   return (
-                    <li className="filter-modal__check" key={el._id}>
+                    <li className="filter-modal__check" key={el}>
                       <Input
                         name="data"
                         type="radio"
-                        id={`${el._id}`}
-                        value={`${el.name}`}
+                        value={el}
+                        id={`${index}`}
+                        onChange={(e) => changeFilterValue(e.target.value)}
                       />
                       <label
-                        htmlFor={`${el._id}`}
+                        htmlFor={`${index}`}
                         className="filter-modal__check-btn"
                       >
-                        {el.name}
+                        {el}
                       </label>
                     </li>
                   );

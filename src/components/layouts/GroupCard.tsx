@@ -5,6 +5,7 @@ import { GroupCardFilter } from "assets/images/svg";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
 import { toggleProductModal, setProductId } from "store/productData";
+import { FilterModal } from ".";
 
 const GroupCard = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const GroupCard = () => {
 
   return (
     <section className="group-card">
+      <FilterModal />
       <div className="container">
         <ul className="group-card__list">
           <li className="group-card__item">

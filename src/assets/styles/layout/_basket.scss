@@ -127,18 +127,23 @@
     }
     &__item {
       max-width: 100%;
-      min-height: 350px;
       text-align: center;
       border-radius: 12px;
       background-color: $header__bg-color;
       border: 1px solid $header-top__border-color;
       @include flexLayout(flex, space-between, space-between, 0, column nowrap);
+
+      &-img {
+        height: 225px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
     }
     &__content {
       padding: 16px;
       &-img {
         width: 190px;
-        height: 190px;
+        height: 190px !important;
       }
       &-heading {
         overflow: hidden;

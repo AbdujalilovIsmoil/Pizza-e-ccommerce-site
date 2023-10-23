@@ -19,9 +19,9 @@ const index = () => {
     queryKey: "order",
   });
 
-  const sliceHistoryProduct = data.slice(lastOperator, firstOperator);
+  const sliceHistoryProduct = data?.slice(lastOperator, firstOperator);
 
-  for (let i = 0; i < Math.ceil(data.length / index); i++) {
+  for (let i = 0; i < Math.ceil(data?.length / index); i++) {
     allPageCount.push(i);
   }
 
@@ -33,7 +33,6 @@ const index = () => {
     if (!storage.get("token")) navigate("/");
   }, []);
 
-  console.log(data);
   return (
     <>
       <section className="history">

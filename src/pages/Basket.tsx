@@ -107,8 +107,6 @@ const index = () => {
     queryKey: "order",
   });
 
-  console.log(orderData.data);
-
   const onBasketUser = (e: any) => {
     mutate(e);
   };

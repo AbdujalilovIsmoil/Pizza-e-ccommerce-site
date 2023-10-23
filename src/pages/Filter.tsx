@@ -1,44 +1,37 @@
 import { get } from "lodash";
 import { api } from "services";
+import { useDispatch } from "react-redux";
 import { Button } from "components/fields";
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GroupCardFilter } from "assets/images/svg";
-import { setProductId, toggleProductModal } from "store/productData";
-import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
+import { setProductId, toggleProductModal } from "store/productData";
 import { FilterModal } from "components/layouts";
 
-const Category = () => {
+const Filter = () => {
   const dispatch = useDispatch();
-  const [category, _] = useSearchParams();
   const [isError, setIsError] = useState(false);
-  const categoryQuery = category.get("search");
+  const [retingSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [categoryData, setCategoryData] = useState<any>([]);
-  const { isFilterModalOpen }: any = useSelector((state) =>
-    get(state, "filterData")
-  );
+  const retingQuery = retingSearchParams.get("search");
+  const [retingData, setRetingData] = useState<any[]>([]);
 
   useEffect(() => {
     setIsLoading(true);
     api
-      .get(`/product/category?category=${categoryQuery?.split("").join("")}`)
+      .get(
+        `/product/filter-by-reting?reting=${retingQuery?.split("").join("")}`
+      )
       .then((res) => {
         setIsError(false);
         setIsLoading(false);
-        setCategoryData([...get(res, "data.prodyct")]);
+        setRetingData([...get(res, "data.retings")]);
       })
       .catch(() => {
         setIsError(true);
       });
-  }, [categoryQuery]);
-
-  if (isFilterModalOpen) {
-    document.body.classList.add("hidden");
-  } else {
-    document.body.classList.remove("hidden");
-  }
+  }, [retingQuery]);
 
   const clickButton = (id: string) => {
     dispatch(setProductId(id));
@@ -48,12 +41,11 @@ const Category = () => {
   return (
     <div className="container">
       <FilterModal />
-
       <ul className="group-card__list">
         <li className="group-card__item">
           <div className="group-card__header">
             <div className="group-card__box">
-              <h2 className="group-card__box-heading">{categoryQuery}</h2>
+              <h2 className="group-card__box-heading">{retingQuery}</h2>
             </div>
             <div className="group-card__box">
               <Button
@@ -80,15 +72,15 @@ const Category = () => {
               <h2>Loader</h2>
             </div>
           )}
-          {!isLoading && !isError && categoryData.length === 0 && (
+          {!isLoading && !isError && retingData.length === 0 && (
             <div>
               <h2>NO DATA</h2>
             </div>
           )}
           <ul className="cards">
             {!isLoading &&
-              categoryData.length > 0 &&
-              categoryData.map((el: any) => {
+              retingData.length > 0 &&
+              retingData.map((el: any) => {
                 return (
                   <li className="cards__item" key={el.id}>
                     <div className="cards__image">
@@ -129,4 +121,4 @@ const Category = () => {
   );
 };
 
-export default memo(Category);
+export default Filter;
