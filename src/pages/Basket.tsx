@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Input } from "components/fields";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,11 +11,15 @@ import {
   Basket1 as BasketIcon1,
   Basket2 as BasketIcon2,
 } from "assets/images/svg";
+import { forEach, get } from "lodash";
+import axios from "axios";
+import { api, storage } from "services";
 
 interface FieldProps extends FastFieldProps {}
 
 const index = () => {
   const dispatch = useDispatch();
+  const [basketData, setBasketData] = useState<any[]>([]);
   const [radioValue, setRadioValue] = useState<string>("");
 
   const regex = new RegExp(
@@ -43,28 +47,31 @@ const index = () => {
     path: "/user/cart",
   });
 
-  const renderData = () => {
-    return (
-      data?.length > 0 &&
-      data?.map((el: any) => {
-        return (
-          el?.items?.length > 0 &&
-          el?.items?.map((el: any) => {
-            return {
-              price: el.price,
-              quantity: el.quantity,
-              productId: el.productId._id,
-            };
-          })
-        );
+  useEffect(() => {
+    api
+      .get(`/user/cart`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${storage.get("token")}`,
+        },
       })
-    );
-  };
+      .then((response) => {
+        setBasketData([...get(response, "data[0].items", [])]);
+      });
+  }, []);
 
-  const renderMapData = () => {
-    return renderData()[0].map((el: any) => {
-      return el;
-    });
+  console.log(basketData);
+
+  const renderData = () => {
+    if (basketData.length > 0) {
+      return basketData.map((el: any) => {
+        return {
+          price: el.price,
+          quantity: el.quantity,
+          productId: el.productId._id,
+        };
+      });
+    }
   };
 
   const initialState = {
@@ -81,7 +88,7 @@ const index = () => {
   };
 
   const postData = {
-    orderItems: renderMapData(),
+    orderItems: renderData(),
     userItems: [
       {
         name: initialState.userName,
@@ -109,20 +116,18 @@ const index = () => {
   const price: number[] = [];
 
   const calcPrices = () => {
-    data?.length > 0 &&
-      data?.map((el: any) => {
-        return (
-          el?.items.length > 0 &&
-          el?.items.map((el: any) => {
-            price.push(el.price);
-          })
-        );
+    if (basketData.length > 0) {
+      forEach(basketData, (el) => {
+        price.push(el.price);
       });
+    }
     return price;
   };
 
+  calcPrices();
+
   const reducedPrice = () => {
-    return calcPrices().reduce((prev, curr) => prev + curr, 0);
+    return price.reduce((prev, curr) => prev + curr, 0);
   };
 
   const product = useGet({
@@ -206,8 +211,8 @@ const index = () => {
                   disableOnInteraction: false,
                 }}
               >
-                {product?.data?.allProduct.length > 0 &&
-                  product?.data?.allProduct.map((el: any) => {
+                {product?.data?.allProduct?.length > 0 &&
+                  get(product, "data.allProduct", []).map((el: any) => {
                     return (
                       <SwiperSlide key={el._id}>
                         <li className="basket-carousel__item">
@@ -562,23 +567,11 @@ const index = () => {
                         Картой
                       </h4>
                     </label>
-                    <label className="basket-form-order__label">
-                      <Input
-                        name="soum"
-                        type="radio"
-                        value="Apple Pay"
-                        className="basket-form-order__label-input"
-                        onChange={(e) => setRadioValue(e.target.value)}
-                      />
-                      <h4 className="basket-form-order__label-heading">
-                        Apple Pay
-                      </h4>
-                    </label>
                   </div>
                 </div>
                 <li className="basket-form-order__footer">
                   <h4 className="basket-form-order__footer-heading">
-                    Итого: 2 379 ₽
+                    Итого: {reducedPrice()} ₽
                   </h4>
                   <Button
                     type="submit"

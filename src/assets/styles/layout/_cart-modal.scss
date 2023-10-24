@@ -47,11 +47,11 @@
     border-radius: 12px;
     background-color: $header__bg-color;
     border: 1px solid $header-top__border-color;
-    @include flexLayout(flex, flex-start, center, 16px, row nowrap);
-    @include mediaQueries($sm) {
-      justify-content: space-between;
+    &__container {
+      @include flexLayout(flex, flex-start, center, 16px, row nowrap);
     }
     &__content {
+      width: 100%;
       max-width: 230px;
       position: relative;
       @include mediaQueries($sm) {
@@ -63,6 +63,7 @@
     }
 
     &__footer {
+      margin-top: 5px;
       @include flexLayout(flex, space-between, center, 0, row nowrap);
       &-soum {
         @include headingFonts($header-cart__bg-color, 16px, 600, 20px, default);
@@ -112,21 +113,6 @@
         );
       }
     }
-    &__counter {
-      padding: 8px;
-      max-width: 92px;
-      border-radius: 6px;
-      @include flexLayout(flex, space-between, center, 10px, row nowrap);
-      background-color: $counter__bg-color;
-      &-count {
-        @include headingFonts($header-cart__bg-color, 16px, 600, 20px, default);
-      }
-      &-icon {
-        width: 8px;
-        height: 8px;
-        cursor: pointer;
-      }
-    }
   }
 
   &__border {
@@ -143,9 +129,6 @@
     position: relative;
     background-color: $header__bg-color;
     @include flexLayout(flex, space-between, space-between, 0, column nowrap);
-    @include mediaQueries($sm) {
-      width: 100%;
-    }
   }
   &__box {
     &-heading {
