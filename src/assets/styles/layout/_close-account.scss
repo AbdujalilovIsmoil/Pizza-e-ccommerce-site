@@ -36,14 +36,14 @@
     border-radius: 24px;
     background-color: $header__bg-color;
     @include flexLayout(flex, center, center, 0, row nowrap);
-    @include mediaQueries($sm){
+    @include mediaQueries($sm) {
       padding: 20px;
     }
   }
   &__text {
     text-align: center;
     @include headingFonts($loader__shadow-color, 26px, 550, 22px, default);
-    @include mediaQueries($sm){
+    @include mediaQueries($sm) {
       font-size: 24px;
     }
   }

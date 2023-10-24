@@ -8,7 +8,7 @@ import { Button, Input } from "components/fields";
 import { FilterModalIcon2 } from "assets/images/svg/filter";
 import { Formik, Form, Field, FastFieldProps } from "formik";
 
-interface FieldProps extends FastFieldProps { }
+interface FieldProps extends FastFieldProps {}
 
 type AuthType = {
   isAuthModalOpen: boolean;
@@ -102,10 +102,11 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                                 type="text"
                                 id="username"
                                 placeholder="имя пользователя"
-                                className={`auth-modal__form-input ${meta.touched &&
+                                className={`auth-modal__form-input ${
+                                  meta.touched &&
                                   meta.error &&
                                   "auth-modal__form-input--error"
-                                  }`}
+                                }`}
                               />
                               {meta.touched && meta.error && (
                                 <h4 className="auth-modal__form-error">
@@ -124,10 +125,11 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                                 {...field}
                                 type="password"
                                 placeholder="пароль"
-                                className={`auth-modal__form-input ${meta.touched &&
+                                className={`auth-modal__form-input ${
+                                  meta.touched &&
                                   meta.error &&
                                   "auth-modal__form-input--error"
-                                  }`}
+                                }`}
                               />
                               {meta.touched && meta.error && (
                                 <h4 className="auth-modal__form-error">
@@ -147,10 +149,11 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                                 {...field}
                                 type="number"
                                 placeholder="телефон"
-                                className={`auth-modal__form-input ${meta.touched &&
+                                className={`auth-modal__form-input ${
+                                  meta.touched &&
                                   meta.error &&
                                   "auth-modal__form-input--error"
-                                  }`}
+                                }`}
                               />
                               {meta.touched && meta.error && (
                                 <h4 className="auth-modal__form-error">
@@ -176,13 +179,12 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
                     isAuthModalOpen={isAuthModalOpen}
                   />
                 )}
-                <Button
-                  type="button"
+                <h4
                   onClick={() => loginFunction()}
-                  className="auth-modal__background-btn"
+                  className="auth-modal__background-link"
                 >
                   {isRegistrAndLogin ? "Login" : "Registration"}
-                </Button>
+                </h4>
               </div>
             </div>
           </div>

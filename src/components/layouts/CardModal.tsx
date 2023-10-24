@@ -106,9 +106,10 @@ const CardModalComponent = ({
             </div>
           </div>
           {data?.length > 0 &&
-            data.map((el: any) => {
+            data?.map((el: any) => {
               return el?.items.length === 0 && <Empty />;
             })}
+          {data?.length === 0 && <Empty />}
 
           <div className="cart-modal__footer">
             <h4 className="cart-modal__footer-heading">
