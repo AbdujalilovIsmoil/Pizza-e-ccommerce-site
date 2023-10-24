@@ -1,6 +1,6 @@
 import Routes from "./Routes";
 import { lazy, Suspense } from "react";
-import { FilterModal, Loader, ProductModal } from "components/layouts";
+import { Loader, ProductModal } from "components/layouts";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const App = () => {

@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import { useGet } from "hook";
-import { api, storage } from "services";
+import { storage } from "services";
 import { Button, Input } from "components/fields";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
@@ -8,9 +8,10 @@ import { FilterModalIcon1 } from "assets/images/svg/filter";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const FilterModal = () => {
-  const [retingSearchParams, setRetingSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [_, setRetingSearchParams] = useSearchParams();
+
   const closeFilterModal = (e: any) => {
     if (e.target?.getAttribute("class") === "filter-modal filter-modal--open") {
       dispatch(toggleFilterOpenModal());

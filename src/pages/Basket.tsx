@@ -102,11 +102,6 @@ const index = () => {
     path: "/order/create",
   });
 
-  const orderData = useTokenGet({
-    path: "/order",
-    queryKey: "order",
-  });
-
   const onBasketUser = (e: any) => {
     mutate(e);
   };
