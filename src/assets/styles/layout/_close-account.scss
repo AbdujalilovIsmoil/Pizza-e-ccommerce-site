@@ -4,6 +4,7 @@
   height: 100%;
   z-index: 1000;
   overflow: auto;
+  z-index: 100000;
   position: fixed;
   transform: scale(0);
   backdrop-filter: blur(16px);
@@ -20,6 +21,9 @@
       right: 100px;
       cursor: pointer;
       position: absolute;
+      @include mediaQueries($xl) {
+        right: 25px;
+      }
     }
   }
   &__background {
@@ -32,9 +36,16 @@
     border-radius: 24px;
     background-color: $header__bg-color;
     @include flexLayout(flex, center, center, 0, row nowrap);
+    @include mediaQueries($sm){
+      padding: 20px;
+    }
   }
   &__text {
+    text-align: center;
     @include headingFonts($loader__shadow-color, 26px, 550, 22px, default);
+    @include mediaQueries($sm){
+      font-size: 24px;
+    }
   }
   &__buttons {
     margin-top: 20px;

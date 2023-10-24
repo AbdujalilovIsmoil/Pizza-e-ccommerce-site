@@ -40,7 +40,6 @@ const App = () => {
           path: "*",
           element: <Error />,
         },
-       
       ],
     },
   ]);

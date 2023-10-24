@@ -1,13 +1,14 @@
 import { get } from "lodash";
 import { useGet } from "hook";
 import { Button } from "components/fields";
+import { FilterModal } from "components/layouts";
 import { GroupCardFilter } from "assets/images/svg";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
 import { toggleProductModal, setProductId } from "store/productData";
-import { FilterModal } from ".";
 
 const GroupCard = () => {
+
   const dispatch = useDispatch();
   const { isFilterModalOpen }: any = useSelector((state) =>
     get(state, "filterData")

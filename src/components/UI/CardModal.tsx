@@ -2,14 +2,7 @@ import { useDelete } from "hook";
 import { Cart2 } from "assets/images/png";
 import { useQueryClient } from "@tanstack/react-query";
 
-const CardModal = ({
-  img,
-  name,
-  price,
-  description,
-  id,
-  cartId,
-}: any) => {
+const CardModal = ({ img, name, price, description, id, cartId }: any) => {
   const client = useQueryClient();
   const { mutate } = useDelete({
     queryKey: "cart",
