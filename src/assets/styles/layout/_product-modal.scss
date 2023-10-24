@@ -9,6 +9,42 @@
   backdrop-filter: blur(16px);
   transition: transform 200ms linear;
   background-color: rgba(25, 25, 25, 0.4);
+  &__content {
+    margin-top: 25px;
+    max-width: 400px;
+    &-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      @include headingFonts(
+        $heading-top__heading-color,
+        28px,
+        600,
+        28px,
+        default
+      );
+      @include mediaQueries($sm) {
+        font-size: 26px;
+      }
+    }
+    &-description {
+      margin-top: 10px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      @include headingFonts(
+        $heading-top__heading-color,
+        16px,
+        400,
+        28px,
+        default
+      );
+      @include mediaQueries($sm) {
+        font-size: 14px;
+      }
+    }
+  }
   &--open {
     transform: scale(1);
     transition: transform 200ms linear;
@@ -20,21 +56,25 @@
     position: relative;
     @include flexLayout(flex, center, center, 0, row nowrap);
     &-times {
-      top: 50px;
-      right: -100px;
+      top: 25px;
+      right: 0;
       cursor: pointer;
       position: absolute;
     }
   }
   &__background {
     padding: 30px;
+    width: 1070px;
     margin: 0 auto;
     overflow: auto;
     min-height: 445px;
-    width: 1070px;
     position: relative;
     border-radius: 24px;
     background-color: $header__bg-color;
+    @include mediaQueries($sm) {
+      padding: 15px;
+      margin-top: 75px;
+    }
   }
   &__category {
     left: 0;
@@ -52,6 +92,9 @@
     height: 100%;
     position: relative;
     @include flexLayout(flex, space-between, space-between, 60px, row nowrap);
+    @include mediaQueries(900px) {
+      @include flexLayout(flex, center, center, 60px, column wrap);
+    }
   }
   &__boxes {
     @include flexLayout(flex, flex-end, space-between, 0, column nowrap);
@@ -61,20 +104,34 @@
       width: 450px;
       min-height: 100%;
       @include flexLayout(flex, space-between, space-between, 0, column nowrap);
+      @include mediaQueries(900px) {
+        width: 100%;
+      }
     }
     &-img {
       width: 450px;
       height: 450px;
       object-fit: cover;
+      @include mediaQueries($sm) {
+        width: 300px;
+        height: 300px;
+      }
     }
     .item {
       &-header {
         @include flexLayout(flex, space-between, center, 0, row nowrap);
         &__box {
           @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+          @include mediaQueries(900px) {
+            @include flexLayout(flex, space-between, center, 12px, row nowrap);
+          }
           &-icon {
             width: 24px;
             height: 24px;
+            @include mediaQueries($sm) {
+              width: 20px;
+              height: 20px;
+            }
           }
           &-heading {
             @include headingFonts(
@@ -84,10 +141,17 @@
               28px,
               default
             );
+            @include mediaQueries($sm) {
+              font-size: 18px;
+            }
           }
           &-warning {
             width: 24px;
             height: 24px;
+            @include mediaQueries($sm) {
+              width: 20px;
+              height: 20px;
+            }
           }
         }
       }

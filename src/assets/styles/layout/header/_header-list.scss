@@ -31,7 +31,7 @@
       }
       &--open {
         transition: transform 150ms linear;
-        transform: translate(27.5%, -20px) scale(1);
+        transform: scale(1);
       }
       &__heading {
         white-space: nowrap;
