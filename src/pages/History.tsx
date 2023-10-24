@@ -153,15 +153,17 @@ const index = () => {
                                       {el?.productId?.description}
                                     </h5>
                                   </div>
-                                  <Button
-                                    type="button"
-                                    className="history-background__element-btn"
-                                  >
-                                    {el?.quantity} товар
-                                  </Button>
-                                  <h4 className="history-background__element-price">
-                                    {el?.productId?.price} ₽
-                                  </h4>
+                                  <div className="history-background__wrapper">
+                                    <Button
+                                      type="button"
+                                      className="history-background__element-btn"
+                                    >
+                                      {el?.quantity} товар
+                                    </Button>
+                                    <h4 className="history-background__element-price">
+                                      {el?.price} ₽
+                                    </h4>
+                                  </div>
                                 </li>
                               );
                             })}
