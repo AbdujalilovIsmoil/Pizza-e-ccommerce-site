@@ -13,6 +13,7 @@
   }
   &__modal {
     position: relative;
+    text-align: center;
     .small-modal {
       top: 60px;
       z-index: 1;
@@ -24,9 +25,13 @@
       transition: transform 150ms linear;
       background-color: $header__bg-color;
       box-shadow: 0px 2px 4px 0px $drop-down__bg-color;
+      @include mediaQueries(865px) {
+        background-color: $header-cart__bg-color;
+        transform: translate(27.5%, -20px) scale(0);
+      }
       &--open {
-        transform: scale(1);
         transition: transform 150ms linear;
+        transform: translate(27.5%, -20px) scale(1);
       }
       &__heading {
         white-space: nowrap;
@@ -37,6 +42,9 @@
           18px,
           default
         );
+        @include mediaQueries(865px) {
+          color: $header__bg-color;
+        }
       }
     }
   }
