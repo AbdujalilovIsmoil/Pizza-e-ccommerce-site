@@ -8,6 +8,12 @@
       48px,
       default
     );
+    @include mediaQueries($md) {
+      font-size: 30px;
+    }
+    @include mediaQueries($sm) {
+      font-size: 28px;
+    }
   }
   &-cart {
     &__item {
@@ -26,10 +32,27 @@
     }
     &__small {
       max-width: 500px;
+      @include mediaQueries(820px) {
+        max-width: 300px;
+      }
+      @include mediaQueries($sm) {
+        max-width: 230px;
+      }
+      @include mediaQueries(450px) {
+        max-width: 140px;
+      }
       &-img {
         width: 120px;
         height: 120px;
         object-fit: cover;
+        @include mediaQueries($md) {
+          width: 100px;
+          height: 100px;
+        }
+        @include mediaQueries($sm) {
+          width: 85px;
+          height: 85px;
+        }
       }
       &-heading {
         overflow: hidden;
@@ -42,6 +65,12 @@
           28px,
           default
         );
+        @include mediaQueries($md) {
+          font-size: 18px;
+        }
+        @include mediaQueries($sm) {
+          font-size: 14px;
+        }
       }
       &-description {
         margin-top: 5px;
@@ -56,6 +85,12 @@
           28px,
           default
         );
+        @include mediaQueries($sm) {
+          font-size: 12px;
+        }
+        @include mediaQueries(450px) {
+          -webkit-line-clamp: 1;
+        }
       }
       &-regular {
         margin-top: 8px;
@@ -71,6 +106,12 @@
     &__counter {
       &-price {
         @include headingFonts($header-cart__bg-color, 20px, 600, 28px, default);
+        @include mediaQueries($md) {
+          font-size: 18px;
+        }
+        @include mediaQueries($sm) {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -80,6 +121,12 @@
     @include flexLayout(flex, flex-end, center, 0, row nowrap);
     &__heading {
       @include headingFonts($header-cart__bg-color, 20px, 600, 28px, default);
+      @include mediaQueries($md) {
+        font-size: 18px;
+      }
+      @include mediaQueries($sm) {
+        font-size: 16px;
+      }
     }
   }
   &-carousel {
@@ -92,6 +139,9 @@
       height: 100%;
       position: absolute;
       @include flexLayout(flex, space-between, center, 0, row nowrap);
+      @include mediaQueries($xl) {
+        display: none;
+      }
       &-btn {
         @include flexLayout(flex, center, center, 0, row nowrap);
         @include Button(
@@ -103,7 +153,6 @@
         );
         &--right {
           right: -50px;
-          position: absolute;
         }
         &--left {
           left: -50px;
@@ -137,6 +186,12 @@
         height: 225px;
         object-fit: cover;
         border-radius: 12px;
+        @include mediaQueries(1349px) {
+          height: 350px !important;
+        }
+        @include mediaQueries($sm){
+          height: 325px !important;
+        }
       }
     }
     &__content {
@@ -203,6 +258,9 @@
       .user {
         width: 100% !important;
         @include flexLayout(flex, space-between, center, 20px, row nowrap);
+        @include mediaQueries($md){
+          @include flexLayout(flex, flex-start, center, 20px, column nowrap);
+        }
         &-label {
           position: relative;
           width: 100% !important;
@@ -250,6 +308,7 @@
     &-header {
       margin: 50px 0 24px 0;
       @include flexLayout(flex, space-between, center, 0, row nowrap);
+
       &__box {
         &-heading {
           @include headingFonts(
@@ -268,6 +327,7 @@
         background-color: $header__bg-color;
         border: 1px solid $header-top__border-color;
         @include flexLayout(flex, flex-start, center, 0, row nowrap);
+
       }
       &__send {
         width: 100%;
@@ -305,6 +365,9 @@
       &__container {
         margin-top: 16px;
         @include flexLayout(flex, space-between, center, 20px, row nowrap);
+        @include mediaQueries($md){
+          @include flexLayout(flex, space-between, center, 20px, column nowrap);
+        }
       }
       &__label {
         width: 100%;

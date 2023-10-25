@@ -6,7 +6,7 @@
   @include mediaQueries(900px) {
     padding: 0 40px;
   }
-  @include mediaQueries($md){
+  @include mediaQueries($md) {
     padding: 0 20px;
   }
   @include mediaQueries($sm) {

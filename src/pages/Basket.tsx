@@ -210,6 +210,20 @@ const index = () => {
                   delay: 2000,
                   disableOnInteraction: false,
                 }}
+                breakpoints={{
+                  320: {
+                    slidesPerView: 1,
+                  },
+                  700: {
+                    slidesPerView: 2,
+                  },
+                  992: {
+                    slidesPerView: 4,
+                  },
+                  1350: {
+                    slidesPerView: 5,
+                  },
+                }}
               >
                 {product?.data?.allProduct?.length > 0 &&
                   get(product, "data.allProduct", []).map((el: any) => {
