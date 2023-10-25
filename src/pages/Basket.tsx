@@ -1,6 +1,8 @@
 import * as Yup from "yup";
-import { useEffect, useState } from "react";
+import { forEach, get } from "lodash";
+import { api, storage } from "services";
 import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import { Button, Input } from "components/fields";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useGet, usePost, useTokenGet } from "hook";
@@ -11,9 +13,6 @@ import {
   Basket1 as BasketIcon1,
   Basket2 as BasketIcon2,
 } from "assets/images/svg";
-import { forEach, get } from "lodash";
-import axios from "axios";
-import { api, storage } from "services";
 
 interface FieldProps extends FastFieldProps {}
 
