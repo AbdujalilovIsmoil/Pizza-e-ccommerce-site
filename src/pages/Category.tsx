@@ -114,7 +114,7 @@ const Category = () => {
                         </div>
                         <div className="cards-footer__box">
                           <h4 className="cards-footer__box-heading">
-                            от {el.price} ₽
+                            {el.price} ₽
                           </h4>
                         </div>
                       </div>
