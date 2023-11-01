@@ -1,14 +1,14 @@
 import { get } from "lodash";
 import { useGet } from "hook";
+import Error from "pages/Error";
 import { Button } from "components/fields";
-import { FilterModal } from "components/layouts";
+import { FilterModal, Loader } from "components/layouts";
 import { GroupCardFilter } from "assets/images/svg";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
 import { toggleProductModal, setProductId } from "store/productData";
 
 const GroupCard = () => {
-
   const dispatch = useDispatch();
   const { isFilterModalOpen }: any = useSelector((state) =>
     get(state, "filterData")
@@ -20,7 +20,7 @@ const GroupCard = () => {
     document.body.classList.remove("hidden");
   }
 
-  const { data, isLoading, isError } = useGet({
+  const { data, isFetching, isError } = useGet({
     path: "/product",
     queryKey: "product",
   });
@@ -55,25 +55,11 @@ const GroupCard = () => {
                 </Button>
               </div>
             </div>
-            {isError && (
-              <div>
-                <h2>NOT FOUND</h2>
-              </div>
-            )}
-            {!isError && isLoading && (
-              <div>
-                <h2>Loader</h2>
-              </div>
-            )}
-            {!isLoading &&
-              !isError &&
-              get(data, "allProduct", []).length === 0 && (
-                <div>
-                  <h2>NO DATA</h2>
-                </div>
-              )}
+            {isError && <Error />}
+            {!isError && isFetching && <Loader />}
             <ul className="cards">
-              {!isLoading &&
+              {!isError &&
+                !isFetching &&
                 get(data, "allProduct", []).length > 0 &&
                 get(data, "allProduct", []).map((el: any) => {
                   return (
