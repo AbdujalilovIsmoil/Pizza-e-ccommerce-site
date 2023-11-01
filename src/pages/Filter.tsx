@@ -7,7 +7,9 @@ import { useSearchParams } from "react-router-dom";
 import { GroupCardFilter } from "assets/images/svg";
 import { toggleFilterOpenModal } from "store/filterData";
 import { setProductId, toggleProductModal } from "store/productData";
-import { FilterModal } from "components/layouts";
+import { FilterModal, Loader } from "components/layouts";
+import Error from "./Error";
+import { Empty } from "components/UI";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -62,59 +64,52 @@ const Filter = () => {
               </Button>
             </div>
           </div>
-          {isError && (
-            <div>
-              <h2>NOT FOUND</h2>
-            </div>
-          )}
-          {!isError && isLoading && (
-            <div>
-              <h2>Loader</h2>
-            </div>
-          )}
-          {!isLoading && !isError && retingData.length === 0 && (
-            <div>
-              <h2>NO DATA</h2>
-            </div>
-          )}
-          <ul className="cards">
-            {!isLoading &&
-              retingData.length > 0 &&
-              retingData.map((el: any) => {
-                return (
-                  <li className="cards__item" key={el.id}>
-                    <div className="cards__image">
-                      <img
-                        src={el.images["home"]}
-                        alt="card-1"
-                        title="card-1"
-                        className="cards__image-img"
-                      />
-                    </div>
-                    <div className="cards__content">
-                      <h4 className="cards__content-title">{el.name}</h4>
-                      <h4 className="cards__content-text">{el.description}</h4>
-                      <div className="cards-footer">
-                        <div className="cards-footer__box">
-                          <Button
-                            type="button"
-                            className="cards-footer__box-btn"
-                            onClick={() => clickButton(el._id)}
-                          >
-                            Выбрать
-                          </Button>
-                        </div>
-                        <div className="cards-footer__box">
-                          <h4 className="cards-footer__box-heading">
-                            от {el.price} ₽
-                          </h4>
+          {isError ? (
+            <Error />
+          ) : isLoading ? (
+            <Loader />
+          ) : (
+            <ul className="cards">
+              {retingData.length > 0 &&
+                retingData.map((el: any) => {
+                  return (
+                    <li className="cards__item" key={el.id}>
+                      <div className="cards__image">
+                        <img
+                          src={el.images["home"]}
+                          alt="card-1"
+                          title="card-1"
+                          className="cards__image-img"
+                        />
+                      </div>
+                      <div className="cards__content">
+                        <h4 className="cards__content-title">{el.name}</h4>
+                        <h4 className="cards__content-text">
+                          {el.description}
+                        </h4>
+                        <div className="cards-footer">
+                          <div className="cards-footer__box">
+                            <Button
+                              type="button"
+                              className="cards-footer__box-btn"
+                              onClick={() => clickButton(el._id)}
+                            >
+                              Выбрать
+                            </Button>
+                          </div>
+                          <div className="cards-footer__box">
+                            <h4 className="cards-footer__box-heading">
+                              от {el.price} ₽
+                            </h4>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                );
-              })}
-          </ul>
+                    </li>
+                  );
+                })}
+            </ul>
+          )}
+          {retingData.length === 0 && <Empty content="No other products" />}
         </li>
       </ul>
     </div>
