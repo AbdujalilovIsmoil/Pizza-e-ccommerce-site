@@ -1,19 +1,21 @@
+import Error from "./Error";
 import { get } from "lodash";
 import { api } from "services";
+import { Empty } from "components/UI";
 import { Button } from "components/fields";
 import { memo, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GroupCardFilter } from "assets/images/svg";
-import { setProductId, toggleProductModal } from "store/productData";
 import { useDispatch, useSelector } from "react-redux";
+import { FilterModal, Loader } from "components/layouts";
 import { toggleFilterOpenModal } from "store/filterData";
-import { FilterModal } from "components/layouts";
+import { setProductId, toggleProductModal } from "store/productData";
 
 const Category = () => {
   const dispatch = useDispatch();
   const [category, _] = useSearchParams();
-  const [isError, setIsError] = useState(false);
   const categoryQuery = category.get("search");
+  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [categoryData, setCategoryData] = useState<any>([]);
   const { isFilterModalOpen }: any = useSelector((state) =>
@@ -21,6 +23,7 @@ const Category = () => {
   );
 
   useEffect(() => {
+    setIsError(false);
     setIsLoading(true);
     api
       .get(`/product/category?category=${categoryQuery?.split("").join("")}`)
@@ -31,6 +34,7 @@ const Category = () => {
       })
       .catch(() => {
         setIsError(true);
+        setIsLoading(false);
       });
   }, [categoryQuery]);
 
@@ -70,59 +74,54 @@ const Category = () => {
               </Button>
             </div>
           </div>
-          {isError && (
-            <div>
-              <h2>NOT FOUND</h2>
-            </div>
-          )}
-          {!isError && isLoading && (
-            <div>
-              <h2>Loader</h2>
-            </div>
-          )}
-          {!isLoading && !isError && categoryData.length === 0 && (
-            <div>
-              <h2>NO DATA</h2>
-            </div>
-          )}
-          <ul className="cards">
-            {!isLoading &&
-              categoryData.length > 0 &&
-              categoryData.map((el: any) => {
-                return (
-                  <li className="cards__item" key={el.id}>
-                    <div className="cards__image">
-                      <img
-                        src={el.images["home"]}
-                        alt="card-1"
-                        title="card-1"
-                        className="cards__image-img"
-                      />
-                    </div>
-                    <div className="cards__content">
-                      <h4 className="cards__content-title">{el.name}</h4>
-                      <h4 className="cards__content-text">{el.description}</h4>
-                      <div className="cards-footer">
-                        <div className="cards-footer__box">
-                          <Button
-                            type="button"
-                            className="cards-footer__box-btn"
-                            onClick={() => clickButton(el._id)}
-                          >
-                            Выбрать
-                          </Button>
-                        </div>
-                        <div className="cards-footer__box">
-                          <h4 className="cards-footer__box-heading">
-                            {el.price} ₽
-                          </h4>
+          {isError ? (
+            <Error />
+          ) : isLoading ? (
+            <Loader />
+          ) : (
+            <ul className="cards">
+              {categoryData.length > 0 ? (
+                categoryData.map((el: any) => {
+                  return (
+                    <li className="cards__item" key={el.id}>
+                      <div className="cards__image">
+                        <img
+                          src={el.images["home"]}
+                          alt="card-1"
+                          title="card-1"
+                          className="cards__image-img"
+                        />
+                      </div>
+                      <div className="cards__content">
+                        <h4 className="cards__content-title">{el.name}</h4>
+                        <h4 className="cards__content-text">
+                          {el.description}
+                        </h4>
+                        <div className="cards-footer">
+                          <div className="cards-footer__box">
+                            <Button
+                              type="button"
+                              className="cards-footer__box-btn"
+                              onClick={() => clickButton(el._id)}
+                            >
+                              Выбрать
+                            </Button>
+                          </div>
+                          <div className="cards-footer__box">
+                            <h4 className="cards-footer__box-heading">
+                              {el.price} ₽
+                            </h4>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                );
-              })}
-          </ul>
+                    </li>
+                  );
+                })
+              ) : (
+                <Empty />
+              )}
+            </ul>
+          )}
         </li>
       </ul>
     </div>
