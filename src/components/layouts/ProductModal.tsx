@@ -10,18 +10,32 @@ import {
   ProductModalIcon2,
   ProductModalIcon3,
 } from "assets/images/svg";
+import Error from "pages/Error";
+import { Loader } from ".";
 
 const ProductModal = () => {
   const dispatch = useDispatch();
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [productModalData, setProductModalData] = useState<any[]>([]);
   const { isProductModal, modalId }: any = useSelector((state) =>
     get(state, "productData")
   );
 
   useEffect(() => {
-    api.get(`/product/${modalId}`).then((res) => {
-      setProductModalData([get(res, "data.viewProduct", {})]);
-    });
+    setIsError(false);
+    setIsLoading(true);
+    api
+      .get(`/product/${modalId}`)
+      .then((res) => {
+        setIsError(false);
+        setIsLoading(false);
+        setProductModalData([get(res, "data.viewProduct", {})]);
+      })
+      .catch(() => setIsError(true))
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [modalId]);
 
   const { mutate } = usePost({
@@ -52,7 +66,12 @@ const ProductModal = () => {
             className="product-modal__container-times"
           />
           <div className="product-modal__background">
-            {productModalData?.length > 0 &&
+            {isError ? (
+              <Error />
+            ) : isLoading ? (
+              <Loader />
+            ) : (
+              productModalData?.length > 0 &&
               productModalData?.map((el: any) => {
                 console.log(el);
                 return (
@@ -168,7 +187,8 @@ const ProductModal = () => {
                     </li>
                   </ul>
                 );
-              })}
+              })
+            )}
           </div>
         </div>
       </div>

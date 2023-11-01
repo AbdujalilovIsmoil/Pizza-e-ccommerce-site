@@ -28,10 +28,12 @@ const CardModalComponent = ({
     setIsCartModalOpen(false);
   };
 
-  const { data } = useTokenGet({
+  const { data, isFetching, isError } = useTokenGet({
     queryKey: "cart",
     path: "/user/cart",
   });
+
+  console.log(isError);
 
   const reduced = () => {
     data?.length > 0 &&
