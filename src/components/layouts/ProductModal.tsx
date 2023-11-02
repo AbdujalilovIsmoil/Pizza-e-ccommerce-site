@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { api } from "services";
+import { api, storage } from "services";
 import { usePost } from "hook";
 import { useEffect, useState } from "react";
 import { Button, Input } from "components/fields";

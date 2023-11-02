@@ -83,6 +83,14 @@ const Header = () => {
     get(state, "productData")
   );
 
+  const openCartModal = () => {
+    if (!storage.get("token")) {
+      setIsAuthModalOpen(true);
+    } else {
+      setIsCartModalOpen(true);
+    }
+  };
+
   return (
     <header className="header">
       <CardModal
@@ -191,7 +199,7 @@ const Header = () => {
             <Button
               type="button"
               className="header-list__btn"
-              onClick={() => setIsCartModalOpen(true)}
+              onClick={() => openCartModal()}
             >
               <img
                 alt="header-cart"

@@ -4,6 +4,8 @@ import { Button } from "components/fields";
 import { useNavigate } from "react-router-dom";
 import { CardModal, Empty } from "components/UI";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
+import { toggleProductModal } from "store/productData";
+import { useDispatch } from "react-redux";
 
 type CardModalType = {
   isCartModalOpen: boolean;
@@ -17,6 +19,7 @@ const CardModalComponent = ({
   const id: string[] = [];
   const price: number[] = [];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const closeCartModal = (e: any) => {
     if (e.target?.getAttribute("class") === "cart-modal cart-modal--open") {
@@ -24,17 +27,15 @@ const CardModalComponent = ({
     } else return false;
   };
 
-  const openBasketPage = () => {
-    navigate("/pages/basket");
-    setIsCartModalOpen(false);
-  };
-
   const { data, isLoading, isError } = useTokenGet({
     queryKey: "cart",
     path: "/user/cart",
   });
 
-  console.log(isError);
+  const openBasketPage = () => {
+    navigate("/pages/basket");
+    setIsCartModalOpen(false);
+  };
 
   const reduced = () => {
     data?.length > 0 &&
@@ -127,13 +128,20 @@ const CardModalComponent = ({
             <h4 className="cart-modal__footer-heading">
               Итого: {calcPrice()} ₽
             </h4>
-            <Button
-              type="button"
-              className="cart-modal__footer-btn"
-              onClick={() => openBasketPage()}
-            >
-              Перейти к товару
-            </Button>
+            {data?.length > 0 &&
+              data?.map((el: any) => {
+                return (
+                  el?.items?.length > 0 && (
+                    <Button
+                      type="button"
+                      onClick={() => openBasketPage()}
+                      className="cart-modal__footer-btn"
+                    >
+                      Перейти к товару
+                    </Button>
+                  )
+                );
+              })}
           </div>
         </div>
       </section>

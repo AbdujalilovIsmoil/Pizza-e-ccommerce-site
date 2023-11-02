@@ -1,15 +1,18 @@
 import { get } from "lodash";
 import { useGet } from "hook";
 import Error from "pages/Error";
+import { useState } from "react";
+import { storage } from "services";
 import { Button } from "components/fields";
-import { FilterModal, Loader } from "components/layouts";
 import { GroupCardFilter } from "assets/images/svg";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
+import { Auth, FilterModal, Loader } from "components/layouts";
 import { toggleProductModal, setProductId } from "store/productData";
 
 const GroupCard = () => {
   const dispatch = useDispatch();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const { isFilterModalOpen }: any = useSelector((state) =>
     get(state, "filterData")
   );
@@ -26,13 +29,21 @@ const GroupCard = () => {
   });
 
   const clickButton = (id: string) => {
-    dispatch(setProductId(id));
-    dispatch(toggleProductModal());
+    if (!storage.get("token")) {
+      setIsAuthModalOpen(true);
+    } else {
+      dispatch(setProductId(id));
+      dispatch(toggleProductModal());
+    }
   };
 
   return (
     <section className="group-card">
       <FilterModal />
+      <Auth
+        isAuthModalOpen={isAuthModalOpen}
+        setIsAuthModalOpen={setIsAuthModalOpen}
+      />
       <div className="container">
         <ul className="group-card__list">
           <li className="group-card__item">

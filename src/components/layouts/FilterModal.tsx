@@ -1,6 +1,9 @@
+import { Loader } from ".";
 import { get } from "lodash";
 import { useGet } from "hook";
+import Error from "pages/Error";
 import { storage } from "services";
+import { Empty } from "components/UI";
 import { Button, Input } from "components/fields";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFilterOpenModal } from "store/filterData";
@@ -71,23 +74,11 @@ const FilterModal = () => {
               />
             </div>
           </div>
-          {isError && (
-            <div>
-              <h2>NOT FOUND</h2>
-            </div>
-          )}
-          {!isError && isLoading && (
-            <div>
-              <h2>Loader</h2>
-            </div>
-          )}
+          {isError && <Error />}
+          {!isError && isLoading && <Loader />}
           {!isLoading &&
             !isError &&
-            get(data, "allProduct", []).length === 0 && (
-              <div>
-                <h2>NO DATA</h2>
-              </div>
-            )}
+            get(data, "allProduct", []).length === 0 && <Empty />}
           <ul className="filter-modal__list">
             <ul className="filter-modal__check-list">
               {retings?.length > 0 &&
