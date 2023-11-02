@@ -3,23 +3,23 @@ import { forEach, get } from "lodash";
 import { api, storage } from "services";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Input } from "components/fields";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useGet, usePost, useTokenGet } from "hook";
 import { Autoplay, Navigation } from "swiper/modules";
+import { useQueryClient } from "@tanstack/react-query";
 import { FastFieldProps, Field, Form, Formik } from "formik";
 import { setProductId, toggleProductModal } from "store/productData";
-import {
-  Basket1 as BasketIcon1,
-  Basket2 as BasketIcon2,
-} from "assets/images/svg";
 
 interface FieldProps extends FastFieldProps {}
 
 const index = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [basketData, setBasketData] = useState<any[]>([]);
-  const [radioValue, setRadioValue] = useState<string>("");
+  const [radioValue, setRadioValue] = useState<string>("Картой");
 
   const regex = new RegExp(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -47,6 +47,10 @@ const index = () => {
   });
 
   useEffect(() => {
+    if (!storage.get("token")) {
+      navigate("/");
+    }
+
     api
       .get(`/user/cart`, {
         headers: {
@@ -58,8 +62,6 @@ const index = () => {
         setBasketData([...get(response, "data[0].items", [])]);
       });
   }, []);
-
-  console.log(basketData);
 
   const renderData = () => {
     if (basketData.length > 0) {
@@ -106,10 +108,15 @@ const index = () => {
   const { mutate } = usePost({
     queryKey: "order",
     path: "/order/create",
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["order"] });
+    },
   });
 
   const onBasketUser = (e: any) => {
     mutate(e);
+    navigate("/");
+    storage.set("basket", "false");
   };
 
   const price: number[] = [];
@@ -255,28 +262,6 @@ const index = () => {
                     );
                   })}
               </Swiper>
-              <div className="basket-carousel__navigation">
-                <Button
-                  type="button"
-                  className="basket-carousel__navigation-btn basket-carousel__navigation-btn--left"
-                >
-                  <img
-                    alt="basket2"
-                    src={BasketIcon2}
-                    className="basket-carousel__navigation-icon"
-                  />
-                </Button>
-                <Button
-                  type="button"
-                  className="basket-carousel__navigation-btn basket-carousel__navigation-btn--right"
-                >
-                  <img
-                    alt="basket1"
-                    src={BasketIcon1}
-                    className="basket-carousel__navigation-icon"
-                  />
-                </Button>
-              </div>
             </ul>
           </div>
 
@@ -561,6 +546,7 @@ const index = () => {
                         name="soum"
                         type="radio"
                         value="Наличными"
+                        checked={radioValue === "Наличными"}
                         className="basket-form-order__label-input"
                         onChange={(e) => setRadioValue(e.target.value)}
                       />
@@ -573,6 +559,7 @@ const index = () => {
                         name="soum"
                         type="radio"
                         value="Картой"
+                        checked={radioValue === "Картой"}
                         className="basket-form-order__label-input"
                         onChange={(e) => setRadioValue(e.target.value)}
                       />

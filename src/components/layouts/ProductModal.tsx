@@ -1,6 +1,7 @@
 import { get } from "lodash";
 import { api, storage } from "services";
 import { usePost } from "hook";
+import Error from "pages/Error";
 import { useEffect, useState } from "react";
 import { Button, Input } from "components/fields";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,12 +11,12 @@ import {
   ProductModalIcon2,
   ProductModalIcon3,
 } from "assets/images/svg";
-import Error from "pages/Error";
 import { Loader } from ".";
 
 const ProductModal = () => {
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
+  const [score, setScore] = useState<string>("20");
   const [isLoading, setIsLoading] = useState(false);
   const [productModalData, setProductModalData] = useState<any[]>([]);
   const { isProductModal, modalId }: any = useSelector((state) =>
@@ -119,10 +120,13 @@ const ProductModal = () => {
                           <ul className="item-buttons">
                             <li className="item-buttons__box">
                               <Input
+                                value="20"
                                 type="radio"
                                 id="button1"
                                 name="button-radio"
+                                checked={score === "20"}
                                 className="item-buttons__box-input"
+                                onChange={(e) => setScore(e.target.value)}
                               />
                               <label
                                 htmlFor="button1"
@@ -133,10 +137,13 @@ const ProductModal = () => {
                             </li>
                             <li className="item-buttons__box">
                               <Input
+                                value="28"
                                 type="radio"
                                 id="button2"
                                 name="button-radio"
+                                checked={score === "28"}
                                 className="item-buttons__box-input"
+                                onChange={(e) => setScore(e.target.value)}
                               />
                               <label
                                 htmlFor="button2"
@@ -147,10 +154,13 @@ const ProductModal = () => {
                             </li>
                             <li className="item-buttons__box">
                               <Input
+                                value="33"
                                 type="radio"
                                 id="button3"
                                 name="button-radio"
+                                checked={score === "33"}
                                 className="item-buttons__box-input"
+                                onChange={(e) => setScore(e.target.value)}
                               />
                               <label
                                 htmlFor="button3"

@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { storage } from "services";
 import { useTokenGet } from "hook";
 import { Button } from "components/fields";
@@ -91,6 +91,11 @@ const Header = () => {
     }
   };
 
+  const history = useTokenGet({
+    path: "/order",
+    queryKey: "order",
+  });
+
   return (
     <header className="header">
       <CardModal
@@ -125,7 +130,7 @@ const Header = () => {
                 </h4>
 
                 <ul className="header-open">
-                  {storage.get("token") && (
+                  {get(history, "data")?.length > 0 && (
                     <li className="header-open__item">
                       <Link to="/pages/history">
                         <h4 className="header-open__item-heading header-open__item-heading--regular">

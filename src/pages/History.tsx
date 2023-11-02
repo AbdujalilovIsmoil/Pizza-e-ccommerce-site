@@ -174,12 +174,14 @@ const index = () => {
                 </div>
               );
             })}
-          <div className="history-pagination">
-            <Pagination
-              onPageChange={handleClick}
-              pageCount={allPageCount?.length}
-            />
-          </div>
+          {data?.length >= 5 && (
+            <div className="history-pagination">
+              <Pagination
+                onPageChange={handleClick}
+                pageCount={allPageCount?.length}
+              />
+            </div>
+          )}
         </div>
       </section>
     </>
