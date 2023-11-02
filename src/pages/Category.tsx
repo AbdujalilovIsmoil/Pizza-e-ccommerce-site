@@ -80,7 +80,7 @@ const Category = () => {
             <Loader />
           ) : (
             <ul className="cards">
-              {categoryData.length > 0 ? (
+              {categoryData.length > 0 &&
                 categoryData.map((el: any) => {
                   return (
                     <li className="cards__item" key={el.id}>
@@ -116,10 +116,7 @@ const Category = () => {
                       </div>
                     </li>
                   );
-                })
-              ) : (
-                <Empty />
-              )}
+                })}
             </ul>
           )}
         </li>

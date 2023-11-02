@@ -3,6 +3,8 @@ import { Button } from "components/fields";
 import { useNavigate } from "react-router-dom";
 import { CardModal, Empty } from "components/UI";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
+import Error from "pages/Error";
+import { Loader } from ".";
 
 type CardModalType = {
   isCartModalOpen: boolean;
@@ -28,7 +30,7 @@ const CardModalComponent = ({
     setIsCartModalOpen(false);
   };
 
-  const { data, isFetching, isError } = useTokenGet({
+  const { data, isLoading, isError } = useTokenGet({
     queryKey: "cart",
     path: "/user/cart",
   });
@@ -82,36 +84,43 @@ const CardModalComponent = ({
               </div>
             </div>
             <div className="cart-modal__body">
-              <ul className="cart-list">
-                {data?.length > 0 &&
-                  data?.map((el: any) => {
-                    id.push(el._id);
-                    return (
-                      el?.items?.length > 0 &&
-                      el?.items?.map((el: any) => {
-                        return (
-                          <CardModal
-                            cartId={id}
-                            id={el._id}
-                            key={el._id}
-                            price={el.price}
-                            quantity={el?.quantity}
-                            name={el?.productId?.name}
-                            img={el?.productId?.images?.home}
-                            description={el?.productId?.description}
-                          />
-                        );
-                      })
-                    );
-                  })}
-              </ul>
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <ul className="cart-list">
+                  {data?.length > 0 &&
+                    data?.map((el: any) => {
+                      id.push(el._id);
+                      return (
+                        el?.items?.length > 0 &&
+                        el?.items?.map((el: any) => {
+                          return (
+                            <CardModal
+                              cartId={id}
+                              id={el._id}
+                              key={el._id}
+                              price={el.price}
+                              quantity={el?.quantity}
+                              name={el?.productId?.name}
+                              img={el?.productId?.images?.home}
+                              description={el?.productId?.description}
+                            />
+                          );
+                        })
+                      );
+                    })}
+                </ul>
+              )}
+              {data?.length > 0 &&
+                data?.map((el: any) => {
+                  return (
+                    el?.items.length === 0 && (
+                      <Empty content="Your cart is empty" />
+                    )
+                  );
+                })}
             </div>
           </div>
-          {data?.length > 0 &&
-            data?.map((el: any) => {
-              return el?.items.length === 0 && <Empty />;
-            })}
-          {data?.length === 0 && <Empty />}
 
           <div className="cart-modal__footer">
             <h4 className="cart-modal__footer-heading">

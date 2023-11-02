@@ -11,6 +11,7 @@
   background-color: rgba(25, 25, 25, 0.4);
   @include flexLayout(flex, flex-end, flex-start, 0, row nowrap);
   &-empty {
+    margin-top: 100px;
     text-align: center;
     &__background {
       width: 100px;
