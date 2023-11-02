@@ -1,7 +1,6 @@
 import Error from "./Error";
 import { get } from "lodash";
 import { api } from "services";
-import { Empty } from "components/UI";
 import { Button } from "components/fields";
 import { memo, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";

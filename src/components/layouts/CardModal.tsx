@@ -1,10 +1,9 @@
+import { Loader } from ".";
 import { useTokenGet } from "hook";
 import { Button } from "components/fields";
 import { useNavigate } from "react-router-dom";
 import { CardModal, Empty } from "components/UI";
 import { FilterModalIcon1 } from "assets/images/svg/filter";
-import Error from "pages/Error";
-import { Loader } from ".";
 
 type CardModalType = {
   isCartModalOpen: boolean;
