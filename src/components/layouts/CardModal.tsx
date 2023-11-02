@@ -84,7 +84,9 @@ const CardModalComponent = ({
               </div>
             </div>
             <div className="cart-modal__body">
-              {isLoading ? (
+              {isError ? (
+                <Empty content="Your cart is empty" />
+              ) : isLoading ? (
                 <Loader />
               ) : (
                 <ul className="cart-list">
