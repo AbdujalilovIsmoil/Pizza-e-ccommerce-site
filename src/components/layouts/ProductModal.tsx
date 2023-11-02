@@ -1,3 +1,4 @@
+import { Loader } from ".";
 import { get } from "lodash";
 import { api } from "services";
 import { usePost } from "hook";
@@ -11,7 +12,6 @@ import {
   ProductModalIcon2,
   ProductModalIcon3,
 } from "assets/images/svg";
-import { Loader } from ".";
 
 const ProductModal = () => {
   const dispatch = useDispatch();
@@ -42,7 +42,8 @@ const ProductModal = () => {
   const { mutate } = usePost({
     queryKey: "cart",
     path: "/user/cart",
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data.message);
       dispatch(toggleProductModal());
       dispatch(smallProductModal(true));
 
