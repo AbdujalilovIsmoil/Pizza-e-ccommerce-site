@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { storage } from "services";
 import { useTokenGet } from "hook";
 import { Button } from "components/fields";
@@ -78,10 +78,6 @@ const Header = () => {
     path: "/cart",
     queryKey: "cart",
   });
-
-  const { smallProductModal }: any = useSelector((state) =>
-    get(state, "productData")
-  );
 
   const openCartModal = () => {
     if (!storage.get("token")) {
@@ -219,13 +215,6 @@ const Header = () => {
                 </h4>
               </div>
             </Button>
-            <div
-              className={`small-modal ${
-                smallProductModal && "small-modal--open"
-              }`}
-            >
-              <h4 className="small-modal__heading">Товар добавлен в корзину</h4>
-            </div>
           </div>
           <div className="header-list__menu">
             {isMenuOpen ? (

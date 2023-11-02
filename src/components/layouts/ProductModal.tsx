@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import { api, storage } from "services";
+import { api } from "services";
 import { usePost } from "hook";
 import Error from "pages/Error";
 import { useEffect, useState } from "react";
