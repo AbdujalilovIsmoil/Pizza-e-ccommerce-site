@@ -195,6 +195,7 @@
           default,
           default
         );
+
       }
     }
     &-menu {
@@ -249,6 +250,9 @@
             22px,
             default
           );
+          &:hover{
+            color: $header-cart__bg-color;
+          }
         }
         &-down {
           width: 15px;
