@@ -6,7 +6,7 @@
     min-height: 343px;
     border-radius: 15px;
     background-color: $categories__heading-color;
-    @include flexLayout(flex, space-between, center, 0, column nowrap);
+    @include flexLayout(flex, space-between, space-between, 0, column nowrap);
     &-img {
       height: 200px;
       object-fit: cover;

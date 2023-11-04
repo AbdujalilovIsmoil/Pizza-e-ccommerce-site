@@ -104,7 +104,9 @@ const RestangleCard = () => {
                       title={el.text}
                       className="restangle-card__item-img"
                     />
-                    <h4 className="restangle-card__item-heading">{el.text}</h4>
+                    <h4 className="restangle-card__item-heading">
+                      {el.text}
+                    </h4>
                   </li>
                 </SwiperSlide>
               );
