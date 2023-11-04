@@ -180,7 +180,8 @@ const Header = () => {
                 isMenuOpen && "header-list-menu--open"
               }`}
             >
-              {categories.length > 0 &&
+              {storage.get("token") &&
+                categories.length > 0 &&
                 categories.map((el: Tcategories) => {
                   return (
                     <li
