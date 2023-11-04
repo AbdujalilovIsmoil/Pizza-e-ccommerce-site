@@ -171,7 +171,7 @@ const History = () => {
               </div>
             );
           })}
-        {data?.length >= 5 && (
+        {data?.length > 5 && (
           <div className="history-pagination">
             <Pagination
               onPageChange={handleClick}

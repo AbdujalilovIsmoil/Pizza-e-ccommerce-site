@@ -1,0 +1,312 @@
+.header {
+  top: 0;
+  z-index: 10;
+  position: sticky;
+  background-color: $header__bg-color;
+  &-open {
+    top: 90px;
+    opacity: 0;
+    right: 0;
+    width: 285px;
+    cursor: default;
+    min-height: 50px;
+    visibility: hidden;
+    position: absolute;
+    border-radius: 12px;
+    transition: all 150ms linear;
+    background-color: $header__bg-color;
+    border: 1px solid $header-top__border-color;
+    box-shadow: 0px 2px 8px 0px $drop-down__bg-color;
+    @include mediaQueries($sm) {
+      right: 0;
+    }
+    &::after {
+      left: 75%;
+      top: -15px;
+      content: "";
+      position: absolute;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 16px solid $header__bg-color;
+      -webkit-filter: drop-shadow(0px 2px 8px $drop-down__bg-color);
+      filter: drop-shadow(0px 2px 8px $drop-down__bg-color);
+      @include mediaQueries($sm) {
+        left: 80%;
+      }
+    }
+    &__item {
+      cursor: pointer;
+      padding: 20px 20px;
+      @include mediaQueries($sm) {
+        padding: 15px 20px;
+      }
+      &-btn {
+        letter-spacing: 0.8px;
+        transition: opacity 150ms linear;
+        @include headingFonts(
+          $heading-cart__heading-color,
+          16px,
+          400,
+          22px,
+          default
+        );
+        @include Button(transparent, none, 0, 0, default);
+        &:hover {
+          opacity: 0.8;
+        }
+        @include mediaQueries($sm) {
+          font-size: 14px;
+        }
+      }
+
+      &:first-child {
+        color: $header-cart__bg-color;
+        border-bottom: 1px solid $header-top__border-color;
+        @include headingFonts($header-cart__bg-color, 16px, 600, 20px, default);
+      }
+      &:last-child {
+        border-top: 1px solid $header-top__border-color;
+      }
+      &:nth-child(2) {
+        padding: 16px 20px 20px 20px;
+      }
+
+      &-heading {
+        &--regular {
+          &:hover .header-open__item-heading {
+            color: $header-cart__bg-color;
+          }
+          transition: color 150ms linear;
+          @include headingFonts(
+            $heading-top__heading-color,
+            16px,
+            400,
+            20px,
+            default
+          );
+          @include mediaQueries($sm) {
+            font-size: 14px;
+          }
+          &:hover {
+            color: $header-cart__bg-color;
+          }
+        }
+      }
+    }
+  }
+  &-list {
+    @include flexLayout(flex, space-between, center, 0, row nowrap);
+  }
+  &__border-bottom {
+    border-bottom: 1px solid $header-top__border-color;
+  }
+  .header-top {
+    z-index: 2;
+    position: relative;
+    @include flexLayout(flex, space-between, center, 0, row nowrap);
+    &__list {
+      width: 100%;
+      @include flexLayout(flex, space-between, center, 40px, row nowrap);
+    }
+    &__item {
+      padding: 10px 0;
+      @include flexLayout(flex, center, center, 10px, row nowrap);
+      &--hover {
+        cursor: pointer;
+        &:hover .header-top__item-down {
+          transform: rotate(180deg);
+          color: $header-cart__bg-color;
+        }
+        &:hover .header-top__item-heading {
+          color: $header-cart__bg-color;
+        }
+        &:hover .header-open {
+          top: 45px;
+          opacity: 1;
+          visibility: visible;
+          transition: all 150ms linear;
+        }
+      }
+      &-heading {
+        transition: color 150ms linear;
+        @include headingFonts(
+          $heading-top__heading-color,
+          14px,
+          400,
+          18px,
+          default
+        );
+        @include mediaQueries($sm) {
+          font-size: 12px;
+        }
+      }
+      &-down {
+        width: 12px;
+        height: 12px;
+        transition: color 150ms linear, transform 150ms linear;
+      }
+      &-account {
+        width: 20px;
+        height: 20px;
+        @include mediaQueries($sm) {
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+  }
+  .header-list {
+    padding: 10px 0;
+    &__menu {
+      display: none;
+      &-icon {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+      @include mediaQueries(865px) {
+        display: block;
+      }
+    }
+    &__container {
+      @include flexLayout(flex, flex-start, center, 0, row nowrap);
+    }
+    &-menu {
+      margin-top: 5px;
+      margin-left: 60px;
+      @include flexLayout(flex, flex-start, center, 30px, nowrap row);
+    }
+    &__intro {
+      cursor: pointer;
+      @include flexLayout(flex, flex-start, center, 12px, row nowrap);
+      &:hover &-heading {
+        color: $header-cart__bg-color;
+      }
+      &-icon {
+        height: 32px;
+        width: 32px;
+      }
+      &-heading {
+        transition: color 150ms linear;
+        @include headingFonts(
+          $heading-top__heading-color,
+          18px,
+          400,
+          default,
+          default
+        );
+      }
+    }
+    &-menu {
+      @include mediaQueries(955px) {
+        margin-left: 20px;
+      }
+      @include mediaQueries(865px) {
+        top: 85px;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        margin-left: 0;
+        position: fixed;
+        transition: left 150ms linear;
+        background-color: $header__bg-color;
+        @include flexLayout(flex, flex-start, flex-start, 20px, column nowrap);
+        &--open {
+          left: 0;
+          transition: left 150ms linear;
+        }
+      }
+      &__item {
+        cursor: pointer;
+        position: relative;
+        @include flexLayout(flex, flex-start, center, 10px, row nowrap);
+        &:last-child {
+          padding: 10px 0;
+        }
+        &:hover &-heading {
+          color: $header-cart__bg-color;
+        }
+        &:hover &-down {
+          transform: rotate(180deg);
+          color: $header-cart__bg-color;
+        }
+        &:hover .header-drop-down {
+          top: 50px;
+          opacity: 1;
+          visibility: visible;
+        }
+        &-block {
+          cursor: pointer;
+          @include flexLayout(flex, flex-start, center, 10px, row nowrap);
+        }
+        &-heading {
+          transition: color 150ms linear;
+          @include headingFonts(
+            $heading-top__heading-color,
+            16px,
+            400,
+            22px,
+            default
+          );
+        }
+        &-down {
+          width: 15px;
+          height: 15px;
+          transition: color 150ms linear, transform 150ms linear;
+        }
+      }
+    }
+    &__btn {
+      @include flexLayout(flex, center, center, 10px, row nowrap);
+      @include Button(
+        $header-cart__bg-color,
+        none,
+        4px,
+        8px 16px,
+        opacity 150ms linear
+      );
+      &:hover {
+        opacity: 0.8;
+      }
+      &-cart {
+        width: 20px;
+        height: 24px;
+        padding: 1.5px 0px;
+      }
+
+      &-heading {
+        @include headingFonts($header__bg-color, 16px, 400, 22px, default);
+        @include mediaQueries(865px) {
+          color: $header-cart__bg-color;
+        }
+      }
+      @include mediaQueries(865px) {
+        right: 40px;
+        width: 70px;
+        height: 70px;
+        bottom: 20px;
+        z-index: 10000;
+        position: fixed;
+        border-radius: 50%;
+      }
+      @include mediaQueries($sm) {
+        right: 20px;
+      }
+    }
+    &__background {
+      @include mediaQueries(865px) {
+        top: -10px;
+        width: 40px;
+        right: -10px;
+        height: 40px;
+        padding: 10px;
+        position: absolute;
+        border-radius: 50%;
+        background-color: $header__bg-color;
+        border: 2px solid $header-cart__bg-color;
+        @include flexLayout(flex, center, center, 0, row nowrap);
+      }
+    }
+  }
+}

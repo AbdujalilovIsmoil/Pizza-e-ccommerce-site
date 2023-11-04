@@ -1,4 +1,3 @@
-import * as Yup from "yup";
 import { forEach, get } from "lodash";
 import { api, storage } from "services";
 import { useDispatch } from "react-redux";
@@ -9,37 +8,22 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useGet, usePost, useTokenGet } from "hook";
 import { Autoplay, Navigation } from "swiper/modules";
 import { useQueryClient } from "@tanstack/react-query";
-import { FastFieldProps, Field, Form, Formik } from "formik";
 import { setProductId, toggleProductModal } from "store/productData";
-
-interface FieldProps extends FastFieldProps {}
 
 const Basket = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [dom, setDom] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [etaj, setEtaj] = useState<string>("");
+  const [podezd, setPodezd] = useState<string>("");
+  const [mobile, setMobile] = useState<string>("");
+  const [street, setStreet] = useState<string>("");
+  const [domofon, setDomofon] = useState<string>("");
+  const [kvartira, setKvartira] = useState<string>("");
   const [basketData, setBasketData] = useState<any[]>([]);
-  const [radioValue, setRadioValue] = useState<string>("Картой");
-
-  const regex = new RegExp(
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  );
-
-  const validationSchema = Yup.object({
-    userName: Yup.string().trim().required("Username is not entered"),
-    phone: Yup.string().trim().required("Phone is not entered"),
-    email: Yup.string()
-      .trim()
-      .required("Email is not entered")
-      .email("User email is invalid")
-      .matches(regex, "User email is invalid"),
-    home: Yup.string().required("Home is not entered"),
-    floor: Yup.string().required("Floor is not entered"),
-    enter: Yup.string().required("Enter is not entered "),
-    street: Yup.string().required("Street is not entered"),
-    intercom: Yup.string().required("Intercom is not entered"),
-    apartment: Yup.string().required("Apartment is not entered"),
-  });
+  const [payment, setPayment] = useState<string>("Картой");
 
   const { data } = useTokenGet({
     queryKey: "cart",
@@ -75,47 +59,30 @@ const Basket = () => {
     }
   };
 
-  const initialState = {
-    home: "",
-    phone: "",
-    floor: "",
-    enter: "",
-    street: "",
-    intercom: "",
-    apartment: "",
-    userName: "",
-    soum: radioValue,
-    email: "",
-  };
-
-  const postData = {
-    orderItems: renderData(),
-    userItems: [
-      {
-        name: initialState.userName,
-        mobile: initialState.phone,
-      },
-    ],
-    street: initialState.street,
-    dom: initialState.home,
-    podezd: initialState.enter,
-    etaj: initialState.floor,
-    kvartira: initialState.apartment,
-    domofon: initialState.intercom,
-    payment: initialState.soum,
-  };
-
   const { mutate } = usePost({
     queryKey: "order",
     path: "/order/create",
     onSuccess: () => {
+      navigate("/");
       queryClient.invalidateQueries({ queryKey: ["order"] });
     },
   });
 
   const onBasketUser = (e: any) => {
-    mutate(e);
-    navigate("/");
+    e.preventDefault();
+    const postData = {
+      dom,
+      etaj,
+      podezd,
+      street,
+      domofon,
+      payment,
+      kvartira,
+      orderItems: renderData(),
+      userItems: [{ name, mobile }],
+    };
+
+    mutate(postData);
     storage.set("basket", "false");
   };
 
@@ -265,305 +232,174 @@ const Basket = () => {
         </div>
 
         <div className="basket-form">
-          <Formik
-            initialValues={initialState}
-            validationSchema={validationSchema}
-            onSubmit={() => onBasketUser(postData)}
-          >
-            <Form className="basket-form-user">
-              <h4 className="basket-form-user__title">О вас</h4>
-              <div className="user">
-                <label className="user-label" htmlFor="userName">
-                  <h4 className="user-label-heading">Имя*</h4>
-                  <Field name="userName">
-                    {({ field, meta }: FieldProps) => {
-                      return (
-                        <>
-                          <Input
-                            type="text"
-                            {...field}
-                            id="userName"
-                            className={`user__input ${
-                              meta.touched && meta.error && "user__input--error"
-                            }`}
-                          />
-                          {meta.touched && meta.error && (
-                            <h4 className="user__input-error">{meta.error}</h4>
-                          )}
-                        </>
-                      );
-                    }}
-                  </Field>
-                </label>
-                <label className="user-label" htmlFor="phone">
-                  <h4 className="user-label-heading">Номер телефона*</h4>
-                  <Field name="phone">
-                    {({ field, meta }: FieldProps) => {
-                      return (
-                        <>
-                          <Input
-                            {...field}
-                            id="phone"
-                            type="number"
-                            className={`user__input ${
-                              meta.touched && meta.error && "user__input--error"
-                            }`}
-                          />
-                          {meta.touched && meta.error && (
-                            <h4 className="user__input-error">{meta.error}</h4>
-                          )}
-                        </>
-                      );
-                    }}
-                  </Field>
-                </label>
-                <label className="user-label" htmlFor="email">
-                  <h4 className="user-label-heading">Почта</h4>
-                  <Field name="email">
-                    {({ field, meta }: FieldProps) => {
-                      return (
-                        <>
-                          <Input
-                            {...field}
-                            id="email"
-                            type="email"
-                            className={`user__input ${
-                              meta.touched && meta.error && "user__input--error"
-                            }`}
-                          />
-                          {meta.touched && meta.error && (
-                            <h4 className="user__input-error">{meta.error}</h4>
-                          )}
-                        </>
-                      );
-                    }}
-                  </Field>
-                </label>
-              </div>
+          <form className="basket-form-user" onSubmit={(e) => onBasketUser(e)}>
+            <h4 className="basket-form-user__title">О вас</h4>
+            <div className="user">
+              <label className="user-label" htmlFor="name">
+                <h4 className="user-label-heading">Имя*</h4>
 
-              <div className="basket-form-header">
-                <div className="basket-form-header__box">
-                  <h4 className="basket-form-header__box-heading">
-                    Добавить к заказу?
-                  </h4>
-                </div>
-              </div>
-              <div className="basket-form-delivery">
-                <Field name="street">
-                  {({ field, meta }: FieldProps) => {
-                    return (
-                      <label
-                        htmlFor="street"
-                        className="basket-form-delivery__label"
-                      >
-                        <h4 className="user-label-heading">Улица</h4>
-                        <Input
-                          {...field}
-                          id="street"
-                          type="text"
-                          className={`basket-form-delivery__label-input ${
-                            meta.touched &&
-                            meta.error &&
-                            "basket-form-delivery__label-input--error"
-                          }`}
-                        />
-                        {meta.touched && meta.error && (
-                          <h4 className="basket-form-delivery__label-input-error">
-                            {meta.error}
-                          </h4>
-                        )}
-                      </label>
-                    );
-                  }}
-                </Field>
+                <Input
+                  id="name"
+                  type="text"
+                  value={name}
+                  required={true}
+                  className="user__input"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </label>
+              <label className="user-label" htmlFor="mobile">
+                <h4 className="user-label-heading">Номер телефона*</h4>
+                <Input
+                  id="mobile"
+                  type="number"
+                  value={mobile}
+                  required={true}
+                  className="user__input"
+                  onChange={(e) => setMobile(e.target.value)}
+                />
+              </label>
+              <label className="user-label" htmlFor="email">
+                <h4 className="user-label-heading">Почта</h4>
+                <Input
+                  id="email"
+                  type="email"
+                  required={true}
+                  className="user__input"
+                />
+              </label>
+            </div>
 
-                <div className="basket-form-delivery__container">
-                  <Field name="home">
-                    {({ field, meta }: FieldProps) => {
-                      return (
-                        <label
-                          htmlFor="home"
-                          className="basket-form-delivery__label"
-                        >
-                          <h4 className="basket-form-delivery__label-heading">
-                            Дом
-                          </h4>
-                          <Input
-                            id="home"
-                            {...field}
-                            type="number"
-                            className={`basket-form-delivery__label-input ${
-                              meta.touched &&
-                              meta.error &&
-                              "basket-form-delivery__label-input--error"
-                            }`}
-                          />
-                          {meta.touched && meta.error && (
-                            <h4 className="basket-form-delivery__label-input-error">
-                              {meta.error}
-                            </h4>
-                          )}
-                        </label>
-                      );
-                    }}
-                  </Field>
-                  <Field name="enter">
-                    {({ field, meta }: FieldProps) => {
-                      return (
-                        <label
-                          htmlFor="enter"
-                          className="basket-form-delivery__label"
-                        >
-                          <h4 className="basket-form-delivery__label-heading">
-                            Подъезд
-                          </h4>
-                          <Input
-                            id="enter"
-                            {...field}
-                            type="number"
-                            className={`basket-form-delivery__label-input ${
-                              meta.touched &&
-                              meta.error &&
-                              "basket-form-delivery__label-input--error"
-                            }`}
-                          />
-                          {meta.touched && meta.error && (
-                            <h4 className="basket-form-delivery__label-input-error">
-                              {meta.error}
-                            </h4>
-                          )}
-                        </label>
-                      );
-                    }}
-                  </Field>
-                  <Field name="floor">
-                    {({ field, meta }: FieldProps) => {
-                      return (
-                        <label
-                          htmlFor="floor"
-                          className="basket-form-delivery__label"
-                        >
-                          <h4 className="basket-form-delivery__label-heading">
-                            Этаж
-                          </h4>
-                          <Input
-                            id="floor"
-                            {...field}
-                            type="number"
-                            className={`basket-form-delivery__label-input ${
-                              meta.touched &&
-                              meta.error &&
-                              "basket-form-delivery__label-input--error"
-                            }`}
-                          />
-                          {meta.touched && meta.error && (
-                            <h4 className="basket-form-delivery__label-input-error">
-                              {meta.error}
-                            </h4>
-                          )}
-                        </label>
-                      );
-                    }}
-                  </Field>
-                  <Field name="apartment">
-                    {({ field, meta }: FieldProps) => {
-                      return (
-                        <label
-                          htmlFor="apartment"
-                          className="basket-form-delivery__label"
-                        >
-                          <h4 className="basket-form-delivery__label-heading">
-                            Квартира
-                          </h4>
-                          <Input
-                            {...field}
-                            type="number"
-                            id="apartment"
-                            className={`basket-form-delivery__label-input ${
-                              meta.touched &&
-                              meta.error &&
-                              "basket-form-delivery__label-input--error"
-                            }`}
-                          />
-                          {meta.touched && meta.error && (
-                            <h4 className="basket-form-delivery__label-input-error">
-                              {meta.error}
-                            </h4>
-                          )}
-                        </label>
-                      );
-                    }}
-                  </Field>
-                  <Field name="intercom">
-                    {({ field, meta }: FieldProps) => {
-                      return (
-                        <label
-                          htmlFor="intercom"
-                          className="basket-form-delivery__label"
-                        >
-                          <h4 className="basket-form-delivery__label-heading">
-                            Домофон
-                          </h4>
-                          <Input
-                            {...field}
-                            type="number"
-                            id="intercom"
-                            className={`basket-form-delivery__label-input ${
-                              meta.touched &&
-                              meta.error &&
-                              "basket-form-delivery__label-input--error"
-                            }`}
-                          />
-                          {meta.touched && meta.error && (
-                            <h4 className="basket-form-delivery__label-input-error">
-                              {meta.error}
-                            </h4>
-                          )}
-                        </label>
-                      );
-                    }}
-                  </Field>
-                </div>
-              </div>
-              <div className="basket-form-order__item">
-                <h4 className="basket-form-order__item-title">Оплата</h4>
-                <div className="basket-form-order__wrapper">
-                  <label className="basket-form-order__label">
-                    <Input
-                      name="soum"
-                      type="radio"
-                      value="Наличными"
-                      checked={radioValue === "Наличными"}
-                      className="basket-form-order__label-input"
-                      onChange={(e) => setRadioValue(e.target.value)}
-                    />
-                    <h4 className="basket-form-order__label-heading">
-                      Наличными
-                    </h4>
-                  </label>
-                  <label className="basket-form-order__label">
-                    <Input
-                      name="soum"
-                      type="radio"
-                      value="Картой"
-                      checked={radioValue === "Картой"}
-                      className="basket-form-order__label-input"
-                      onChange={(e) => setRadioValue(e.target.value)}
-                    />
-                    <h4 className="basket-form-order__label-heading">Картой</h4>
-                  </label>
-                </div>
-              </div>
-              <li className="basket-form-order__footer">
-                <h4 className="basket-form-order__footer-heading">
-                  Итого: {reducedPrice()} ₽
+            <div className="basket-form-header">
+              <div className="basket-form-header__box">
+                <h4 className="basket-form-header__box-heading">
+                  Добавить к заказу?
                 </h4>
-                <Button type="submit" className="basket-form-order__footer-btn">
-                  Оформить заказ
-                </Button>
-              </li>
-            </Form>
-          </Formik>
+              </div>
+            </div>
+            <div className="basket-form-delivery">
+              <label htmlFor="street" className="basket-form-delivery__label">
+                <h4 className="user-label-heading">Улица</h4>
+
+                <Input
+                  id="street"
+                  type="text"
+                  value={street}
+                  required={true}
+                  onChange={(e) => setStreet(e.target.value)}
+                  className="basket-form-delivery__label-input"
+                />
+              </label>
+
+              <div className="basket-form-delivery__container">
+                <label htmlFor="dom" className="basket-form-delivery__label">
+                  <h4 className="basket-form-delivery__label-heading">Дом</h4>
+                  <Input
+                    id="dom"
+                    value={dom}
+                    type="number"
+                    required={true}
+                    onChange={(e) => setDom(e.target.value)}
+                    className="basket-form-delivery__label-input"
+                  />
+                </label>
+                <label htmlFor="enter" className="basket-form-delivery__label">
+                  <h4 className="basket-form-delivery__label-heading">
+                    Подъезд
+                  </h4>
+                  <Input
+                    id="enter"
+                    type="number"
+                    value={podezd}
+                    required={true}
+                    onChange={(e) => setPodezd(e.target.value)}
+                    className="basket-form-delivery__label-input"
+                  />
+                </label>
+                <label htmlFor="floor" className="basket-form-delivery__label">
+                  <h4 className="basket-form-delivery__label-heading">Этаж</h4>
+                  <Input
+                    id="floor"
+                    value={etaj}
+                    type="number"
+                    required={true}
+                    onChange={(e) => setEtaj(e.target.value)}
+                    className="basket-form-delivery__label-input"
+                  />
+                </label>
+                <label
+                  htmlFor="apartment"
+                  className="basket-form-delivery__label"
+                >
+                  <h4 className="basket-form-delivery__label-heading">
+                    Квартира
+                  </h4>
+                  <Input
+                    type="number"
+                    id="apartment"
+                    required={true}
+                    value={kvartira}
+                    onChange={(e) => setKvartira(e.target.value)}
+                    className="basket-form-delivery__label-input"
+                  />
+                </label>
+                <label
+                  htmlFor="intercom"
+                  className="basket-form-delivery__label"
+                >
+                  <h4 className="basket-form-delivery__label-heading">
+                    Домофон
+                  </h4>
+                  <Input
+                    type="number"
+                    id="intercom"
+                    value={domofon}
+                    required={true}
+                    onChange={(e) => setDomofon(e.target.value)}
+                    className="basket-form-delivery__label-input"
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="basket-form-order__item">
+              <h4 className="basket-form-order__item-title">Оплата</h4>
+              <div className="basket-form-order__wrapper">
+                <label className="basket-form-order__label">
+                  <Input
+                    name="soum"
+                    type="radio"
+                    required={true}
+                    value="Наличными"
+                    checked={payment === "Наличными"}
+                    className="basket-form-order__label-input"
+                    onChange={(e) => setPayment(e.target.value)}
+                  />
+                  <h4 className="basket-form-order__label-heading">
+                    Наличными
+                  </h4>
+                </label>
+                <label className="basket-form-order__label">
+                  <Input
+                    name="soum"
+                    type="radio"
+                    value="Картой"
+                    required={true}
+                    checked={payment === "Картой"}
+                    className="basket-form-order__label-input"
+                    onChange={(e) => setPayment(e.target.value)}
+                  />
+                  <h4 className="basket-form-order__label-heading">Картой</h4>
+                </label>
+              </div>
+            </div>
+            <li className="basket-form-order__footer">
+              <h4 className="basket-form-order__footer-heading">
+                Итого: {reducedPrice()} ₽
+              </h4>
+              <Button type="submit" className="basket-form-order__footer-btn">
+                Оформить заказ
+              </Button>
+            </li>
+          </form>
         </div>
       </div>
     </section>

@@ -7,6 +7,7 @@ interface inputInterface {
   hidden?: boolean;
   checked?: boolean;
   maxLength?: number;
+  required?: boolean;
   className?: string;
   placeholder?: string;
   defaultValue?: string;
