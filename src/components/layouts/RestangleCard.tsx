@@ -1,8 +1,69 @@
 import { Autoplay } from "swiper/modules";
-import { restangleCard1 } from "assets/images/svg";
 import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  RestangleCardImg1,
+  RestangleCardImg2,
+  RestangleCardImg3,
+  RestangleCardImg4,
+  RestangleCardImg5,
+  RestangleCardImg6,
+  RestangleCardImg7,
+  RestangleCardImg8,
+} from "assets/images/jpg";
 
 const RestangleCard = () => {
+  type CardsData = {
+    id: number;
+    img: string;
+    text: string;
+  };
+
+  const cardsData: CardsData[] = [
+    {
+      id: 1,
+      img: RestangleCardImg1,
+      text: "Baked tasty margerita pizza near oven stock photo",
+    },
+    {
+      id: 2,
+      img: RestangleCardImg2,
+      text: `Pizza with salami, bell pepper, tomatoes and cheese, pickles,
+      bacon and sausages on a light background. Close-up, selective
+      focus stock photo`,
+    },
+    {
+      id: 3,
+      img: RestangleCardImg3,
+      text: `Freshly baked pizza with arugula, tomato, red onion and
+      mozzarella stock photo`,
+    },
+    {
+      id: 4,
+      img: RestangleCardImg4,
+      text: "Sausage and vegetable pizza on dark background stock photo",
+    },
+    {
+      id: 5,
+      img: RestangleCardImg5,
+      text: "Grilled sausages stock photo",
+    },
+    {
+      id: 6,
+      img: RestangleCardImg6,
+      text: "Sausages variation on dark wood table stock photo",
+    },
+    {
+      id: 7,
+      img: RestangleCardImg7,
+      text: "Italiam cured meat variety stock photo",
+    },
+    {
+      id: 8,
+      img: RestangleCardImg8,
+      text: "Grilling Sausage stock photo",
+    },
+  ];
+
   return (
     <section className="restangle-card">
       <div className="container">
@@ -32,112 +93,22 @@ const RestangleCard = () => {
             },
           }}
         >
-          <SwiperSlide>
-            <li className="restangle-card__item">
-              <img
-                src={restangleCard1}
-                alt="restangle-card"
-                title="restangle-card"
-                className="restangle-card__item-img"
-              />
-              <div className="restangle-card__item-line">
-                <h4 className="restangle-card__item-heading">
-                  3 средние пиццы от 999 рубле
-                </h4>
-              </div>
-            </li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className="restangle-card__item">
-              <img
-                src={restangleCard1}
-                alt="restangle-card"
-                title="restangle-card"
-                className="restangle-card__item-img"
-              />
-              <h4 className="restangle-card__item-heading">
-                Кэшбек 10% на самовывоз (доставка)
-              </h4>
-            </li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className="restangle-card__item">
-              <img
-                src={restangleCard1}
-                alt="restangle-card"
-                title="restangle-card"
-                className="restangle-card__item-img"
-              />
-              <h4 className="restangle-card__item-heading">
-                3 средние пиццы от 999 рублей
-              </h4>
-            </li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className="restangle-card__item">
-              <img
-                src={restangleCard1}
-                alt="restangle-card"
-                title="restangle-card"
-                className="restangle-card__item-img"
-              />
-              <h4 className="restangle-card__item-heading">
-                Кэшбек 10% на самовывоз (доставка)
-              </h4>
-            </li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className="restangle-card__item">
-              <img
-                src={restangleCard1}
-                alt="restangle-card"
-                title="restangle-card"
-                className="restangle-card__item-img"
-              />
-              <h4 className="restangle-card__item-heading">
-                Кэшбек 10% на самовывоз (доставка)
-              </h4>
-            </li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className="restangle-card__item">
-              <img
-                src={restangleCard1}
-                alt="restangle-card"
-                title="restangle-card"
-                className="restangle-card__item-img"
-              />
-              <h4 className="restangle-card__item-heading">
-                Кэшбек 10% на самовывоз (доставка)
-              </h4>
-            </li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className="restangle-card__item">
-              <img
-                src={restangleCard1}
-                alt="restangle-card"
-                title="restangle-card"
-                className="restangle-card__item-img"
-              />
-              <h4 className="restangle-card__item-heading">
-                Кэшбек 10% на самовывоз (доставка)
-              </h4>
-            </li>
-          </SwiperSlide>
-          <SwiperSlide>
-            <li className="restangle-card__item">
-              <img
-                src={restangleCard1}
-                alt="restangle-card"
-                title="restangle-card"
-                className="restangle-card__item-img"
-              />
-              <h4 className="restangle-card__item-heading">
-                Кэшбек 10% на самовывоз (доставка)
-              </h4>
-            </li>
-          </SwiperSlide>
+          {cardsData.length > 0 &&
+            cardsData.map((el: CardsData) => {
+              return (
+                <SwiperSlide key={el.id}>
+                  <li className="restangle-card__item">
+                    <img
+                      src={el.img}
+                      alt={el.text}
+                      title={el.text}
+                      className="restangle-card__item-img"
+                    />
+                    <h4 className="restangle-card__item-heading">{el.text}</h4>
+                  </li>
+                </SwiperSlide>
+              );
+            })}
         </Swiper>
       </div>
     </section>

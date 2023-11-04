@@ -2,7 +2,6 @@ import * as Yup from "yup";
 import { usePost } from "hook";
 import { storage } from "services";
 import { Login } from "components/UI";
-import "react-phone-input-2/lib/style.css";
 import { useEffect, useState } from "react";
 import { Button, Input } from "components/fields";
 import { FilterModalIcon2 } from "assets/images/svg/filter";
@@ -25,6 +24,10 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
   const [isRegistrAndLogin, setIsRegistrAndLogin] = useState<boolean>(
     JSON.parse(storage.get("storage") as string) || false
   );
+
+  useEffect(() => {
+    storage.set("storage", isRegistrAndLogin);
+  }, [isRegistrAndLogin]);
 
   const { mutate } = usePost({
     path: "/user/register",
@@ -60,10 +63,6 @@ const Auth = ({ isAuthModalOpen = false, setIsAuthModalOpen }: AuthType) => {
       storage.set("storage", "true");
     }
   };
-
-  useEffect(() => {
-    storage.set("storage", isRegistrAndLogin);
-  }, [isRegistrAndLogin]);
 
   return (
     <section className={`auth-modal ${isAuthModalOpen && "auth-modal--open"}`}>

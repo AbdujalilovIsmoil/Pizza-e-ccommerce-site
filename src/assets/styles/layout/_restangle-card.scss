@@ -6,11 +6,11 @@
     min-height: 343px;
     border-radius: 15px;
     background-color: $categories__heading-color;
-    @include flexLayout(flex, space-between, space-between, 0, column nowrap);
+    @include flexLayout(flex, space-between, center, 0, column nowrap);
     &-img {
-      height: 115px;
-      margin-top: 70px;
-      object-fit: contain;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
     }
     &-line {
       width: 100%;
