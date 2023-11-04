@@ -118,56 +118,76 @@ const Footer = () => {
   ];
 
   return (
-    <>
-      <footer className="footer">
-        <div className="container">
-          <ul className="footer__list">
-            <li className="footer__item">
-              <a href="#">
-                <div className="footer__intro">
-                  <img
-                    alt="intro"
-                    title="intro"
-                    src={HeaderListIntro}
-                    className="footer__item-intro"
-                  />
-                  <h4 className="footer__item-title">Куда пицца</h4>
-                </div>
-              </a>
-            </li>
-            {footerData.length > 0 &&
-              footerData.map((el: TfooterDataOuside) => {
-                return (
-                  <li className="footer__item" key={el.id}>
-                    <h4 className="footer__item-heading">{el.title}</h4>
-                    <ul className="footer-categories">
-                      {el.data.length > 0 &&
-                        el.data.map((el: TfooterDataInside) => {
-                          return (
-                            <li className="footer-categories__item" key={el.id}>
-                              <a
-                                href="#"
-                                className="footer-categories__item-heading"
-                              >
-                                {el.title}
-                              </a>
-                            </li>
-                          );
-                        })}
-                    </ul>
-                  </li>
-                );
-              })}
+    <footer className="footer">
+      <div className="container">
+        <ul className="footer__list">
+          <li className="footer__item">
+            <a href="#">
+              <div className="footer__intro">
+                <img
+                  alt="intro"
+                  title="intro"
+                  src={HeaderListIntro}
+                  className="footer__item-intro"
+                />
+                <h4 className="footer__item-title">Куда пицца</h4>
+              </div>
+            </a>
+          </li>
+          {footerData.length > 0 &&
+            footerData.map((el: TfooterDataOuside) => {
+              return (
+                <li className="footer__item" key={el.id}>
+                  <h4 className="footer__item-heading">{el.title}</h4>
+                  <ul className="footer-categories">
+                    {el.data.length > 0 &&
+                      el.data.map((el: TfooterDataInside) => {
+                        return (
+                          <li className="footer-categories__item" key={el.id}>
+                            <a
+                              href="#"
+                              className="footer-categories__item-heading"
+                            >
+                              {el.title}
+                            </a>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </li>
+              );
+            })}
 
-            {mediaData.length > 0 &&
-              mediaData.map((el: mediaData) => {
-                return (
-                  <li className="footer__item" key={el.id}>
-                    <h4 className="footer__item-heading">{el.title}</h4>
+          {mediaData.length > 0 &&
+            mediaData.map((el: mediaData) => {
+              return (
+                <li className="footer__item" key={el.id}>
+                  <h4 className="footer__item-heading">{el.title}</h4>
 
-                    <ul className="footer-medias">
-                      {el.outsideData.length > 0 &&
-                        el.outsideData.slice(0, 2).map((el) => {
+                  <ul className="footer-medias">
+                    {el.outsideData.length > 0 &&
+                      el.outsideData.slice(0, 2).map((el) => {
+                        return (
+                          <li className="footer-medias__item" key={el.id}>
+                            <a href="#" target="_blank">
+                              <div className="footer-medias__container">
+                                <img
+                                  src={el.img}
+                                  alt={el.alt}
+                                  title={el.title}
+                                  className="footer-medias__item-icon"
+                                />
+                                <h4 className="footer-medias__item-heading">
+                                  {el.title}
+                                </h4>
+                              </div>
+                            </a>
+                          </li>
+                        );
+                      })}
+                    <ul className="footer-medias__list">
+                      {insideData.length > 0 &&
+                        insideData.map((el: insideData) => {
                           return (
                             <li className="footer-medias__item" key={el.id}>
                               <a href="#" target="_blank">
@@ -186,41 +206,19 @@ const Footer = () => {
                             </li>
                           );
                         })}
-                      <ul className="footer-medias__list">
-                        {insideData.length > 0 &&
-                          insideData.map((el: insideData) => {
-                            return (
-                              <li className="footer-medias__item" key={el.id}>
-                                <a href="#" target="_blank">
-                                  <div className="footer-medias__container">
-                                    <img
-                                      src={el.img}
-                                      alt={el.alt}
-                                      title={el.title}
-                                      className="footer-medias__item-icon"
-                                    />
-                                    <h4 className="footer-medias__item-heading">
-                                      {el.title}
-                                    </h4>
-                                  </div>
-                                </a>
-                              </li>
-                            );
-                          })}
-                      </ul>
                     </ul>
-                  </li>
-                );
-              })}
-          </ul>
-          <div className="footer__copy">
-            <h4 className="footer__copy-heading">
-              &copy; Copyright {new Date().getFullYear()} — Куда Пицца
-            </h4>
-          </div>
+                  </ul>
+                </li>
+              );
+            })}
+        </ul>
+        <div className="footer__copy">
+          <h4 className="footer__copy-heading">
+            &copy; Copyright {new Date().getFullYear()} — Куда Пицца
+          </h4>
         </div>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 };
 

@@ -20,18 +20,6 @@ const storage = {
       return window.localStorage.removeItem(key);
     }
   },
-  key: (index: number | string) => {
-    if (typeof index !== "number") {
-      return window.localStorage.key(Number(index));
-    }
-
-    if (typeof index === "number") {
-      return window.localStorage.key(index);
-    }
-  },
-  length: () => {
-    return window.localStorage.length;
-  },
   clear: () => {
     return window.localStorage.clear();
   },

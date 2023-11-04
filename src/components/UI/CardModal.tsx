@@ -13,35 +13,33 @@ const CardModal = ({ img, name, price, description, id, cartId }: any) => {
   });
 
   return (
-    <>
-      <li className="cart-item">
-        <div className="cart-item__container">
-          <div className="cart-item__box">
-            <img
-              src={img}
-              alt="cart1"
-              title="cart1"
-              className="cart-item__box-img"
-            />
-          </div>
-          <div className="cart-item__box">
-            <div className="cart-item__content">
-              <h4 className="cart-item__box-title">{name}</h4>
-              <h5 className="cart-item__box-desc">{description}</h5>
-            </div>
-          </div>
-        </div>
-        <div className="cart-item__footer">
-          <h4 className="cart-item__footer-soum">Price: {price} ₽</h4>
+    <li className="cart-item">
+      <div className="cart-item__container">
+        <div className="cart-item__box">
           <img
-            src={Cart2}
-            alt="delete"
-            onClick={() => mutate(id)}
-            className="cart-item__footer-delete"
+            src={img}
+            alt="cart1"
+            title="cart1"
+            className="cart-item__box-img"
           />
         </div>
-      </li>
-    </>
+        <div className="cart-item__box">
+          <div className="cart-item__content">
+            <h4 className="cart-item__box-title">{name}</h4>
+            <h5 className="cart-item__box-desc">{description}</h5>
+          </div>
+        </div>
+      </div>
+      <div className="cart-item__footer">
+        <h4 className="cart-item__footer-soum">Price: {price} ₽</h4>
+        <img
+          src={Cart2}
+          alt="delete"
+          onClick={() => mutate(id)}
+          className="cart-item__footer-delete"
+        />
+      </div>
+    </li>
   );
 };
 

@@ -21,14 +21,10 @@ interface inputInterface {
     | "email"
     | "password"
     | undefined;
-};
+}
 
 const Input = (props: inputInterface) => {
-  return (
-    <>
-      <input ref={props.passwordRef} {...props} />
-    </>
-  );
+  return <input ref={props.passwordRef} {...props} />;
 };
 
 export default Input;

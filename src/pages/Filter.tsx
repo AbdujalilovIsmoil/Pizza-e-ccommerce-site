@@ -1,15 +1,15 @@
+import Error from "./Error";
 import { get } from "lodash";
 import { api } from "services";
+import { Empty } from "components/UI";
 import { useDispatch } from "react-redux";
 import { Button } from "components/fields";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GroupCardFilter } from "assets/images/svg";
 import { toggleFilterOpenModal } from "store/filterData";
-import { setProductId, toggleProductModal } from "store/productData";
 import { FilterModal, Loader } from "components/layouts";
-import Error from "./Error";
-import { Empty } from "components/UI";
+import { setProductId, toggleProductModal } from "store/productData";
 
 const Filter = () => {
   const dispatch = useDispatch();

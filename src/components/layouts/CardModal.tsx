@@ -58,91 +58,87 @@ const CardModalComponent = ({
   }
 
   return (
-    <>
-      <section
-        onClick={(e) => closeCartModal(e)}
-        className={`cart-modal ${isCartModalOpen && "cart-modal--open"}`}
-      >
-        <div className="cart-modal__background">
-          <div className="cart-modal__border">
-            <div className="cart-modal__header">
-              <div className="cart-modal__box">
-                <h4 className="cart-modal__box-heading">Ваш заказ</h4>
-              </div>
-              <div
-                className="cart-modal__box"
-                onClick={() => setIsCartModalOpen(false)}
-              >
-                <img
-                  src={FilterModalIcon1}
-                  alt="cart-modal-icon"
-                  className="cart-modal__box-icon"
-                />
-              </div>
+    <section
+      onClick={(e) => closeCartModal(e)}
+      className={`cart-modal ${isCartModalOpen && "cart-modal--open"}`}
+    >
+      <div className="cart-modal__background">
+        <div className="cart-modal__border">
+          <div className="cart-modal__header">
+            <div className="cart-modal__box">
+              <h4 className="cart-modal__box-heading">Ваш заказ</h4>
             </div>
-            <div className="cart-modal__body">
-              {isError ? (
-                <Empty content="Your cart is empty" />
-              ) : isLoading ? (
-                <Loader />
-              ) : (
-                <ul className="cart-list">
-                  {data?.length > 0 &&
-                    data?.map((el: any) => {
-                      id.push(el._id);
-                      return (
-                        el?.items?.length > 0 &&
-                        el?.items?.map((el: any) => {
-                          return (
-                            <CardModal
-                              cartId={id}
-                              id={el._id}
-                              key={el._id}
-                              price={el.price}
-                              quantity={el?.quantity}
-                              name={el?.productId?.name}
-                              img={el?.productId?.images?.home}
-                              description={el?.productId?.description}
-                            />
-                          );
-                        })
-                      );
-                    })}
-                </ul>
-              )}
-              {data?.length > 0 &&
-                data?.map((el: any) => {
-                  return (
-                    el?.items.length === 0 && (
-                      <Empty content="Your cart is empty" />
-                    )
-                  );
-                })}
+            <div
+              className="cart-modal__box"
+              onClick={() => setIsCartModalOpen(false)}
+            >
+              <img
+                src={FilterModalIcon1}
+                alt="cart-modal-icon"
+                className="cart-modal__box-icon"
+              />
             </div>
           </div>
-
-          <div className="cart-modal__footer">
-            <h4 className="cart-modal__footer-heading">
-              Итого: {calcPrice()} ₽
-            </h4>
+          <div className="cart-modal__body">
+            {isError ? (
+              <Empty content="Your cart is empty" />
+            ) : isLoading ? (
+              <Loader />
+            ) : (
+              <ul className="cart-list">
+                {data?.length > 0 &&
+                  data?.map((el: any) => {
+                    id.push(el._id);
+                    return (
+                      el?.items?.length > 0 &&
+                      el?.items?.map((el: any) => {
+                        return (
+                          <CardModal
+                            cartId={id}
+                            id={el._id}
+                            key={el._id}
+                            price={el.price}
+                            quantity={el?.quantity}
+                            name={el?.productId?.name}
+                            img={el?.productId?.images?.home}
+                            description={el?.productId?.description}
+                          />
+                        );
+                      })
+                    );
+                  })}
+              </ul>
+            )}
             {data?.length > 0 &&
               data?.map((el: any) => {
                 return (
-                  el?.items?.length > 0 && (
-                    <Button
-                      type="button"
-                      onClick={() => openBasketPage()}
-                      className="cart-modal__footer-btn"
-                    >
-                      Перейти к товару
-                    </Button>
+                  el?.items.length === 0 && (
+                    <Empty content="Your cart is empty" />
                   )
                 );
               })}
           </div>
         </div>
-      </section>
-    </>
+
+        <div className="cart-modal__footer">
+          <h4 className="cart-modal__footer-heading">Итого: {calcPrice()} ₽</h4>
+          {data?.length > 0 &&
+            data?.map((el: any) => {
+              return (
+                el?.items?.length > 0 && (
+                  <Button
+                    type="button"
+                    onClick={() => openBasketPage()}
+                    className="cart-modal__footer-btn"
+                  >
+                    Перейти к товару
+                  </Button>
+                )
+              );
+            })}
+        </div>
+      </div>
+    </section>
   );
 };
 

@@ -1,6 +1,6 @@
 import { GroupCard, RestangleCard } from "components/layouts";
 
-const index = () => {
+const Home = () => {
   return (
     <>
       <RestangleCard />
@@ -9,4 +9,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Home;
