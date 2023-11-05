@@ -1,23 +1,33 @@
 import Error from "./Error";
 import { get } from "lodash";
-import { api } from "services";
+import { api, storage } from "services";
 import { Empty } from "components/UI";
 import { useDispatch } from "react-redux";
 import { Button } from "components/fields";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { GroupCardFilter } from "assets/images/svg";
 import { toggleFilterOpenModal } from "store/filterData";
-import { FilterModal, Loader } from "components/layouts";
+import { Auth, FilterModal, Loader } from "components/layouts";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { setProductId, toggleProductModal } from "store/productData";
 
 const Filter = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
   const [retingSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const retingQuery = retingSearchParams.get("search");
   const [retingData, setRetingData] = useState<any[]>([]);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!storage.get("token")) {
+      navigate({
+        pathname: "/",
+      });
+    }
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,13 +46,29 @@ const Filter = () => {
   }, [retingQuery]);
 
   const clickButton = (id: string) => {
-    dispatch(setProductId(id));
-    dispatch(toggleProductModal());
+    if (!storage.get("token")) {
+      setIsAuthModalOpen(true);
+    } else {
+      dispatch(setProductId(id));
+      dispatch(toggleProductModal());
+    }
+  };
+
+  const openFilterModal = () => {
+    if (!storage.get("token")) {
+      setIsAuthModalOpen(true);
+    } else {
+      dispatch(toggleFilterOpenModal());
+    }
   };
 
   return (
     <div className="container">
       <FilterModal />
+      <Auth
+        isAuthModalOpen={isAuthModalOpen}
+        setIsAuthModalOpen={setIsAuthModalOpen}
+      />
       <ul className="group-card__list">
         <li className="group-card__item">
           <div className="group-card__header">
@@ -53,7 +79,7 @@ const Filter = () => {
               <Button
                 type="button"
                 className="group-card__filter"
-                onClick={() => dispatch(toggleFilterOpenModal())}
+                onClick={() => openFilterModal()}
               >
                 <img
                   src={GroupCardFilter}

@@ -37,6 +37,14 @@ const GroupCard = () => {
     }
   };
 
+  const openFilterModal = () => {
+    if (!storage.get("token")) {
+      setIsAuthModalOpen(true);
+    } else {
+      dispatch(toggleFilterOpenModal());
+    }
+  };
+
   return (
     <section className="group-card">
       <FilterModal />
@@ -55,7 +63,7 @@ const GroupCard = () => {
                 <Button
                   type="button"
                   className="group-card__filter"
-                  onClick={() => dispatch(toggleFilterOpenModal())}
+                  onClick={() => openFilterModal()}
                 >
                   <img
                     src={GroupCardFilter}

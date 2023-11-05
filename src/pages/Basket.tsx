@@ -9,6 +9,7 @@ import { useGet, usePost, useTokenGet } from "hook";
 import { Autoplay, Navigation } from "swiper/modules";
 import { useQueryClient } from "@tanstack/react-query";
 import { setProductId, toggleProductModal } from "store/productData";
+import { Auth } from "components/layouts";
 
 const Basket = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Basket = () => {
   const [kvartira, setKvartira] = useState<string>("");
   const [basketData, setBasketData] = useState<any[]>([]);
   const [payment, setPayment] = useState<string>("Картой");
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
 
   const { data } = useTokenGet({
     queryKey: "cart",
@@ -109,12 +111,20 @@ const Basket = () => {
   });
 
   const clickButton = (id: string) => {
-    dispatch(setProductId(id));
-    dispatch(toggleProductModal());
+    if (!storage.get("token")) {
+      setIsAuthModalOpen(true);
+    } else {
+      dispatch(setProductId(id));
+      dispatch(toggleProductModal());
+    }
   };
 
   return (
     <section className="basket">
+      <Auth
+        isAuthModalOpen={isAuthModalOpen}
+        setIsAuthModalOpen={setIsAuthModalOpen}
+      />
       <div className="container">
         <h4 className="basket__heading">Ваш заказ</h4>
         <ul className="basket-cart">
