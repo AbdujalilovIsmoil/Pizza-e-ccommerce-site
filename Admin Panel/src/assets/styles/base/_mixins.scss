@@ -1,0 +1,134 @@
+// Flexbox Layout
+@mixin flexLayout(
+  $flex: flex,
+  $jc: default,
+  $ai: default,
+  $gap: default,
+  $flexFlow: nowrap row
+) {
+  gap: $gap;
+  display: $flex;
+  align-items: $ai;
+  justify-content: $jc;
+  flex-flow: $flexFlow;
+}
+
+// Grid Layout
+@mixin gridLayout(
+  $grid: grid,
+  $gridTemplateCol: 3,
+  $jc: default,
+  $ai: default,
+  $gap: default
+) {
+  gap: $gap;
+  display: $grid;
+  align-items: $ai;
+  justify-content: $jc;
+  @if $gridTemplateCol > 1 {
+    grid-template-columns: repeat($gridTemplateCol, auto);
+  } @else {
+    grid-template-columns: auto;
+  }
+}
+
+// Input Layout
+@mixin Input(
+  $color: $input__border-color,
+  $placeholderColor: $input__border-color,
+  $bgColor: default,
+  $border: 1px solid $input__border-color,
+  $borderRadius: 4px,
+  $textIndent: 10px
+) {
+  width: 100%;
+  height: 100%;
+  color: $color;
+  outline: none;
+  border: $border;
+  text-indent: $textIndent;
+  background-color: $bgColor;
+  border-radius: $borderRadius;
+  &::placeholder {
+    color: $placeholderColor;
+  }
+}
+
+// Button Layout
+
+@mixin Button(
+  $bgColor: default,
+  $border: 1px solid $input__border-color,
+  $borderRadius: 4px,
+  $padding: 10px,
+  $transition: all 300ms ease
+) {
+  outline: none;
+  border: $border;
+  padding: $padding;
+  transition: $transition;
+  background-color: $bgColor;
+  border-radius: $borderRadius;
+}
+
+// Heading Fonts
+
+@mixin headingFonts(
+  $color: $input__border-color,
+  $fontSize: 18px,
+  $fontWeight: 400,
+  $lineHeight: default,
+  $textTransform: capitalize
+) {
+  color: $color;
+  margin: 0 default;
+  font-size: $fontSize;
+  line-height: lineHeight;
+  font-weight: $fontWeight;
+  text-transform: $textTransform;
+}
+
+// Media Queries
+
+@mixin mediaQueries($query) {
+  @if $sm == $query {
+    @media only screen and (max-width: $sm) {
+      @content;
+    }
+  }
+  @if $md == $query {
+    @media only screen and (max-width: $md) {
+      @content;
+    }
+  }
+  @if $lg == $query {
+    @media only screen and (max-width: $lg) {
+      @content;
+    }
+  }
+  @if $xl == $query {
+    @media only screen and (max-width: $xl) {
+      @content;
+    }
+  }
+  @if $xxl == $query {
+    @media only screen and (max-width: $xxl) {
+      @content;
+    }
+  }
+  @if $sm !=
+    $query and
+    $md !=
+    $query and
+    $lg !=
+    $query and
+    $query !=
+    $xl and
+    $query !=
+    $xxl
+  {
+    @media only screen and (max-width: $query) {
+      @content;
+    }
+  }
+}
