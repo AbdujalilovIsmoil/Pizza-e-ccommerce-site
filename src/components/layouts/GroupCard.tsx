@@ -23,7 +23,7 @@ const GroupCard = () => {
     document.body.classList.remove("hidden");
   }
 
-  const { data, isFetching, isError } = useGet({
+  const { data, isLoading, isError } = useGet({
     path: "/product",
     queryKey: "product",
   });
@@ -75,10 +75,10 @@ const GroupCard = () => {
               </div>
             </div>
             {isError && <Error />}
-            {!isError && isFetching && <Loader />}
+            {!isError && isLoading && <Loader />}
             <ul className="cards">
               {!isError &&
-                !isFetching &&
+                !isLoading &&
                 get(data, "allProduct", []).length > 0 &&
                 get(data, "allProduct", []).map((el: any) => {
                   return (
